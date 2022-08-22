@@ -77,7 +77,7 @@
           ·
         </span>
         <span>
-          1843 words
+          1839 words
         </span>
         <span class="split">
           ·
@@ -499,38 +499,38 @@ $$\varphi\otimes \psi = (\mathbf{id}_{V_2}\otimes \psi) \circ (\varphi\otimes \m
 
 
 
-<p><strong>Proposition 5.</strong>
-For every vector spaces $V, U, W$, we have
-$$(V\oplus U)\otimes W \cong (V\otimes W) \oplus (U\otimes W)$$</p>
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 8.</strong>
+Let $\{V_i\}_{i\in \mathcal{I}}$ be a collection of vector spaces, let $W$ be a vector space. Then
+$$\left(\bigoplus\limits_{i\in \mathcal{I}} V_i\right)\otimes W \cong \bigoplus\limits_{i\in \mathcal{I}} \left(V_i\otimes W\right)$$
+    </p>
+  </div>
+</p>
 
 
-<p><em>Proof.</em> Let $\mathbf{i}_V: V\to V\oplus U$ and $\mathbf{i}_U: U\to V\oplus U$ be inclusions from $V, U$ to $V\oplus U$.</p>
-<p>Let $\mathbf{j}_V = \mathbf{i}_V \otimes \mathbf{id}_W$ and $\mathbf{j}_U = \mathbf{i}_U\otimes \mathbf{id}_W$. We show that $(V\oplus U)\otimes W$ together with $\mathbf{i}_V$ and $\mathbf{i}_U$ forms a direct sum of $V\otimes W$ and $U\otimes W$.</p>
-<p>Given two linear homomorphisms
-$$\varphi_V: V\otimes W\to Z\text{ and }\varphi_U: U\otimes W\to Z$$
-They induce two bilinear maps
-$$\psi_V: V\times W\to Z \text{ and }\psi_U: U\times W\to Z$$
-$\psi_V$ and $\psi_U$ induce two linear homomorphisms:
-$$\overline{\psi}_V: V\to \mathcal{L}(W, Z)\text{ and }\overline{\psi}_U: U\to \mathcal{L}(W, Z)$$
-$\overline{\psi}_V$ and $\overline{\psi}_U$ induce a linear homomorphism
-$$\overline{\psi}: V\oplus U \to \mathcal{L}(W, Z)$$
-$\overline{\psi}$ a bilinear map
-$$\psi: (V\oplus U)\times W\to Z$$
-Finally, $\psi$ induces a linear homomorphism
-$$\overline{\varphi}: (V\oplus U)\otimes W\to Z$$
-We have
+<p><em>Proof.</em> Let $\left(V, \{\mathbf{i}_i : V_i\to V\}_{i\in \mathcal{I}}\right)$ be a direct sum of $\{V_i\}_{i\in \mathcal{I}}$. For each $i\in \mathcal{I}$, define
+$$\mathbf{j}_i = \mathbf{i}_i \otimes \mathbf{id}_W: V_i\otimes W \to V\otimes W$$</p>
+<p>Given a collection $\{\varphi_i: V_i\otimes W\to Z\}_{i\in \mathcal{I}}$ of linear homomorphisms.</p>
+<p>For each $i\in \mathcal{I}$, there is a unique linear homomorphism $\overline{\varphi}_i: V_i\to \mathcal{L}(W, Z)$ such that
+$$\overline{\varphi}_i(\mathbf{v})(\mathbf{w}) = \varphi_i(\mathbf{v}\otimes \mathbf{w})$$</p>
+<p>So there is a unique linear homomorphism $\psi: V \to \mathcal{L}(W, Z)$ such that for every $i\in \mathcal{I}$
+$$\psi\circ \mathbf{i}_i = \overline{\varphi}_i$$</p>
+<p>Thus, there is a unique linear homomorphism $\overline{\psi}: V\otimes W\to Z$ such that
+$$\overline{\psi}(\mathbf{v}\otimes \mathbf{w}) = \psi(\mathbf{v})(\mathbf{w})$$</p>
+<p>Given $i\in \mathcal{I}$, for every $\mathbf{v}\in V_i$ and $\mathbf{w}\in W$, we have
 $$
 \begin{alignat*}{2}
-\overline{\varphi}((\mathbf{v}\oplus \mathbf{u})\otimes \mathbf{w}) &amp; = \psi(\mathbf{v}\oplus \mathbf{u}, \mathbf{w}) \\
-&amp; = \overline{\psi}(\mathbf{v}\oplus \mathbf{u})(\mathbf{w}) \\
-&amp; = \overline{\psi}_V(\mathbf{v})(\mathbf{w}) + \overline{\psi}_U(\mathbf{u})(\mathbf{w}) \\
-&amp; = \psi_V(\mathbf{v}, \mathbf{w}) + \psi_U(\mathbf{u}, \mathbf{w}) \\
-&amp; = \varphi_V(\mathbf{v}\otimes \mathbf{w}) + \varphi_U(\mathbf{u}\otimes \mathbf{w})
+\left(\overline{\psi}\circ \mathbf{j}_i\right)(\mathbf{v}\otimes \mathbf{w}) &amp; = \overline{\psi}(\mathbf{i}_i(\mathbf{v})\otimes \mathbf{w}) \\
+&amp; = \psi(\mathbf{i}_i(\mathbf{v}))(\mathbf{w}) \\
+&amp; = (\psi \circ \mathbf{i}_i)(\mathbf{v})(\mathbf{w}) \\
+&amp; = \overline{\varphi}_i(\mathbf{v})(\mathbf{w}) \\
+&amp; = \varphi_i(\mathbf{v}\otimes \mathbf{w})
 \end{alignat*}
 $$
-so
-$$\overline{\varphi}\circ \mathbf{j}_V = \varphi_V\text{ and }\overline{\varphi}\circ \mathbf{j}_U = \varphi_U$$
-These maps are unique, so $(V\oplus U)\otimes W \cong (V\otimes W) \oplus (U\otimes W)$.</p>
+so $\psi\circ \mathbf{j}_i = \varphi_i$. Since $i$ is arbitrarily choosen, $\left(V\otimes W, \{\mathbf{j}_i : V_i\otimes W\to V\otimes W\}_{i\in \mathcal{I}}\right)$ is a direct sum of $\{V_i\otimes W\}_{i\in \mathcal{I}}$. Therefore
+$$\left(\bigoplus\limits_{i\in \mathcal{I}} V_i\right)\otimes W \cong V\otimes W \cong \bigoplus\limits_{i\in \mathcal{I}} \left(V_i\otimes W\right)$$</p>
 
     </div>
 
