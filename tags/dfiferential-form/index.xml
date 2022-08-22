@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dfiferential form on Personal Math Blog</title>
+    <link>https://dogsteven.github.io/tags/dfiferential-form/</link>
+    <description>Recent content in dfiferential form on Personal Math Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://dogsteven.github.io/tags/dfiferential-form/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Differential Form: Basic construction</title>
+      <link>https://dogsteven.github.io/posts/differential-form-basic-construction/</link>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://dogsteven.github.io/posts/differential-form-basic-construction/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

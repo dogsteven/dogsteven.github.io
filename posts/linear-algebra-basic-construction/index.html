@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Linear Algebra: Basic construction | Personal Math Blog</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Basic concepts of linear algebra">
+<meta name="generator" content="Hugo 0.101.0" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+    <link rel="stylesheet" href="https://dogsteven.github.io/css/custom.css">
+  
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+    
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script type="module">
+  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.mjs";
+  renderMathInElement(document.body, {
+    delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+    ],
+    throwOnError : false
+  });
+</script>
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>Home</a>
+	
+	<a href="/posts">Archive</a>
+	<a href="/tags">Tags</a>
+	<a href="/about">About</a>
+
+	
+
+	
+	  <a class="button" href="https://dogsteven.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Linear Algebra: Basic construction</h1>
+
+    <div class="tip">
+        <time datetime="2022-07-08 00:00:00 &#43;0000 UTC">Jul 8, 2022</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          3676 words
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          18 minute read
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#vector-spaces-subspaces-linear-independence-bases">Vector spaces, subspaces, linear independence, bases</a></li>
+    <li><a href="#linear-maps-quotient-subspaces">Linear maps, quotient subspaces</a></li>
+    <li><a href="#direct-products-direct-sums">Direct products, direct sums</a></li>
+  </ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      <h2 id="vector-spaces-subspaces-linear-independence-bases">Vector spaces, subspaces, linear independence, bases <a href="#vector-spaces-subspaces-linear-independence-bases" class="anchor">🔗</a></h2>
+  
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 1.</strong>
+Let $\mathbb{K}$ be a field. A <em>vector space</em> over $\mathbb{K}$ is a non-empty set $V$ together with two operations $+ : V\times V \to V$ and $\cdot : \mathbb{K}\times V\to V$, called the <em>vectors addition</em> and the <em>scalar multiplication</em>, respectively, which satisfies the following axioms</p>
+<ol>
+<li>$(V, +)$ is an Abelian group, we denote the its identity element by $\mathbf{0}$.</li>
+<li>$1\cdot \mathbf{v} = \mathbf{v}$ for every $\mathbf{v}\in V$.</li>
+<li>$(ab)\cdot \mathbf{v} = a\cdot (b\cdot \mathbf{v})$ for every $a, b\in \mathbb{K}$ and $\mathbf{v}\in V$.</li>
+<li>$(a + b)\cdot \mathbf{v} = a\cdot \mathbf{v} + b\cdot \mathbf{v}$ for every $a, b\in \mathbb{K}$ and $\mathbf{v}\in V$.</li>
+<li>$a\cdot (\mathbf{v} + \mathbf{w}) = a\cdot \mathbf{v} + a\cdot \mathbf{w}$ for every $a\in \mathbb{K}$ and $\mathbf{v}, \mathbf{w}\in V$.</li>
+</ol>
+<p>The elements of a vector space are called <em>vectors</em>, and the vector $\mathbf{0}$ is called <em>zero vector</em>. The elements of the field $\mathbb{K}$ are called <em>scalars</em>.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+  
+
+
+
+
+<p><strong>Proposition 1.</strong>
+$0\cdot \mathbf{v} = \mathbf{0}$ for every $\mathbf{v}\in V$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 2.</strong>
+For every $a\in \mathbb{K}$ and $\mathbf{v}\in V$, we have $a\cdot \mathbf{v} = \mathbf{0}$ implies that $a = 0$ or $\mathbf{v} = \mathbf{0}$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 2.</strong>
+Let $V$ be a vector space over a field $\mathbb{K}$. A non-empty subset $U$ of $V$ is called a <em>vector subspace</em> of $V$, or a <em>subspace</em> of $V$ for short, if $U$ is closed under the vectors additiion and the scalar multiplication, i.e.</p>
+<ol>
+<li>For every $\mathbf{v}, \mathbf{w}\in U$, the vector $\mathbf{v} + \mathbf{w}$ belongs to $U$.</li>
+<li>For every scalar $a\in \mathbb{K}$ and $\mathbf{v}\in U$, the vector $a\cdot \mathbf{v}$ belongs to $U$.</li>
+</ol>
+
+    </p>
+  </div>
+</p>
+
+
+<p>We can see that, a subspace of a vector space is also a vector space over the same field.</p>
+
+
+
+
+<p><strong>Proposition 3.</strong>
+Let $V$ be a subspace and let $\left\{U_i\right\}_{i\in \mathcal{I}}$ be a collection of subspaces of $V$. Then the intersection $\bigcap\limits_{i\in \mathcal{I}} U_i$ is also a subspace of $V$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 3.</strong>
+Let $A$ be a subset of a vector space $V$. The smallest subspace of $V$ containing $A$ is called the <em>subspace generated by $A$</em>. We denote this space by $\left&lt;A\right&gt;$. We say that $A$ <em>generates</em> $W$ if $\left&lt;A\right&gt; = W$ for some subspace $W$ of $V$. Also, if $\mathbf{v}\in \left&lt;A\right&gt;$, we say that $A$ <em>spans</em> $\mathbf{v}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 4.</strong>
+Let $A$ be a subset of a vector space $V$ over a field $\mathbb{K}$. A vector $\mathbf{v}$ in $V$ is said to be <em>a linear combination</em> of $A$ if there is a finite subset $\{\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n\}$ of $A$ and scalars $a_1, a_2, &hellip;, a_n$ such that $\mathbf{v} = a_1\cdot \mathbf{v}_1 + a_2\cdot \mathbf{v}_2 + &hellip; + a_n\cdot \mathbf{v}_n$. As a convention, the zero vector $\mathbf{0}$ is the only linear combination of the empty set.
+    </p>
+  </div>
+</p>
+
+
+
+  
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 1.</strong>
+Let $A$ be a non-empty subset of a vector space $V$. Then the subspace generated by $A$ is exactly the same as the set of all linear combinations of $A$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 5.</strong>
+Let $V$ be a vector space over a field $\mathbb{K}$. A subset $A$ of $V$ is said to be <em>linear independent</em> if for every finite subset $\left\{\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n\right\}$ of $A$, for every $a_1, a_2, &hellip;, a_n$ in the field $\mathbb{K}$, then
+$$a_1\cdot\mathbf{v}_1 + a_2\cdot\mathbf{v}_2 + &hellip; + a_n\cdot\mathbf{v}_n = \mathbf{0}$$</p>
+<p>implies $a_1 = a_2 = &hellip; = a_n = 0$. Otherwise, we say $A$ is <em>linear dependent</em>. A subset $A$ is called <em>a basis</em> for $V$ of $A$ is linear independent and $A$ generates $V$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 4.</strong>
+Let $A$ be a subset of a vector space $V$. Suppose that $A$ is linear independent and there is a vector $\mathbf{v}\in V\setminus \left&lt;A\right&gt;$. Then $\{\mathbf{v}\}\cup A$ is linear independent.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 2.</strong>
+Let $A$ be a subset of a vector space $V$ over a field $\mathbb{K}$. Suppose $A$ generates $V$, then $A$ contains a basis for $V$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\mathcal{L}$ be the set of all linear independent subsets of $A$. Since $\varnothing\in \mathcal{L}$, then $\mathcal{L}$ is non-empty.</p>
+<p>Given a non-empty chain $\{C_i\}_{i\in \mathcal{I}}$ in $\mathcal{L}$, let $C = \bigcup\limits_{i \in \mathcal{I}} C_i$, we show that $C$ is also linear independent. Given a finite subset $\{\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n\}$ of $C$, suppose that
+$$a_1\cdot\mathbf{v}_1 + a_2\cdot\mathbf{v}_2 + &hellip; + a_n\cdot\mathbf{v}_n = \mathbf{0}$$
+for some scalars $a_1, a_2, &hellip;, a_n$. For each $j\in \{1, 2, &hellip;, n\}$, there is an index $i_j\in \mathcal{I}$ such that the vector $\mathbf{v}_j$ belongs to $C_{i_j}$. Since $\{C_i\}_{i\in \mathcal{I}}$ is a chain, there is an index $k\in \mathcal{I}$ such that all the vectors $\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n$ is contained in $C_k$. We have $a_1 = a_2 = &hellip; = a_n = 0$ as $C_k$ is linear independent. Since $\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n$ are arbitrarily chosen, it follows that $C$ is linear independent. Obviously, $C$ is a subset of $A$, so $C$ lies in $\mathcal{L}$.</p>
+<p>By Zorn&rsquo;s lemma, $\mathcal{L}$ has a maximal element, which is a maximal linear independent subset of $A$, denote this element by $C$. We show that $C$ generates $V$.</p>
+<p>Suppose that $C$ doesn&rsquo;t generate $V$. There is a vector $\mathbf{v}\in A$ such that $\mathbf{v}\not\in \left&lt;C\right&gt;$. Let&rsquo;s consider the set $D = \{\mathbf{v}\}\cup C$. This set is a subset of $A$, also this set is linear independent, so $D$ belongs to $\mathcal{L}$, which contradicts to the maximality of $C$.</p>
+<p>Therefore, $C$ generates $V$, so $C$ is a basis for $V$.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 3.</strong>
+Every vector space has a basis.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 4.</strong>
+Let $A$ be a linear independent subset of a vector space $V$ over a field $\mathbb{K}$. Then we can extend $A$ into a basis for $V$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\mathcal{L}$ be the set of all subsets $B$ of $V$ such that $B$ is linear independent and $B$ contains $A$.</p>
+<p>Obviously, $A$ is an element of $\mathcal{L}$. Given a chain $\{C_i\}_{i\in \mathcal{I}}$ in $\mathcal{L}$, let $C = \bigcup\limits_{i \in \mathcal{I}} C_i$. From the proof of <strong>Theorem 2</strong>, $C$ is linear independent. Also, $C$ contains $A$, so $C$ is an element of $\mathcal{L}$.</p>
+<p>By Zorn&rsquo;s lemma, $\mathcal{L}$ has a maximal element, denoted $C$. By a similar argument as <strong>Theorem 2</strong>, one can show that $C$ is a basis for $V$.</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 6.</strong>
+A vector space $V$ is called a <em>finite dimensional</em> vector space if there is a finite subset $A$ of $V$ such that $A$ generates $V$, equivalently, $V$ has a finite basis. Otherwise, we call $V$ an <em>infinite dimensional</em> vector space.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 5.</strong>
+Let $V$ be a finite dimensional vector space with basis $\{\alpha_1, \alpha_2, &hellip;, \alpha_n\}$. Suppose that $\{\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_m\}$ is a linear independent subset of $V$. Then $m\leqslant n$.</p>
+
+
+<p><em>Proof.</em> Suppose that $m &gt; n$.</p>
+<p>We can write $\mathbf{v}_1 = a_1\cdot \alpha_1 + a_2\cdot \alpha_2 + &hellip; a_n\cdot \alpha_n$, since $\mathbf{v}_1\ne \mathbf{0}$, there is an index $i$ such that $a_i \ne 0$. Without loss of general, assume that $a_1 \ne 0$, then
+$$\alpha_1 = \dfrac{1}{a_1}\cdot \mathbf{v}_1 - \dfrac{a_2}{a_1}\cdot \alpha_2 - &hellip; - \dfrac{a_n}{a_1}\cdot \alpha_n$$
+so $\alpha_1$ is a combination of $\{\mathbf{v}_1, \alpha_2, &hellip;, \alpha_n\}$. Therefore
+$$\{\alpha_1, \alpha_2, &hellip;, \alpha_n\}\subseteq \left&lt;\mathbf{v}_1, \alpha_2, &hellip;, \alpha_n\right&gt;$$
+so $\{\mathbf{v}_1, \alpha_2, &hellip;, \alpha_n\}$ generates $V$.</p>
+<p>Now, we can write $\mathbf{v}_2 = a_1\cdot \mathbf{v}_1 + a_2\cdot \alpha_2 + &hellip; + a_n\cdot \alpha_n$. If $a_2 = a_3 = &hellip; = a_n = 0$, then $\mathbf{v}_2 = a_1\cdot \mathbf{v}_1$, which contradicts to the linear independence of $\{\mathbf{v}_i\}_{i = 1}^{m}$. Without loss of general, assume that $a_2 \ne 0$, by a similar argument, $\{\mathbf{v}_1, \mathbf{v}_2, \alpha_3, &hellip;, \alpha_n\}$ generates $V$. And so on. Since $m &gt; n$, after a finite number of steps, we have $\{\mathbf{v}_1, \mathbf{v}_2, &hellip;, \mathbf{v}_n\}$ generates $A$, so $\mathbf{v}_m$ is a linear combination of this set, which contradicts to the linear independence of $\{\mathbf{v}_i\}_{i = 1}^{m}$.</p>
+<p>Hence the assumption is wrong. In another words, $m\leqslant n$.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 5.</strong>
+Let $V$ be a vector space. Then any two bases of $V$ have the same cardinality.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> If $V$ is finite dimensional, it follows from <strong>Proposition 5</strong> that any two bases of $V$ have the same number of elements. Suppose that $V$ is infinite dimensional.</p>
+<p>Let $\mathcal{A}$ and $\mathcal{B}$ be two bases of $V$. For each $\alpha\in \mathcal{A}$, there is a finite subset $\mathcal{F}_{\alpha}$ of $\mathcal{B}$ such that $\alpha$ is a combination of $\mathcal{F}_{\alpha}$. The set $\mathcal{F} = \bigcup\limits_{\alpha\in \mathcal{A}} \mathcal{F}_{\alpha}$ spans $\alpha$ for every $\alpha\in \mathcal{A}$, so $\mathcal{F}$ generates $V$. Therefore
+$$\mathcal{B} = \bigcup\limits_{\alpha\in \mathcal{A}} \mathcal{F}_{\alpha}$$
+We have
+$$\left|\mathcal{B}\right| = \left|\bigcup\limits_{\alpha\in \mathcal{A}} \mathcal{F}_{\alpha}\right| \leqslant \aleph_0\cdot \left|\mathcal{A}\right| = \left|\mathcal{A}\right|$$
+The last equality holds since $\mathcal{A}$ is infinite. Similarly, we have $\left|\mathcal{A}\right| \leqslant \left|\mathcal{B}\right|$.</p>
+<p>By Schroder-Bernstein theorem, we have $\mathcal{A}$ and $\mathcal{B}$ have the same cardinality.</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 7.</strong>
+Let $V$ be a finite dimensional vector space, the <em>dimension</em> of $V$ is defined to be the number of elements of a basis of $V$, we denote it by $\dim V$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 6.</strong>
+Let $V$ be a finite dimensional vector space and let $W$ be its subspace, then $\dim W\leqslant \dim V$. Furthermore, if $\dim W = \dim V$, then $W = V$.
+    </p>
+  </div>
+</p>
+
+
+<h2 id="linear-maps-quotient-subspaces">Linear maps, quotient subspaces <a href="#linear-maps-quotient-subspaces" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 8.</strong>
+Let $V$ and $W$ be vector spaces over the same field $\mathbb{K}$. A <em>linear map</em> (or a <em>linear homomorphism</em>) is a map $\varphi: V\to W$ satisfying the following condition: For every $\mathbf{v}, \mathbf{u}\in V$ and for every $a, b\in \mathbb{K}$, we have $\varphi(a\cdot \mathbf{v} + b\cdot \mathbf{u}) = a\cdot \varphi(\mathbf{v}) + b\cdot \varphi(\mathbf{u})$.</p>
+<p>A <em>linear isomorphism</em> is a bijective linear homomorphism. If there is a linear isomorphism from $V$ into $W$, we say that $V$ is <em>isomorphic</em> to $W$, and we write $V\cong W$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 6.</strong>
+Composite of two linear homomorphisms is also a linear homomorphism.</p>
+
+
+
+
+
+
+<p><strong>Proposition 7.</strong>
+If $V$ is a vector space and $W$ is a subspace of $V$, then the inclusion $j: W\to V$ is a linear homomorphism.</p>
+
+
+
+  
+
+
+
+
+<p><strong>Corollary 1.</strong>
+We can construct new linear homomorphism by extending the codomain, or restricting the domain of an existing one. Also, we can restrict the codomain of a linear homomorphism to get a new one as long as the new codomain contains the image of the old one.</p>
+
+
+
+
+
+
+<p><strong>Proposition 8.</strong>
+Inverse of a linear isomorphism is also a linear isomorphism.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 9.</strong>
+Let $V$ and $W$ be vector spaces over the same field $\mathbb{K}$. The set of all linear homomorphisms from $V$ into $W$ is denoted by $\mathcal{L}(V, W)$. Furthermore, $\mathcal{L}(V, W)$ is a vector space over $\mathbb{K}$ with the following operations for $\varphi, \psi\in \mathcal{L}(V, W)$</p>
+<ol>
+<li>$(\varphi + \psi)(\mathbf{v}) = \varphi(\mathbf{v}) + \psi(\mathbf{v})$ for every $\mathbf{v}\in V$.</li>
+<li>$(a\cdot \varphi)(\mathbf{v}) = a\cdot \varphi(\mathbf{v})$ for every $\mathbf{v}\in V$.</li>
+</ol>
+<p>The zero vector of this space is the zero map, which carries every vector into $\mathbf{0}$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 10.</strong>
+Let $V$ be a vector space and $W$ be a subspace of $V$. The quotient group $V / W$ together with the scalar multiplication $a\left[\mathbf{v}\right] = \left[a\cdot \mathbf{v}\right]$ forms a vector space called the <em>quotient subspace</em> $V / W$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 9.</strong>
+If $V$ is a finite dimensional vector space, and $W$ is a subspace of $V$, then $\dim V / W = \dim V - \dim W$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 11.</strong>
+Let $V$ and $W$ be vector spaces over the same field, let $\varphi: V\to W$ be a linear homomorphism. The <em>kernel</em> of $\varphi$ is defined to be the set $\left\{\mathbf{v}\in V : \varphi(\mathbf{v}) = \mathbf{0}\right\}$. We denote ther kernel of a homomorphism $\varphi$ by $\ker \varphi$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 10.</strong>
+Image of a subspace under a linear homomorphism is a subspace. In particular, the image of a linear homomorphism is a subspace.</p>
+
+
+
+
+
+
+<p><strong>Proposition 11.</strong>
+Inverse image of a subspace under a linear homomorphism is a subspace. In particular, the kernel of a linear homomorphism is a subspace.</p>
+
+
+
+
+
+
+<p><strong>Proposition 12.</strong>
+Inverse image of a linear independent subset under a linear homomorphism is a linear independent. In particular, image of a linear independent subset under an injective linear homomorphism is also linear independent.</p>
+
+
+
+
+
+
+<p><strong>Proposition 13.</strong>
+A homomorphism is injective if and only if its kernel is $\{\mathbf{0}\}$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 14.</strong>
+Let $\varphi: V\to W$ be a linear homomorphism from a vector space $V$ to a vector space $W$. For every subset $A$ of $V$, we have
+$$\left&lt;\varphi(A)\right&gt; = \varphi\left(\left&lt;A\right&gt;\right)$$</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 7.</strong>
+Let $V$ and $W$ be vector spaces over the same field, let $\varphi: V\to W$ be a linear homomorphism. Then there is an injective linear homomorphism $\overline{\varphi}: V / \ker \varphi \to W$ such that $\overline{\varphi}(\left[\mathbf{v}\right]) = \varphi(\mathbf{v})$ for every $\mathbf{v}\in V$. Therefore,
+$$V / \ker \varphi \cong \varphi(V)$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Corollary 2.</strong>
+Let $V$ and $W$ be finite dimensional vector spaces over the same field, let $\varphi: V\to W$ be a linear homomorphism, then
+$$\dim V = \dim \ker \varphi + \dim \varphi(V)$$</p>
+
+
+
+
+
+
+<p><strong>Corollary 3.</strong>
+Let $V$ and $W$ be finite dimensional vector spaces and let $\varphi: V\to W$ be a linear homomorphism. Then
+$$\dim \varphi(V) \leqslant \dim V$$</p>
+
+
+
+
+
+
+<p><p><strong>Proposition 15.</strong>
+Suppose that $V$ is a finite dimensional vector space and $\varphi: V\to V$ is a linear homomorphism. Then the following statements are equivalent:</p>
+<ol>
+<li>$\varphi$ is injective.</li>
+<li>$\varphi$ is surjective.</li>
+<li>$\varphi$ is an isomorphism.</li>
+</ol>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 8.</strong>
+Let $V$ and $W$ be vector spaces over the same field, let $\mathcal{A}$ be a basis for $V$. Then we can extend any map $\varphi: \mathcal{A}\to W$ to a linear homomorphism from $V$ into $W$. Furthermore, the extension is unique.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\psi: V\to W$ be defined as follows: Given $\mathbf{v}\in V$, we can write
+$$\mathcal{v} = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \alpha$$
+for some finite subset $\mathcal{I}$ of $\mathcal{A}$ and some scalars $\{a_{\alpha}\}_{\alpha\in \mathcal{I}}$. Define
+$$\psi(\mathcal{v}) = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \varphi(\alpha)$$
+First, we show that this definition is well-defined. Given $\mathbf{v} \in V$, suppose that we can write $\mathcal{v}$ as a combination of $\mathcal{A}$ in two ways:
+$$\mathbf{v} = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \alpha = \sum\limits_{\alpha\in \mathcal{J}} b_{\alpha}\cdot \alpha$$
+Then
+$$\sum\limits_{\alpha\in \mathcal{I}\setminus \mathcal{J}} a_{\alpha}\cdot \alpha - \sum\limits_{\alpha\in \mathcal{J}\setminus \mathcal{I}} b_{\alpha}\cdot \alpha + \sum\limits_{\alpha\in \mathcal{I}\cap \mathcal{J}} (a_{\alpha} - b_{\alpha})\cdot \alpha = \mathbf{0}$$
+By the linear independence of $\mathcal{A}$, $a_{\alpha} = 0$ for every $\alpha\in \mathcal{I}\setminus \mathcal{J}$, $b_{\alpha} = 0$ for every $\alpha \in \mathcal{J}\setminus \mathcal{I}$, and $a_{\alpha} = b_{\alpha}$ for every $\alpha\in \mathcal{I}\cap \mathcal{J}$. Hence
+$$\sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \varphi(\alpha) = \sum\limits_{\alpha\in \mathcal{I}\cap \mathcal{J}} a_{\alpha}\cdot \varphi(\alpha) = \sum\limits_{\alpha\in \mathcal{I}\cap \mathcal{J}} b_{\alpha}\cdot \varphi(\alpha) = \sum\limits_{\alpha\in \mathcal{J}} b_{\alpha}\cdot \varphi(\alpha)$$
+It follows that the definition of $\psi$ is well-defined. Now, we show that $\psi$ is a linear homomorphism.</p>
+<p>Given vectors $\mathbf{v}, \mathbf{u}\in V$, suppose that
+$$\mathbf{v} = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \alpha,\;\; \mathbf{u} = \sum\limits_{\alpha\in \mathcal{J}} b_{\alpha}\cdot \alpha$$
+then we have
+$$\mathbf{v} + \mathbf{u} = \sum\limits_{\alpha\in \mathcal{I}\setminus \mathcal{J}} a_{\alpha}\cdot \alpha + \sum\limits_{\alpha\in \mathcal{I}\cap \mathcal{J}} (a_{\alpha} + b_{\alpha})\cdot \alpha + \sum\limits_{\alpha\in \mathcal{J}\setminus \mathcal{I}} b_{\alpha}\cdot \alpha$$
+so
+$$
+\begin{alignat*}{2}
+\psi(\mathbf{v} + \mathbf{u}) &amp; = \sum\limits_{\alpha\in \mathcal{I}\setminus \mathcal{J}} a_{\alpha}\cdot \varphi(\alpha) + \sum\limits_{\alpha\in \mathcal{I}\cap \mathcal{J}} (a_{\alpha} + b_{\alpha})\cdot \varphi(\alpha) + \sum\limits_{\alpha\in \mathcal{J}\setminus \mathcal{I}} b_{\alpha}\cdot \varphi(\alpha) \\
+&amp; = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \varphi(\alpha) + \sum\limits_{\alpha\in \mathcal{J}} b_{\alpha}\cdot \varphi(\alpha) = \psi(\mathbf{v}) + \psi(\mathbf{u})
+\end{alignat*}
+$$
+In another hand, given a scalar $a$,
+$$a\cdot \mathbf{v} = a\cdot \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \alpha = \sum\limits_{\alpha\in \mathcal{I}} (aa_{\alpha})\cdot \alpha$$
+so
+$$
+\psi(a\cdot \mathbf{v})= \sum\limits_{\alpha\in \mathcal{I}} (aa_{\alpha})\cdot \varphi(\alpha) = a\cdot \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \varphi(\alpha) = a\cdot \psi(\mathbf{v})
+$$
+Therefore $\psi$ is a linear homomorphism, furthermore, $\psi$ is an extension of $\varphi$ from $\mathcal{A}$ to $V$.</p>
+<p>Finally, we shwo that the extension is unique. Suppose that $\phi: V\to W$ be a linear map such that $\phi(\alpha) = \mathbf{0}$ for every $\alpha\in \mathcal{A}$. Given $\mathbf{v}\in V$, we can write
+$$\mathbf{v} = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha}\cdot \alpha$$
+for some finite subset $\mathcal{I}$ of $\mathcal{A}$ and some scalars $\{a_{\alpha}\}_{\alpha\in \mathcal{I}}$, then
+$$\phi(\mathbf{v}) = \sum\limits_{\alpha\in \mathcal{I}} a_{\alpha} \cdot \varphi(\alpha) = \mathbf{0}$$</p>
+<p>Thus, $\phi$ is the zero map. Suppose that $\psi^{\star}: V\to W$ is a linear homomorphism which is an extension of $\varphi$, then for every $\alpha\in \mathcal{A}$, we have $(\psi - \psi^{\star})(\alpha) = \mathbf{0}$, hence $\psi - \psi^{\star}$ is the zero map. Therefore $\psi = \psi^{\star}$, which proves the uniqueness of $\psi$.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 9.</strong>
+Let $V$ and $W$ be vector spaces over the same field. Let $\mathcal{A}$ and $\mathcal{B}$ be bases for $V$ and $W$, respectively. Then $V\cong W$ if and only if $\left|\mathcal{A}\right| = \left|\mathcal{B}\right|$.
+    </p>
+  </div>
+</p>
+
+
+<h2 id="direct-products-direct-sums">Direct products, direct sums <a href="#direct-products-direct-sums" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 12.</strong>
+Let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of vector spaces over the same field. The Cartesian product of this collection together with two following operations</p>
+<ol>
+<li>$\left(\mathbf{v}_i\right)_{i \in \mathcal{I}} + \left(\mathbf{u}_i\right)_{i \in \mathcal{I}} = \left(\mathbf{v}_i + \mathbf{u}_i\right)_{i \in \mathcal{I}}$, and</li>
+<li>$a\cdot \left(\mathbf{v}_i\right)_{i \in \mathcal{I}} = \left(a\cdot \mathbf{v}_i\right)_{i \in \mathcal{I}}$</li>
+</ol>
+<p>is a vector space, called the <em>direct product</em> of the collection $\left\{V_{i}\right\}_{i\in \mathcal{I}}$, denoted by
+$$\prod\limits_{i\in \mathcal{I}} V_{i}$$</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 13.</strong>
+For every $j\in \mathcal{I}$, the map
+$$
+\begin{alignat*}{2}
+\pi_j: \prod\limits_{i\in \mathcal{I}} V_{i} &amp; \to V_{j} \\
+(\mathbf{v}_{i})_{i\in \mathcal{I}} &amp; \mapsto \mathbf{v}_{j}
+\end{alignat*}
+$$
+is a linear homomorphism, called the <em>$j$-th coordinate projection</em>.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 10.</strong>
+Let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of vector spaces over the same field. Then for every vector space $V$, for every collection of linear homomorphisms $\left\{\varphi_i: V\to V_{i}\right\}_{i\in \mathcal{I}}$, there is a unique linear homomorphism $\varphi: V\to \prod\limits_{i\in \mathcal{I}} V_{i}$ such that
+$$\pi_i\circ \varphi = \varphi_i$$
+for every $i\in \mathcal{I}$. More explicitly,
+$$\varphi(\mathbf{v}) = \left(\varphi_i(\mathbf{v})\right)_{i\in \mathcal{I}}$$
+for every $\mathbf{v}\in V$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 14.</strong>
+Let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of vector spaces over the same field. The subcollection of the Cartesian product of $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ consisting of all tuples with finitely many nonzero vectors is a subspace of the product space of $\left\{V_{i}\right\}_{i\in \mathcal{I}}$. This space is denoted by
+$$\bigoplus\limits_{i\in \mathcal{I}} V_{i}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 15.</strong>
+For every $j\in \mathcal{I}$, the map
+$$
+\begin{alignat*}{2}
+\mathbf{i}_j: V_j &amp; \to \bigoplus\limits_{i\in \mathcal{I}} V_{i} \\
+\mathbf{v} &amp; \mapsto (&hellip;, \mathbf{0}, \mathbf{v}, \mathbf{0}, &hellip;)
+\end{alignat*}
+$$
+carrying each $\mathbf{v}\in V_j$ into a tuple having value $\mathbf{v}$ at index $j$ and zero otherwise, is a linear homomorphism. This linear homomorphism is called the <em>$j$-th coordinate injection</em>. For each $\mathbf{v}\in V_i$ and $\mathbf{u}\in V_j$ for some $i, j\in \mathcal{I}$, we define
+$$\mathbf{v} \oplus \mathbf{u} = \mathbf{i}_i(\mathbf{v}) + \mathbf{i}_j(\mathbf{u})$$
+We can extend this definition to sums of $n$-terms
+$$\mathbf{v}_1 \oplus \mathbf{v}_2 \oplus &hellip; \oplus \mathbf{v}_n$$
+By definition, every element of the direct product can be represented as a sum of a finite number of terms.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 11.</strong>
+Let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of vector spaces over the same field. Then for every vector space $V$, for every collection of linear homomorphisms $\left\{\varphi_i: V_i\to V\right\}_{i\in \mathcal{I}}$, there is a unique linear homomorphism $\varphi: \bigoplus\limits_{i\in \mathcal{I}} V_{i}\to V$ such that
+$$\varphi_i = \varphi\circ \mathbf{i}_i$$
+for every $i\in \mathcal{I}$. More explicitly,
+$$\varphi\left(\mathbf{v}_1 \oplus \mathbf{v}_2 \oplus &hellip; \oplus \mathbf{v}_n\right) = \sum\limits_{k = 1}^{n} \varphi_{i_k}(\mathbf{v}_k)$$
+where $\mathbf{v}_k \in V_{i_k}$ for every $k\in \{1, 2, &hellip;, n\}$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Corollary 4.</strong>
+Let $\{V_i\}_{i\in \mathcal{I}}$ be a collection of vector spaces, let $W$ be a vector space. Then
+$$\mathcal{L}\left(\bigoplus\limits_{i\in \mathcal{I}} V_i, W\right) \cong \prod\limits_{i\in \mathcal{I}} \mathcal{L}(V_i, W)$$</p>
+
+
+
+
+
+
+<p><strong>Proposition 16.</strong>
+Let $V$ be a vector space, let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of subspaces of $V$. By the preceeding theorem, there is a unique linear homomorphism
+$$\varphi: \bigoplus\limits_{i\in \mathcal{I}} V_{i}\to V$$
+such that for every $i\in \mathcal{I}$, we have $\varphi\circ \mathbf{i}_i = \mathbf{j}_i$ where $\mathbf{j}_i: V_i\to V$ is the inclusion map. The image of this linear homomorphism is a subspace of $V$, which we denote by $\sum\limits_{i\in \mathcal{I}} V_i$. Then
+$$\sum\limits_{i\in \mathcal{I}} V_i = \left&lt;\bigcup\limits_{i\in \mathcal{I}} V_i\right&gt;$$</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 12.</strong>
+Let $V$ be a vector space, let $\left\{V_{i}\right\}_{i\in \mathcal{I}}$ be a collection of subspaces of $V$. Then
+$$\sum\limits_{i\in \mathcal{I}} V_i \cong \bigoplus\limits_{i\in \mathcal{I}} V_i$$
+if and only if for every $i\in \mathcal{I}$, we have
+$$V_i \cap \left(\sum\limits_{j\in \mathcal{I}\setminus \{i\}} V_j\right) = \{\mathbf{0}\}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 13.</strong>
+Let $V$ be a vector space, let $\left\{V_{i}\right\}_{i = 1}^{n}$ be a finite collection of subspaces of $V$. Suppose that
+$$V \cong \bigoplus\limits_{i = 1}^{n} V_i$$
+Then every vector of $V$ can be written uniquely as the form
+$$\mathbf{v}_1 + \mathbf{v}_2 + &hellip; + \mathbf{v}_n$$
+where $\mathbf{v}_i\in V_i$ for every $i\in \{1, 2, &hellip;, n\}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 14.</strong>
+Every vector space of dimension $n\in \mathbb{Z}^{+}$ is isomorphic to $\mathbb{K}^n$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 15.</strong>
+Let $V$ be a vector space and let $W$ be a subspace of $V$. There is a subspace $U$ of $V$ such that $V \cong W\oplus U$. These such subspaces $U$ are non-unique and are called <em>algebraic complements</em> of $W$ in $V$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\mathcal{B}$ be a basis for $W$, then we can extend $\mathcal{B}$ into a basis $\mathcal{A}$ for $V$, let $\mathcal{C} = \mathcal{A}\setminus \mathcal{B}$, let $U$ is the subspace generated by $\mathcal{C}$. We show that $V \cong W\oplus U$.</p>
+<p>Given $\mathbf{v} \in W\cap U$, we can write
+$$\mathbf{v} = \sum\limits_{\beta\in \mathcal{I}} b_{\beta}\cdot \beta = \sum\limits_{\gamma\in \mathcal{J}} c_{\gamma}\cdot \gamma$$
+for some finite subsets $\mathcal{I}$ and $\mathcal{J}$ of $\mathcal{B}$ and $\mathcal{C}$, respectively. Then
+$$\sum\limits_{\beta\in \mathcal{I}} b_{\beta}\cdot \beta - \sum\limits_{\gamma\in \mathcal{J}} c_{\gamma}\cdot \gamma = \mathbf{0}$$
+By the linear independence of $\mathcal{A}$, we have $b_{\beta} = 0$ for every $\beta\in \mathcal{I}$, so $\mathbf{v} = \mathbf{0}$.</p>
+<p>Hence $W\cap U = \{\mathbf{0}\}$, therefore $W\oplus U \cong W + U = \left&lt;W\cup U\right&gt; = \left&lt;\mathcal{B}\cup \mathcal{C}\right&gt; = \left&lt;\mathcal{A}\right&gt; = V$.</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 16.</strong>
+Let $\{V_i\}_{i\in \mathcal{I}}$ be a collection of vector spaces. A vector space $V$ together with a collection $\{\mathbf{i}_i: V_i\to V\}_{i\in \mathcal{I}}$ of linear homomorphisms is called a <em>direct sum</em> of $\{V_i\}_{i\in \mathcal{I}}$ if for every collection $\{\varphi_i: V_i\to Z\}_{i\in \mathcal{I}}$ of linear homomorphisms, there is a unique linear homomorphism $\varphi: V\to Z$ such that
+$$\varphi_i = \varphi\circ \mathbf{i}_i$$
+for every $i\in \mathcal{I}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 16.</strong>
+The space $V = \bigoplus\limits_{i\in \mathcal{I}} V_{i}$ together with the collection $\left\{\mathbf{i}_i : V_i\to V\right\}_{i\in \mathcal{I}}$ is a direct sum of $\{V_i\}_{i\in \mathcal{I}}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 17.</strong>
+Direct sum is unique up to isomorphism.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\left(V, \{\mathbf{i}_i^V: V_i\to V\}_{i\in \mathcal{I}}\right)$ and $\left(Z, \{\mathbf{i}_i^Z: V_i\to Z\}_{i\in \mathcal{I}}\right)$ be two direct sums of $\{V_i\}_{i\in \mathcal{I}}$.</p>
+<p>Consider the collection $\{\mathbf{i}_i^V: V_i\to V\}_{i\in \mathcal{I}}$, there is a unique linear homomorphism $\varphi: Z\to V$ such that $\varphi\circ \mathbf{i}_i^Z = \mathbf{i}_i^V$ for every $i\in \mathcal{I}$.</p>
+<p>Consider the collection $\{\mathbf{i}_i^Z: V_i\to Z\}_{i\in \mathcal{I}}$, there is a unique linear homomorphism $\psi: V\to Z$ such that $\psi\circ \mathbf{i}_i^V = \mathbf{i}_i^Z$ for every $i\in \mathcal{I}$.</p>
+<p>Therefore, for every $i\in \mathcal{I}$
+$$\mathbf{i}_i^V = \varphi\circ \mathbf{i}_i^Z = \varphi\circ \psi \circ \mathbf{i}_i^V\text{ and }\mathbf{i}_i^Z = \psi\circ \mathbf{i}_i^V = \psi\circ \varphi \circ \mathbf{i}_i^Z$$</p>
+<p>Consider the collection $\{\mathbf{i}_i^V: V_i\to V\}_{i\in \mathcal{I}}$, there is a unique linear homomorphism $j: V\to V$ such that $j = j\circ \mathbf{i}_i^V$ for every $i\in \mathcal{I}$. Since $\mathbf{id}_V \circ \mathbf{i}_i^V = \mathbf{i}_i^V$ for every $i\in \mathcal{I}$, by the uniqueness,
+$$\varphi\circ \psi = \mathbf{id}_V$$
+Similarly, $\psi\circ \varphi = \mathbf{id}_Z$. So $\varphi$ is a linear isomorphism.</p>
+
+    </div>
+
+    
+        <div class="tags">
+            
+                <a href="https://dogsteven.github.io/tags/linear-algebra">linear algebra</a>
+            
+                <a href="https://dogsteven.github.io/tags/abstract-algebra">abstract algebra</a>
+            
+        </div>
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/dogsteven" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>stackoverflow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-488.000000, -1163.000000)">
+            <g id="stackoverflow" transform="translate(488.000000, 1163.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M42.0860128,53.5922927 L22.9745951,53.6011499 L22.9729497,49.5538824 L42.0835447,49.5440929 L42.0860128,53.5922927 L42.0860128,53.5922927 Z M55,30.6708298 L51.7306912,12 L47.7087256,12.6920259 L50.9775643,31.3628557 L55,30.6708298 L55,30.6708298 Z M42.5455518,44.3547147 L23.5156994,42.616026 L23.1410164,46.6470941 L42.1712214,48.3841513 L42.5455518,44.3547147 L42.5455518,44.3547147 Z M43.8009984,39.0731519 L25.3459811,34.1539179 L24.285633,38.0621508 L42.7419431,42.9819676 L43.8009984,39.0731519 L43.8009984,39.0731519 Z M46.2103463,34.4436411 L29.7494464,24.8164635 L27.6748215,28.3015328 L44.1365441,37.9292931 L46.2103463,34.4436411 L46.2103463,34.4436411 Z M50.2466504,31.6088756 L46.8745036,33.8883189 L36.106599,18.2318456 L39.4792159,15.9517031 L50.2466504,31.6088756 Z M45.3315807,40.2784283 L48.5799693,40.2784283 L48.5799693,60 L17,60 L17,40.2784283 L20.2648427,40.2784283 L20.2648427,56.8243495 L45.3315807,56.8243495 L45.3315807,40.2784283 Z" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.536px" height="438.536px" viewBox="0 0 438.536 438.536" style="enable-background:new 0 0 438.536 438.536;"
+	 xml:space="preserve">
+<g>
+	<path d="M414.41,24.123C398.333,8.042,378.963,0,356.315,0H82.228C59.58,0,40.21,8.042,24.126,24.123
+		C8.045,40.207,0.003,59.576,0.003,82.225v274.084c0,22.647,8.042,42.018,24.123,58.102c16.084,16.084,35.454,24.126,58.102,24.126
+		h274.084c22.648,0,42.018-8.042,58.095-24.126c16.084-16.084,24.126-35.454,24.126-58.102V82.225
+		C438.532,59.576,430.49,40.204,414.41,24.123z M335.471,168.735c0.191,1.713,0.288,4.278,0.288,7.71
+		c0,15.989-2.334,32.025-6.995,48.104c-4.661,16.087-11.8,31.504-21.416,46.254c-9.606,14.749-21.074,27.791-34.396,39.115
+		c-13.325,11.32-29.311,20.365-47.968,27.117c-18.648,6.762-38.637,10.143-59.953,10.143c-33.116,0-63.76-8.952-91.931-26.836
+		c4.568,0.568,9.329,0.855,14.275,0.855c27.6,0,52.439-8.565,74.519-25.7c-12.941-0.185-24.506-4.179-34.688-11.991
+		c-10.185-7.803-17.273-17.699-21.271-29.691c4.947,0.76,8.658,1.137,11.132,1.137c4.187,0,9.042-0.76,14.56-2.279
+		c-13.894-2.669-25.598-9.562-35.115-20.697c-9.519-11.136-14.277-23.84-14.277-38.114v-0.571
+		c10.085,4.755,19.602,7.229,28.549,7.422c-17.321-11.613-25.981-28.265-25.981-49.963c0-10.66,2.758-20.747,8.278-30.264
+		c15.035,18.464,33.311,33.213,54.816,44.252c21.507,11.038,44.54,17.227,69.092,18.558c-0.95-3.616-1.427-8.186-1.427-13.704
+		c0-16.562,5.853-30.692,17.56-42.399c11.703-11.706,25.837-17.561,42.394-17.561c17.515,0,32.079,6.283,43.688,18.846
+		c13.134-2.474,25.892-7.33,38.26-14.56c-4.757,14.652-13.613,25.788-26.55,33.402c12.368-1.716,23.88-4.95,34.537-9.708
+		C357.458,149.793,347.462,160.166,335.471,168.735z"/>
+</g>
+</svg>
+
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2022 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       Huynh Bach Khoa
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

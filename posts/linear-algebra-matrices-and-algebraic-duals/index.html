@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Linear Algebra: Matrices and Algebraic Duals | Personal Math Blog</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Matrices">
+<meta name="generator" content="Hugo 0.101.0" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+    <link rel="stylesheet" href="https://dogsteven.github.io/css/custom.css">
+  
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+    
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script type="module">
+  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.mjs";
+  renderMathInElement(document.body, {
+    delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+    ],
+    throwOnError : false
+  });
+</script>
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>Home</a>
+	
+	<a href="/posts">Archive</a>
+	<a href="/tags">Tags</a>
+	<a href="/about">About</a>
+
+	
+
+	
+	  <a class="button" href="https://dogsteven.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Linear Algebra: Matrices and Algebraic Duals</h1>
+
+    <div class="tip">
+        <time datetime="2022-07-09 00:00:00 &#43;0000 UTC">Jul 9, 2022</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          2089 words
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          10 minute read
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#coordinate-matrices">Coordinate, matrices</a></li>
+    <li><a href="#endomorphisms-change-of-basis">Endomorphisms, change of basis</a></li>
+    <li><a href="#the-algebraic-duals">The algebraic duals</a></li>
+  </ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      <p>Assume that all vector spaces in this post are vector spaces over a field $\mathbb{K}$.</p>
+<h2 id="coordinate-matrices">Coordinate, matrices <a href="#coordinate-matrices" class="anchor">🔗</a></h2>
+  
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 1.</strong>
+Let $V$ be a vector space of dimension $n$, let $(\alpha_1, \alpha_2, &hellip;, \alpha_n)$ be an ordered basis for $V$. For each vector $\mathbf{v}\in V$, we can write $\mathbf{v}$ uniquely as
+$$\mathbf{v} = a_1\cdot \alpha_1 + a_2\cdot \alpha_2 + &hellip; + a_n\cdot \alpha_n$$
+Then the tuple $(a_1, a_2, &hellip;, a_n) \in \mathbb{K}^n$ is called the <em>coordinate</em> of $\mathbf{v}$ with respect to the ordered basis $(\alpha_1, \alpha_2, &hellip;, \alpha_n)$. If $\mathcal{A}$ is an ordered basis for $V$, the coordinate of a vector $\mathbf{v}$ with respect to $\mathcal{A}$ is denoted by $\left(\mathbf{v}\right)_{\mathcal{A}}$. The map
+$$\left(\cdot\right)_{\mathcal{A}}: V\to \mathbb{K}^n$$
+is a linear isomorphism.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 2.</strong>
+A matrix (over a field $\mathbb{K}$) of dimension $n\times m$ is a collection $\left(a_{i,j}\right)$ of scalars for $i \in \{1, 2, &hellip;, n\}$ and $j\in \{1, 2, &hellip;, m\}$. We can visualize a matrix as a rectangular of size $n\times m$
+$$
+\left[
+\begin{matrix}
+a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1, m} \\
+a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2, m} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{n,1} &amp; a_{n,2} &amp; \cdots &amp; a_{n, m} \\
+\end{matrix}
+\right]
+$$
+The set of all matrices of dimension $n\times m$ is denoted by $\text{Mat}_{n\times m}(\mathbb{K})$. If $A$ is a matrix of size $n\times m$, we denote the value of cell at row $i$, column $j$ by $A_{i,j}$.
+    </p>
+  </div>
+</p>
+
+
+<p>Let $V$ and $W$ be vector spaces of dimension $n$ and $m$, respectively. Let $\varphi: V\to W$ be a linear homomorphism. Let $\mathcal{A} = (\alpha_1, &hellip;, \alpha_n)$ and $\mathcal{B} = (\beta_1, &hellip;, \beta_m)$ be ordered bases of $V$ and $W$, respectively. Suppose that
+$$(\varphi(\alpha_j))_{\mathcal{B}} = (a_{1,j}, a_{2,j}, &hellip;, a_{m,j})$$
+for each $j\in \{1, 2, &hellip;, n\}$. Since $\varphi$ is uniquely determined by values on a basis, it follows that with respect to $\mathcal{A}$ and $\mathcal{B}$, $\varphi$ is uniquely determined by the value of the matrix $(a_{i, j})$.</p>
+
+  
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 1.</strong>
+There is a bijection from $\mathcal{L}(V, W)$ into $\text{Mat}_{m\times n}(\mathbb{K})$ defined as above. This bijection induces a vector space structure on $\text{Mat}_{m\times n}(\mathbb{K})$ where</p>
+<ol>
+<li>$(a_{i, j}) + (b_{i, j}) = (a_{i, j} + b_{i, j})$,</li>
+<li>$k\cdot (a_{i, j}) = (ka_{i, j})$</li>
+</ol>
+<p>With respect to this structure, the bijection becomes a linear isomorphism. We denote this linear isomorphism by $\left[\cdot\right]_{\mathcal{A}}^{\mathcal{B}}: \mathcal{L}(V, W)\to \text{Mat}_{m\times n}(\mathbb{K})$.</p>
+<p>$\left[\varphi\right]_{\mathcal{A}}^{\mathcal{B}}$ is called the matrix $\varphi$ with respect to bases $(\mathcal{A}, \mathcal{B})$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+<p>Let $U$ be a vector space of dimension $p$ with an ordered basis $\mathcal{C}$.</p>
+<p>Let $\psi: W\to U$ be a linear homomorphism, suppose that
+$$\left(\psi(\beta_k)\right)_{\mathcal{C}} = (b_{1,k}, b_{2,k}, &hellip;, b_{p,k})$$
+for every $k\in \{1, 2, &hellip;, m\}$. Then
+$$
+\begin{alignat*}{2}
+\left(\psi\circ \varphi(\alpha_j)\right)_{\mathcal{C}} &amp; = \left(\sum\limits_{k = 1}^{m}a_{k,j}\cdot \psi(\beta_k)\right)_{\mathcal{C}} \\
+&amp; = \sum\limits_{k = 1}^{m} a_{k,j}\cdot (b_{1,k}, b_{2,k}, &hellip;, b_{p,k}) \\
+&amp; = \left(\sum\limits_{k = 1}^{m} b_{1, k}a_{k,j}, \sum\limits_{k = 1}^{m} b_{2, k}a_{k,j}, &hellip;, \sum\limits_{k = 1}^{m} b_{p, k}a_{k,j}\right)
+\end{alignat*}
+$$
+Hence
+$$\left[\psi\circ \varphi\right]_{\mathcal{A}}^{\mathcal{C}} = (c_{i,j}) = \left(\sum\limits_{k = 1}^{m} b_{i,k}a_{k,j}\right)$$</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 3.</strong>
+The matrix multiplication $\cdot : \text{Mat}_{p\times m}(\mathbb{K})\times \text{Mat}_{m\times n}(\mathbb{K}) \to \text{Mat}_{p\times n}(\mathbb{K})$ is defined as follows:
+$$(A\cdot B)_{i,j} = \sum\limits_{k = 1}^{m} A_{i,k}B_{k,j}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 2.</strong>
+For every $\varphi\in \mathcal{L}(V, W)$ and $\psi\in \mathcal{L}(W, U)$, we have
+$$\left[\psi\circ \varphi\right]_{\mathcal{A}}^{\mathcal{C}} = \left[\psi\right]_{\mathcal{B}}^{\mathcal{C}}\cdot \left[\varphi\right]_{\mathcal{A}}^{\mathcal{B}}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 3.</strong>
+The map $\varphi: V \to \mathcal{L}(\mathbb{K}, V)$ carrying each vector $\mathbf{v}$ into the linear homomorphism $\mathbf{v}: \mathbb{K}\to V$
+$$\mathbf{v}(a) = a\cdot \mathbf{v}$$
+For each ordered basis $\mathcal{A}$ of $V$, we write $\left[\mathbf{v}\right]_{\mathcal{A}}$ as an abbreviation $\left[\mathbf{v}\right]_{(1)}^{\mathcal{A}}$</p>
+<p>Since $\mathbf{v}(1) = \mathbf{v}$, the matrix $\left[\mathbf{v}\right]_{\mathcal{A}}$ is just the coordinate $(\mathbf{v})_{\mathcal{A}}$ written in column vector.</p>
+<p>For every linear homomorphism $\psi: V\to W$, we have
+$$\left[\psi\circ \mathbf{v}\right]_{\mathcal{B}} = \left[\psi\right]_{\mathcal{A}}^{\mathcal{B}}\cdot \left[\mathbf{v}\right]_{\mathcal{A}}$$
+By a similar argument, $\left[\psi\circ \mathbf{v}\right]_{\mathcal{B}}$ is just the coordinate $(\psi(\mathbf{v}))_{\mathcal{B}}$ written in column vector.</p>
+
+    </p>
+  </div>
+</p>
+
+
+<h2 id="endomorphisms-change-of-basis">Endomorphisms, change of basis <a href="#endomorphisms-change-of-basis" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 4.</strong>
+Let $V$ be a vector space, an <em>endomorphism</em> on $V$ is a linear homomorphism from $V$ into itself. We denote the vector space of all endomorphisms on $V$ by $\text{End}(V)$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 4.</strong>
+Let $V$ be a vector space of dimension $n$. $\text{End}(V)$ is a ring with unity under addition and composition. The linear isomorphism $[\cdot]_{\mathcal{A}}^{\mathcal{A}}: \text{End}(V)\to \text{Mat}_{n\times n}(\mathbb{K})$ makes $\text{Mat}_{n\times n}(\mathbb{K})$ into a ring with unity under matrix addition and matrix multiplication. Under this structure, $[\cdot]_{\mathcal{A}}^{\mathcal{A}}$ becomes a ring homomorphism. The identity of $\text{Mat}_{n\times n}(\mathbb{K})$ is
+$$E_n = \left[\begin{matrix}1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 \end{matrix}\right]$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 5.</strong>
+A matrix $A$ in $\text{Mat}_{n\times n}(\mathbb{K})$ is said to be <em>invertible</em> if there is a matrix $B$ in $\text{Mat}_{n\times n}(\mathbb{K})$ such that
+$$A\cdot B = B\cdot A = E_n$$
+    </p>
+  </div>
+</p>
+
+
+
+  
+
+
+
+
+<p><strong>Proposition 1.</strong>
+A matrix $A$ in $\text{Mat}_{n\times n}(\mathbb{K})$ is said to be invertible if and only if there is a matrix $B$ in $\text{Mat}_{n\times n}(\mathbb{K})$ such that $A\cdot B = E_n$ or $B\cdot A = E_n$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 2.</strong>
+A matrix $A$ in $\text{Mat}_{n\times n}(\mathbb{K})$ is said to be invertible if and only if given a vector space $V$ of dimension $n$, there exists a linear isomorphism $\varphi\in \text{End}(V)$ such that $\left[\varphi\right]_{\mathcal{A}}^{\mathcal{A}} = A$ for every ordered basis $\mathcal{A}$ of $V$. Furthermore, $\left[\varphi^{-1}\right]_{\mathcal{A}}^{\mathcal{A}} = A^{-1}$.</p>
+
+
+
+  
+
+
+
+
+<p><strong>Corollary 1.</strong>
+Let $A$ and $B$ be invertible matrices in $\text{Mat}_{n\times n}(\mathbb{K})$, then $A\cdot B$ is invertible and
+$$(A\cdot B)^{-1} = B^{-1}\cdot A^{-1}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 6.</strong>
+Let $V$ be a vector space of dimension $n$, let $\mathcal{A}$ and $\mathcal{B}$ be two ordered bases of $V$. The matrix $C$ of the identity map with respect to bases $(\mathcal{B}, \mathcal{A})$ is called the <em>change-of-basis matrix</em> from $\mathcal{A}$ to $\mathcal{B}$. We have
+$$\left[\mathbf{v}\right]_{\mathcal{A}} = C\cdot \left[\mathbf{v}\right]_{\mathcal{B}}$$
+for every $\mathbf{v}\in V$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 3.</strong>
+If $C$ is the change-of-basis matrix from $\mathcal{A}$ to $\mathcal{B}$, then $C$ is invertible and $C^{-1}$ is the change-of-basis matrix from $\mathcal{B}$ to $\mathcal{A}$.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 5.</strong>
+Let $V$ be a finite dimensional vector space, let $\mathcal{A}_1, \mathcal{A}_2$ be ordered bases of $V$. Let $W$ be a vector space with ordered bases $\mathcal{B}_1$ and $\mathcal{B}_2$. Let $A$ and $B$ be the change-of-basis matrices from $\mathcal{A}_1$ to $\mathcal{A}_2$ and from $\mathcal{B}_1$ to $\mathcal{B}_2$, respectively. Then for every linear homomorphism $\varphi\in \mathcal{L}(V, W)$, we have
+$$\left[\varphi\right]_{\mathcal{A}_1}^{\mathcal{B}_1} = B^{-1}\cdot \left[\varphi\right]_{\mathcal{A}_2}^{\mathcal{B}_2}\cdot A$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Corollary 2.</strong>
+Let $C$ be the change-of-basis from $\mathcal{A}$ to $\mathcal{B}$, for every endomorphism $\varphi$, we have
+$$\left[\varphi\right]_{\mathcal{A}}^{\mathcal{A}} = C^{-1}\cdot \left[\varphi\right]_{\mathcal{B}}^{\mathcal{B}}\cdot C$$</p>
+
+
+<p>For short, we write $\left[\varphi\right]_{\mathcal{A}}$ as an abbreviation of $\left[\varphi\right]_{\mathcal{A}}^{\mathcal{A}}$, and call it the matrix of $\varphi$ with respect to the ordered basis $\mathcal{A}$.</p>
+
+
+
+
+<p><strong>Proposition 4.</strong>
+If $C$ is an invertible matrix and $\mathcal{A}$ is an ordered basis, then there is an ordered basis $\mathcal{B}$ such that $C$ is the change-of-basis matrix from $\mathcal{A}$ to $\mathcal{B}$.</p>
+
+
+<p><em>Proof.</em> There is a linear isomorphism $\varphi: V\to V$ whose matrix with respect to $\mathcal{A}$ is $C^{-1}$. Consider
+$$\mathcal{B} = (\beta_1, \beta_2, &hellip;, \beta_n) = \left(\varphi(\alpha_1), \varphi(\alpha_2), &hellip;, \varphi(\alpha_n)\right)$$
+where $\mathcal{A} = (\alpha_1, \alpha_2, &hellip;, \alpha_n)$. By definition,
+$$\left[\varphi^{-1}\right]_{\mathcal{B}}^{\mathcal{A}} = E_n$$
+so
+$$[\mathbf{i}_V]_{\mathcal{B}}^{\mathcal{A}} = \left[\varphi\circ \varphi^{-1}\right]_{\mathcal{B}}^{\mathcal{A}} = \left[\varphi\right]_{\mathcal{A}}\cdot \left[\varphi^{-1}\right]_{\mathcal{B}}^{\mathcal{A}} = C\cdot E_n = C$$</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 7.</strong>
+Two matrices $A, B\in \text{Mat}_{n\times n}(\mathbb{K})$ are called <em>similar</em> if there is an invertible matrix $P$ of dimension $n\times n$ such that
+$$A = P^{-1}\cdot B\cdot P$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 6.</strong>
+Two matrices $A, B\in \text{Mat}_{n\times n}(\mathbb{K})$ are similar if and only if given a vector space $V$ of dimension $n$, there is an endomorphism $\varphi$ on $V$ such that
+$$\left[\varphi\right]_{\mathcal{A}} = A \text{ and } \left[\varphi\right]_{\mathcal{B}} = B$$
+for some ordered bases $\mathcal{A}$ and $\mathcal{B}$ for $V$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Suppose that $A, B\in \text{Mat}_{n\times n}(\mathbb{K})$ are similar, i.e., $A = P^{-1}\cdot B\cdot P$ for some invertible matrix $P$.</p>
+<p>Given a metric space $V$ of dimension $n$, given an ordered basis $\mathcal{A}$ for $V$. Since $\left[\cdot\right]_{\mathcal{A}}^{\mathcal{A}}$ is a linear isomorphism, so there is an endomorphism $\varphi: V\to V$ whose matrix with respect to $\mathcal{A}$ is $A$. Since $P$ is invertible, there is an ordered basis $\mathcal{B}$ of $V$ such that $P$ is the change-of-basis matrix from $\mathcal{A}$ to $\mathcal{B}$. Then
+$$[\varphi]_{\mathcal{B}} = P\cdot [\varphi]_{\mathcal{A}}\cdot P^{-1} = P\cdot A\cdot P^{-1} = B$$</p>
+<h2 id="the-algebraic-duals">The algebraic duals <a href="#the-algebraic-duals" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 8.</strong>
+Let $V$ be a vector space. The <em>algebraic dual</em> of $V$ is defined to be $\mathcal{L}(V, \mathbb{K})$ and it&rsquo;s denoted by $V^{\star}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 9.</strong>
+Let $\mathcal{A}$ be a basis for a vector space $V$. For each $\alpha\in V$, let $\alpha^{\star}: V\to \mathbb{K}$ be the linear homomorphism such that
+$$\alpha^{\star}(\alpha) = 1 \text{ and } \alpha^{\star}(\beta) = 0 \text{ for every }\beta\in \mathcal{A}\setminus \{\alpha\}$$
+This definition determines a map from $\mathcal{A}$ into $V^{\star}$, which can be extended into a linear homomorphism from $V$ into $V^{\star}$. We denote this linear homomorphism by
+$$(\cdot)^{\star}: V\ni \mathbf{v}\mapsto \mathbf{v}^{\star}\in V^{\star}$$
+Furthermore, $\mathbf{v}^{\star}(\alpha) = \alpha^{\star}(\mathbf{v})$ for every $\mathbf{v}\in V$ and $\alpha\in \mathcal{A}$. The vector $\mathbf{v}^{\star}$ is called the <em>dual vector</em> of $\mathbf{v}$ with respect to $\mathcal{A}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 5.</strong>
+Given a basis $\mathcal{A}$ for a vector space $V$ and define the operator $(\cdot)^{\star}$ as above. Then for every $\mathbf{v}\in V$
+$$\mathbf{v} = \mathbf{0} \text{ if and only if }\alpha^{\star}(\mathbf{v}) = 0\text{ for every }\alpha\in \mathcal{A}$$
+As a consequence, we have the following theorem:</p>
+
+
+
+
+
+
+<p><strong>Proposition 6.</strong>
+Given a basis $\{\alpha_1, \alpha_2, &hellip;, \alpha_n\}$ for a vector space $V$. Then for every $\mathcal{v}\in V$,
+$$\mathbf{v}^{\star} = \sum\limits_{i = 1}^{n} \alpha_i^{\star}(\mathbf{v})\cdot \alpha_i^{\star} = \sum\limits_{i = 1}^{n} \mathbf{v}^{\star}(\alpha_i)\cdot \alpha_i^{\star}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 7.</strong>
+Let $\mathcal{A}$ be a basis for a vector space $V$. Then the linear homomorphism carrying each $\alpha\in \mathcal{A}$ into $\alpha^{\star}$ is injective.</p>
+<p>If $V$ is finite dimensional, this linear homomorphism is a linear isomorphism. In this case, $\{\alpha_1^{\star}, \alpha_2^{\star}, &hellip;, \alpha_n^{\star}\}$ is a basis for $V^{\star}$, called the <em>dual basis</em> with respect to $\mathcal{A}$.</p>
+<p>In fact, if $\mathcal{A}$ is a basis for $V$, then
+$$V^{\star} \cong \left(\bigoplus\limits_{\alpha\in \mathcal{A}}\mathbb{K}\right)^{\star} \cong \prod\limits_{\alpha\in \mathcal{A}} \mathbb{K}^{\star} \cong \prod\limits_{\alpha\in \mathcal{A}} \mathbb{K} = \mathbb{K}^{|\mathcal{A}|}$$</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 10.</strong>
+Let $V, W$ be vector spaces. Given a a linear homomorphism $\varphi: V\to W$, define the <em>dual</em> $\varphi^{\star}: W^{\star}\to V^{\star}$ of $\varphi$ by $$\varphi^{\star}(\psi) = \psi\circ \varphi$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 8.</strong>
+The map $(\cdot)^{\star}: \mathcal{L}(V, W)\ni \varphi\mapsto \varphi^{\star}\in \mathcal{L}(W^{\star}, V^{\star})$ is an injective linear homomorphism. If $V$ and $W$ are finite dimensional, it becomes a linear isomorphism.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 7.</strong>
+Let $V, W, U$ be vector spaces. Rhen for every $\varphi\in \mathcal{L}(V, W)$ and $\psi\in \mathcal{L}(W, U)$,
+$$(\psi\circ \varphi)^{\star} = \varphi^{\star}\circ \psi^{\star}$$</p>
+
+
+
+
+
+
+<p><strong>Corollary 3.</strong>
+If $\varphi: V\to W$ is a linear isomorphism, then
+$$\left(\varphi^{-1}\right)^{\star} = \left(\varphi^{\star}\right)^{-1}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 9.</strong>
+Let $V$ and $W$ be vector spaces and let $\mathcal{A}$ and $\mathcal{B}$ be ordered bases for $V$ and $W$, respectively. Suppose that $V$ is of dimension $n$ and $W$ is of dimension $m$. Let $\mathcal{A}^{\star}$ and $\mathcal{B}^{\star}$ be the ordered dual bases with respect to $\mathcal{A}$ and $\mathcal{B}$, respectively. Given a linear homomorphism $\varphi: V\to W$, let $A\in \text{Mat}_{m\times n}(\mathbb{K})$ be the matrix of $\varphi$ with respect to $(\mathcal{A}, \mathcal{B})$. Then the matrix of $\varphi^{\star}$ with respect to $(\mathcal{B}^{\star}, \mathcal{A}^{\star})$ is the matrix $A^T\in \text{Mat}_{n\times m}(\mathbb{K})$ where
+$$A^T_{i, j} = A_{j, i}$$
+for every $i\in \{1, 2, &hellip;, n\}$ and $j\in \{1, 2, &hellip;, m\}$. The matrix $A^T$ is called the <em>transpose</em> of $A$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Suppose that $\mathcal{A} = (\alpha_1, \alpha_2, &hellip;, \alpha_n)$ and $\mathcal{B} = (\beta_1, \beta_2, &hellip;, \beta_m)$. We have
+$$\varphi^{\star}(\beta_i^{\star}) = \beta_i^{\star}\circ \varphi = \sum\limits_{j = 1}^{n} (\beta_i^{\star}\circ \varphi)(\alpha_j)\cdot \alpha_j^{\star} = \sum\limits_{j = 1}^{n} \beta_i^{\star}(\varphi(\alpha_j))\cdot \alpha_j = \sum\limits_{j = 1}^{n} A_{i, j}\cdot \alpha_j$$</p>
+
+
+
+
+<p><strong>Corollary 4.</strong>
+For every $A\in \text{Mat}_{n\times m}(\mathbb{K})$ and $B\in \text{Mat}_{m\times p}(\mathbb{K})$,
+$$B^T\cdot A^T = (A\cdot B)^T$$</p>
+
+
+
+
+
+
+<p><strong>Corollary 5.</strong>
+For every invertible matrix $A\in \text{Mat}_{n\times n}(\mathbb{K})$, we have $A^T$ is invertible and
+$$\left(A^{-1}\right)^T = \left(A^T\right)^{-1}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 11.</strong>
+Define $V^{\star\star} = (V^{\star})^{\star}$, called it the <em>second algebraic dual</em> of $V$. Define
+$$(\cdot)^{\star\star}: V\to V^{\star\star},\;\;\mathbf{v}\mapsto \mathbf{v}^{\star\star} = (\varphi \mapsto \varphi(\mathbf{v}))$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 8.</strong>
+The map $\mathbf{v}\mapsto \mathbf{v}^{\star\star}$ is an injective linear homomorphism. If $V$ is finite dimensional, it becomes a linear isomorphism.</p>
+
+
+
+
+
+
+<p><strong>Proposition 9.</strong>
+Suppose that $V$ is finite dimensional with basis $\mathcal{A}$. Then for every $\alpha\in \mathcal{A}$
+$$(\alpha^{\star})^{\star} = \alpha^{\star\star}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 12.</strong>
+Let $V$ be a vector space and let $W$ be a subspace of $V$. Define
+$$W^{\perp} = \left\{\varphi\in V^{\star} : W \subseteq \ker \varphi\right\}$$
+called the <em>orthogonal complement</em> of $W$ in $V^{\star}$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 10.</strong>
+Let $V$ be a vector space and let $W$ be a subspace of $V$, then
+$$(V / W)^{\star} \cong W^{\perp}\text{ and }V^{\star} / W^{\perp} \cong W^{\star}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 10.</strong>
+Let $W, U$ be subspaces of a vector space $V$, then
+$$(W + U)^{\perp} = W^{\perp}\cap U^{\perp}\text{ and }(W\cap U)^{\perp} = W^{\perp} + U^{\perp}$$</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 11.</strong>
+If $\varphi: V\to W$ is a linear homomorphism, then
+$$\left(\varphi(V)\right)^{\perp} = \ker \varphi^{\star}\text{ and } (\ker \varphi)^{\perp} = \varphi^{\star}(W^{\star})$$
+    </p>
+  </div>
+</p>
+
+
+
+    </div>
+
+    
+        <div class="tags">
+            
+                <a href="https://dogsteven.github.io/tags/linear-algebra">linear algebra</a>
+            
+                <a href="https://dogsteven.github.io/tags/abstract-algebra">abstract algebra</a>
+            
+        </div>
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/dogsteven" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>stackoverflow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-488.000000, -1163.000000)">
+            <g id="stackoverflow" transform="translate(488.000000, 1163.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M42.0860128,53.5922927 L22.9745951,53.6011499 L22.9729497,49.5538824 L42.0835447,49.5440929 L42.0860128,53.5922927 L42.0860128,53.5922927 Z M55,30.6708298 L51.7306912,12 L47.7087256,12.6920259 L50.9775643,31.3628557 L55,30.6708298 L55,30.6708298 Z M42.5455518,44.3547147 L23.5156994,42.616026 L23.1410164,46.6470941 L42.1712214,48.3841513 L42.5455518,44.3547147 L42.5455518,44.3547147 Z M43.8009984,39.0731519 L25.3459811,34.1539179 L24.285633,38.0621508 L42.7419431,42.9819676 L43.8009984,39.0731519 L43.8009984,39.0731519 Z M46.2103463,34.4436411 L29.7494464,24.8164635 L27.6748215,28.3015328 L44.1365441,37.9292931 L46.2103463,34.4436411 L46.2103463,34.4436411 Z M50.2466504,31.6088756 L46.8745036,33.8883189 L36.106599,18.2318456 L39.4792159,15.9517031 L50.2466504,31.6088756 Z M45.3315807,40.2784283 L48.5799693,40.2784283 L48.5799693,60 L17,60 L17,40.2784283 L20.2648427,40.2784283 L20.2648427,56.8243495 L45.3315807,56.8243495 L45.3315807,40.2784283 Z" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.536px" height="438.536px" viewBox="0 0 438.536 438.536" style="enable-background:new 0 0 438.536 438.536;"
+	 xml:space="preserve">
+<g>
+	<path d="M414.41,24.123C398.333,8.042,378.963,0,356.315,0H82.228C59.58,0,40.21,8.042,24.126,24.123
+		C8.045,40.207,0.003,59.576,0.003,82.225v274.084c0,22.647,8.042,42.018,24.123,58.102c16.084,16.084,35.454,24.126,58.102,24.126
+		h274.084c22.648,0,42.018-8.042,58.095-24.126c16.084-16.084,24.126-35.454,24.126-58.102V82.225
+		C438.532,59.576,430.49,40.204,414.41,24.123z M335.471,168.735c0.191,1.713,0.288,4.278,0.288,7.71
+		c0,15.989-2.334,32.025-6.995,48.104c-4.661,16.087-11.8,31.504-21.416,46.254c-9.606,14.749-21.074,27.791-34.396,39.115
+		c-13.325,11.32-29.311,20.365-47.968,27.117c-18.648,6.762-38.637,10.143-59.953,10.143c-33.116,0-63.76-8.952-91.931-26.836
+		c4.568,0.568,9.329,0.855,14.275,0.855c27.6,0,52.439-8.565,74.519-25.7c-12.941-0.185-24.506-4.179-34.688-11.991
+		c-10.185-7.803-17.273-17.699-21.271-29.691c4.947,0.76,8.658,1.137,11.132,1.137c4.187,0,9.042-0.76,14.56-2.279
+		c-13.894-2.669-25.598-9.562-35.115-20.697c-9.519-11.136-14.277-23.84-14.277-38.114v-0.571
+		c10.085,4.755,19.602,7.229,28.549,7.422c-17.321-11.613-25.981-28.265-25.981-49.963c0-10.66,2.758-20.747,8.278-30.264
+		c15.035,18.464,33.311,33.213,54.816,44.252c21.507,11.038,44.54,17.227,69.092,18.558c-0.95-3.616-1.427-8.186-1.427-13.704
+		c0-16.562,5.853-30.692,17.56-42.399c11.703-11.706,25.837-17.561,42.394-17.561c17.515,0,32.079,6.283,43.688,18.846
+		c13.134-2.474,25.892-7.33,38.26-14.56c-4.757,14.652-13.613,25.788-26.55,33.402c12.368-1.716,23.88-4.95,34.537-9.708
+		C357.458,149.793,347.462,160.166,335.471,168.735z"/>
+</g>
+</svg>
+
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2022 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       Huynh Bach Khoa
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

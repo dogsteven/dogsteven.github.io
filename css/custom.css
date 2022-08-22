@@ -1,0 +1,11 @@
+.definition-block {
+  padding: 4px 32px 4px 32px;
+  background-color: rgb(245, 245, 245);
+  border-left: solid 2px green;
+}
+
+.theorem-block {
+  padding: 4px 32px 4px 32px;
+  background-color: rgb(245, 245, 245);
+  border-left: solid 2px crimson;
+}
