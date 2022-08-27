@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Group Theory: Composition Series | Personal Math Blog</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Composition Series">
+<meta name="generator" content="Hugo 0.101.0" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+    <link rel="stylesheet" href="https://dogsteven.github.io/css/custom.css">
+  
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+    
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script type="module">
+  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.mjs";
+  renderMathInElement(document.body, {
+    delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+    ],
+    throwOnError : false
+  });
+</script>
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>Home</a>
+	
+	<a href="/posts">Archive</a>
+	<a href="/tags">Tags</a>
+	<a href="/about">About</a>
+
+	
+
+	
+	  <a class="button" href="https://dogsteven.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Group Theory: Composition Series</h1>
+
+    <div class="tip">
+        <time datetime="2022-07-09 00:00:00 &#43;0000 UTC">Jul 9, 2022</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          2158 words
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          11 minute read
+        </span>
+    </div>
+
+    
+    
+        
+  
+
+
+    
+
+
+    <div class="content">
+      
+  
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 1.</strong>
+Let $G$ be a finite group, let $p$ be a prime divisor of $|G|$. Then $G$ has an element of order $p$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Consider the following set
+$$\mathcal{S} = \left\{(a_1, a_2, &hellip;, a_p)\in G^n : a_1a_2&hellip;a_p = 1\right\}$$
+Let $H = \left&lt;\sigma\right&gt;\leqslant S_{G^p}$ where $\sigma$ is a permutation on $G^n$ defined by
+$$\sigma(a_1, a_2, &hellip;, a_p) = (a_2, a_3, &hellip;, a_p, a_1)$$</p>
+<p>First, we observe that
+$$\sigma^{k}(a_1, a_2, &hellip;, a_p) = (a_{k + 1\text{ mod } p}, a_{k + 2\text{ mod } p}, &hellip;, a_{k + p\text{ mod } p})$$
+for every $a_1, a_2, &hellip;, a_p\in G$ and $k\in \mathbb{Z}^{+}$. So
+$$\sigma^p(a_1, a_2, &hellip;, a_p) = (a_1, a_2, &hellip;, a_p)$$
+so $H\cong \mathbb{Z}_p$. Next, $\sigma$ doesn&rsquo;t change the product of $p$-tuples, so let $H$ acts on $\mathcal{S}$ in a obvious way.</p>
+<p>Let $H\mathbf{a}$ be the orbit of an element $\mathbf{a}\in \mathcal{S}$, then
+$$\left|H\mathbf{a}\right| = [H : H_{\mathbf{a}}] \mid p$$
+Hence each orbit of this action has size $1$ or $p$. On the other hand,
+$$p \mid |G|^{n - 1} = |\mathcal{S}| = \sum\limits_{\mathcal{O}\in \mathcal{S} / H} |\mathcal{O}|$$
+and $\{(1, 1, &hellip;, 1)\}$ is an orbit of size $1$. Hence there is an orbit $\mathcal{O} = \{(a_1, a_2, &hellip;, a_p)\}$ of size $1$ different than $\{(1, 1, &hellip;, 1)\}$, then
+$$(a_1, a_2, &hellip;, a_p) = \sigma(a_1, a_2, &hellip;, a_p) = (a_2, a_3, &hellip;, a_p, a_1)$$
+so $a_1 = a_2 = &hellip; = a_p$. We have $a_1^p = 1$, so $a_1$ is an element of order $p$ in $G$.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 2.</strong>
+Let $G$ be a finite abelian group of order $n$. Then for every positive divisor $d$ of $n$, there is a subgroup of $G$ having order $d$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> We shall prove this theorem via induction on $n$.</p>
+<p><em>Base case $n = 1$.</em> There is nothing to prove.</p>
+<p><em>Induction step.</em> Assume that the theorem holds for every $n \leqslant n_0$ for some $n_0\in \mathbb{Z}^{+}$. Suppose that $G$ is a group of order $n_0 + 1$. Given $d$ a positive divisor of $n_0 + 1$. If $d = 1$, then there is nothing to prove, so suppose that $d &gt; 1$. Then $d$ has a prime divisor $p$.</p>
+<p>Since $d$ is a divisor of $n_0 + 1$, we have $p$ is a prime divisor of $n_0 + 1$. By Cauchy&rsquo;s theorem, $G$ has an element $x$ of order $p$. Denote $\left&lt;x\right&gt;$ by $N$. Since $G$ is abelian, $N$ is a normal subgroup of $G$. The quotient group $G / N$ is also abelian, and has order $(n_0 + 1) / p &lt; n_0$. By induction hypothesis, $G / N$ has a subgroup $H / N$ of order $d / p$. We have
+$$|H| = |N|\cdot [G : N] = p \cdot \dfrac{d}{p} = d$$
+so $H$ is a subgroup of order $d$ in $G$.</p>
+
+  
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 1.</strong>
+A group $G$ is said to be simple if $|G| &gt; 1$ and the only normal subgroups of $G$ are $1$ and $G$.
+    </p>
+  </div>
+</p>
+
+
+
+  
+
+
+
+
+<p><strong>Proposition 1.</strong>
+If $G$ is an abelian simple group, then $G\cong \mathbb{Z}_p$ for some prime $p$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 2.</strong>
+If $G$ is a solvable simple group, then $G\cong \mathbb{Z}_p$ for some prime $p$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 2.</strong>
+Let $G$ be a group. A <em>composition series</em> of $G$
+$$1 = G_0 \leqslant G_1 \leqslant &hellip; \leqslant G_n = G$$
+is a finite chain of subgroups of $G$ satisfying the following conditions</p>
+<ol>
+<li>$G_{i} \trianglelefteq G_{i + 1}$ for every $i\in \{0, 1, &hellip;, n - 1\}$.</li>
+<li>$G_{i + 1} / G_{i}$ is simple for every $i\in \{0, 1, &hellip;, n - 1\}$.</li>
+</ol>
+<p>The quotient groups $G_{i + 1} / G_{i}$ are called <em>composition factors</em> of $G$.</p>
+<p>If a chain of subgroups of $G$ satisfies only the first condition, then we say this chain a <em>subnormal series</em>, and write
+$$1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_n = G$$</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 3.</strong>
+A group $G$ is said to be <em>solvable</em> if there is a subnormal series
+$$1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_n = G$$
+such that $G_{i + 1} / G_{i}$ are abelian.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 3.</strong>
+Let $G$ be a group, let $N$ be a normal subgroup of $G$. Then $G$ is solvable if and only if $N$ and $G / N$ are solvable.</p>
+
+
+<p><em>Proof.</em> Suppose that $G$ is solvable:
+$$1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_n = G$$
+with $G_{i + 1} / G_{i}$ are abelian.</p>
+<p>For each $i\in \{0, 1, &hellip;, n - 1\}$, define $N_i = G_i \cap N$, then
+$$1 = N_0 \trianglelefteq N_1 \trianglelefteq &hellip; \trianglelefteq N_n = N$$
+is a subnormal series that $N_{i  +1} / N_{i}$ are abelian.</p>
+<p>For each $i\in \{0, 1, &hellip;, n - 1\}$, define $M_i = G_iN$. Since $N$ is normal in $G$, we have $M_i$ are subgroups of $G$. Given $i\in \{0, 1, &hellip;, n - 1\}$, given $g\in G_{i + 1}$, we have
+$$gM_ig^{-1} = g(G_iN)g^{-1} = (gG_ig^{-1})(gNg^{-1}) = G_iN = M_i$$
+so $G_{i + 1} \leqslant N_G(M_i)$. In another hand, $N \leqslant M_i \leqslant N_G(M_i)$, so
+$$M_{i + 1} = G_{i + 1}N = \left&lt;G_{i + 1}, N\right&gt; \leqslant N_G(M_i)$$
+Hence $M_{i} \trianglelefteq M_{i + 1}$. Therefore
+$$N / N = M_0 / N \trianglelefteq M_1 / N \trianglelefteq &hellip; \trianglelefteq M_n / N = G / N$$
+is a subnormal series. Given $i\in \{0, 1, &hellip;, n - 1\}$, by the third isomorphism theorem
+$$(M_{i + 1} / N) / (M_i / N)\cong M_{i + 1} / M_i$$</p>
+<p>Consider the map
+$$
+\begin{alignat*}{2}
+\varphi: G_{i + 1} &amp; \to M_{i + 1} / M_i \\
+g &amp; \mapsto gM_i
+\end{alignat*}
+$$</p>
+<p>This map is obviously a homomorphism. Given an element $gnM_i\in M_{i + 1} / M_i$ for some $g\in G_{i + 1}$ and $n\in N$, we have $M_i = G_iN = NG_i$, so
+$$gnM_i = gn(NG_i) = g(NG_i) = gM_i = \varphi(g)$$
+Therefore $\varphi$ is surjective. Also, given $g\in G_{i}$, we have
+$$\varphi(g) = gM_i = g(G_iN) = G_iN$$
+Hence $G_i \leqslant \ker\varphi$. Thus, $\varphi$ induces a homomorphism $\overline{\varphi}$
+$$
+\begin{alignat*}{2}
+\overline{\varphi} : G_{i + 1} / G_{i} &amp; \to M_{i + 1} / M_i \\
+gG_{i} &amp; \mapsto \varphi(g)
+\end{alignat*}
+$$
+that is surjective. Since $G_{i + 1} / G_i$ is abelian, we have $M_{i + 1} / M_i = \varphi(G_{i + 1} / G_i)$ is also abelian.</p>
+<p>Therefore, $G / N$ is solvable. The other direction of the proposition is easy to solve.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 3.</strong>
+Let $G$ be a finite group and let $H$ be a normal subgroup of $G$. Then there is a composition series of $G$, one of whose terms is $H$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 4.</strong>
+Let $G$ be a finite group. Then the following statements are equivalent</p>
+<ol>
+<li>$G$ is solvable.</li>
+<li>$G$ has a subnormal series $1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_n = G$ such that $G_{i + 1} / G_{i}$ are cyclic.</li>
+<li>All composition factors of $G$ are of prime order.</li>
+<li>$G$ has a chain of subgroups $1 = G_0 \leqslant G_1 \leqslant &hellip; \leqslant G_n = G$ such that $G_i$ are normal in $G$ and $G_{i + 1} / G_{i}$ are abelian.</li>
+</ol>
+
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> We show that $(1) \implies (3) \implies (2) \implies (1)$ and $(1)\iff (4)$ by induction on $|G|$.</p>
+<p>We observe that $(3) \implies (2) \implies (1)$  and $(4)\implies (1)$ are trivial. So we only need to prove $(1)\implies (3)$ and $(1)\implies (4)$.</p>
+<p><em>Base case $|G| = 1$.</em> There is nothing to prove.</p>
+<p><em>Induction step.</em> Assume that the theorem holds for every group of order less than $n$. Let $G$ be a group of order $n$.</p>
+<p><em>Prove $(1) \implies (3)$.</em> If $G$ is simple, then there&rsquo;s nothing to prove, so suppose that $G$ is not simple. Let $1 &lt; H &lt; G$ be a normal subgroup of $G$ and let
+$$1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_n = G$$
+be a composition series of $G$ where $G_k = H$ for some $k\in \{1, 2, &hellip;, n - 1\}$. Then
+$$1 = G_0 \trianglelefteq G_1 \trianglelefteq &hellip; \trianglelefteq G_k = H$$
+is a composition series of $H$ and
+$$H / H = G_k / H \trianglelefteq G_{k + 1} / G \trianglelefteq &hellip; \trianglelefteq G_n / H = G / H$$
+is a composition series of $G / H$. By the induction hypothesis, $G_{i + 1} / G_{i}$ are of prime order.</p>
+<p><em>Prove $(1)\implies (4)$.</em> Let $M$ be a non-trivial minimal normal subgroup of $G$: For every subgroup $N$ of $G$ such that $1 &lt; N &lt; M$, we have $N$ is not normal in $G$.</p>
+<p>By $(3)$, since $M$ is solvable, $M$ as a normal subgroup $N$ of index $p$ for some prime $p$. Since $M$ is normal in $G$, for every $g\in G$, $gNg^{-1}$ is also a subgroup of index $p$ of $M$.</p>
+<p>Given $x, y\in M$, we have $xyx^{-1}y^{-1}\in gNg^{-1}$ for every $g\in G$, so
+$$xyx^{-1}y^{-1}\in \bigcap\limits_{g\in G}gNg^{-1}$$</p>
+<p>The subgroup $\bigcap\limits_{g\in G}gNg^{-1}$ is the largest normal subgroup of $G$ that contained in $N$. By the minimality of $G$, $\bigcap\limits_{g\in G}gNg^{-1} = 1$ so $xyx^{-1}y^{-1} = 1$. Hence, $M$ is abelian.</p>
+<p>By induction hypothesis, $G / M$ has a chain of subgroups
+$$M / M = G_1 / M \leqslant G_2 / M \leqslant &hellip; \leqslant G_n / M = G / M$$
+such that $G_i / M$ are normal in $G / M$ and $(G_{i + 1} / M) / (G_i / M)$ are abelian.</p>
+<p>By the third isomorphism theorem and $M$ is abelian, $G_i$ are normal in $G$ and $G_{i + 1} / G_i$ are abelian.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 5.</strong>
+Let $G$ be a finite group. Assume that $G$ has two composition series
+$$1 = N_0 \trianglelefteq N_1 \trianglelefteq &hellip; \trianglelefteq N_r = G$$
+and
+$$1 = M_0 \trianglelefteq M_1 \trianglelefteq &hellip; \trianglelefteq M_s = G$$
+then $r = s$ and there exists a permutation $\sigma$ on $\{0, 1, &hellip;, r\}$ such that
+$$N_{i + 1} / N_i \cong M_{\sigma(i) + 1} / M_{\sigma(i)}$$
+for every $i\in \{0, 1, &hellip;, r - 1\}$.
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> For short, we abbreviate the condition in the theorem to that two given composition series are <em>equivalent</em>. It&rsquo;s easy to see that, if a composition series $\alpha$ is equivalent to a composition series $\beta$, and $\beta$ is equivalent to a composition series $\gamma$, then $\alpha$ is equivalent to $\gamma$.</p>
+<p>We shall prove this theorem by induction on $\min\{r, s\}$.</p>
+<p>Without loss of general, assume that $s \leqslant r$.</p>
+<p><em>Base case $s = 1$.</em> There is nothing to prove.</p>
+<p><em>Induction step.</em> Assume that the theorem is true for every $s &lt; n$ for some $n$. Consider $s = n$.</p>
+<p>We have $N_{r - 1}M_{s - 1}$ is a normal subgroup of $G$ that contains $M_{s - 1}$, so $N_{r - 1}M_{s - 1} = M_{s - 1}$ or $N_{r - 1}M_{s - 1} = G$.</p>
+<p>In the case $N_{r - 1}M_{s - 1} = M_{s - 1}$, we have $N_{r - 1} \leqslant M_{s - 1}$. We have $M_{s - 1}$ is a normal subgroup of $G$ that contains $N_{r - 1}$, so $M_{s - 1} = N_{r - 1}$. By induction hypothesis, the theorem holds in this case.</p>
+<p>In the case $N_{r - 1}M_{s - 1} = G$, we have
+$$N_{r - 1} / (N_{r - 1} \cap M_{s - 1}) \cong N_{r - 1}M_{s - 1} / M_{s - 1} = G / M_{s - 1}$$
+and
+$$M_{s - 1} / (N_{r - 1} \cap M_{s - 1}) \cong M_{s - 1}N_{r - 1} / N_{r - 1} \cong G / N_{r - 1}$$</p>
+<p>Let $H = N_{r - 1} \cap M_{s - 1}$, let
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H$$
+be a composition series of $H$. Then
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq N_{r - 1}$$
+is a composition series of $N_{r - 1}$ and
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq M_{s - 1}$$
+is a composition series of $M_{s - 1}$.</p>
+<p>By induction hypothesis on $N_{r - 1}$, the composition series
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq N_{r - 1}$$
+is equivalent to
+$$1 = N_0 \trianglelefteq N_1 \trianglelefteq &hellip; \trianglelefteq N_{r - 1}$$
+Hence two composition series
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq N_{r - 1} \trianglelefteq G$$
+and
+$$1 = N_0 \trianglelefteq N_1 \trianglelefteq &hellip; \trianglelefteq N_{r} = G$$
+are equivalent.</p>
+<p>Similarly, two composition series
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq M_{s - 1} \trianglelefteq G$$
+and
+$$1 = M_0 \trianglelefteq M_1 \trianglelefteq &hellip; \trianglelefteq M_{s} = G$$
+are equivalent.</p>
+<p>In another hand, two composition series
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq N_{r - 1} \trianglelefteq G$$
+and
+$$1 = H_0 \trianglelefteq H_1 \trianglelefteq &hellip; \trianglelefteq H_k = H \trianglelefteq M_{s - 1} \trianglelefteq G$$
+are equivalent.</p>
+<p>Therefore two composition series
+$$1 = N_0 \trianglelefteq N_1 \trianglelefteq &hellip; \trianglelefteq N_r = G$$
+and
+$$1 = M_0 \trianglelefteq M_1 \trianglelefteq &hellip; \trianglelefteq M_s = G$$
+are equivalent.</p>
+
+    </div>
+
+    
+        <div class="tags">
+            
+                <a href="https://dogsteven.github.io/tags/abstract-algebra">abstract algebra</a>
+            
+                <a href="https://dogsteven.github.io/tags/group-theory">group theory</a>
+            
+        </div>
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/dogsteven" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>stackoverflow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-488.000000, -1163.000000)">
+            <g id="stackoverflow" transform="translate(488.000000, 1163.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M42.0860128,53.5922927 L22.9745951,53.6011499 L22.9729497,49.5538824 L42.0835447,49.5440929 L42.0860128,53.5922927 L42.0860128,53.5922927 Z M55,30.6708298 L51.7306912,12 L47.7087256,12.6920259 L50.9775643,31.3628557 L55,30.6708298 L55,30.6708298 Z M42.5455518,44.3547147 L23.5156994,42.616026 L23.1410164,46.6470941 L42.1712214,48.3841513 L42.5455518,44.3547147 L42.5455518,44.3547147 Z M43.8009984,39.0731519 L25.3459811,34.1539179 L24.285633,38.0621508 L42.7419431,42.9819676 L43.8009984,39.0731519 L43.8009984,39.0731519 Z M46.2103463,34.4436411 L29.7494464,24.8164635 L27.6748215,28.3015328 L44.1365441,37.9292931 L46.2103463,34.4436411 L46.2103463,34.4436411 Z M50.2466504,31.6088756 L46.8745036,33.8883189 L36.106599,18.2318456 L39.4792159,15.9517031 L50.2466504,31.6088756 Z M45.3315807,40.2784283 L48.5799693,40.2784283 L48.5799693,60 L17,60 L17,40.2784283 L20.2648427,40.2784283 L20.2648427,56.8243495 L45.3315807,56.8243495 L45.3315807,40.2784283 Z" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.536px" height="438.536px" viewBox="0 0 438.536 438.536" style="enable-background:new 0 0 438.536 438.536;"
+	 xml:space="preserve">
+<g>
+	<path d="M414.41,24.123C398.333,8.042,378.963,0,356.315,0H82.228C59.58,0,40.21,8.042,24.126,24.123
+		C8.045,40.207,0.003,59.576,0.003,82.225v274.084c0,22.647,8.042,42.018,24.123,58.102c16.084,16.084,35.454,24.126,58.102,24.126
+		h274.084c22.648,0,42.018-8.042,58.095-24.126c16.084-16.084,24.126-35.454,24.126-58.102V82.225
+		C438.532,59.576,430.49,40.204,414.41,24.123z M335.471,168.735c0.191,1.713,0.288,4.278,0.288,7.71
+		c0,15.989-2.334,32.025-6.995,48.104c-4.661,16.087-11.8,31.504-21.416,46.254c-9.606,14.749-21.074,27.791-34.396,39.115
+		c-13.325,11.32-29.311,20.365-47.968,27.117c-18.648,6.762-38.637,10.143-59.953,10.143c-33.116,0-63.76-8.952-91.931-26.836
+		c4.568,0.568,9.329,0.855,14.275,0.855c27.6,0,52.439-8.565,74.519-25.7c-12.941-0.185-24.506-4.179-34.688-11.991
+		c-10.185-7.803-17.273-17.699-21.271-29.691c4.947,0.76,8.658,1.137,11.132,1.137c4.187,0,9.042-0.76,14.56-2.279
+		c-13.894-2.669-25.598-9.562-35.115-20.697c-9.519-11.136-14.277-23.84-14.277-38.114v-0.571
+		c10.085,4.755,19.602,7.229,28.549,7.422c-17.321-11.613-25.981-28.265-25.981-49.963c0-10.66,2.758-20.747,8.278-30.264
+		c15.035,18.464,33.311,33.213,54.816,44.252c21.507,11.038,44.54,17.227,69.092,18.558c-0.95-3.616-1.427-8.186-1.427-13.704
+		c0-16.562,5.853-30.692,17.56-42.399c11.703-11.706,25.837-17.561,42.394-17.561c17.515,0,32.079,6.283,43.688,18.846
+		c13.134-2.474,25.892-7.33,38.26-14.56c-4.757,14.652-13.613,25.788-26.55,33.402c12.368-1.716,23.88-4.95,34.537-9.708
+		C357.458,149.793,347.462,160.166,335.471,168.735z"/>
+</g>
+</svg>
+
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2022 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       Huynh Bach Khoa
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

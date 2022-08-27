@@ -9,3 +9,11 @@
   background-color: rgb(245, 245, 245);
   border-left: solid 2px crimson;
 }
+
+#TableOfContents > ul > li {
+  list-style-type: none;
+}
+
+#TableOfContents > ul > li > a {
+  color: black;
+}

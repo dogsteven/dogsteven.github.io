@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Group Theory: Basic Construction | Personal Math Blog</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Basic concepts of group theory">
+<meta name="generator" content="Hugo 0.101.0" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+    <link rel="stylesheet" href="https://dogsteven.github.io/css/custom.css">
+  
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+    
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+<script type="module">
+  import renderMathInElement from "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.mjs";
+  renderMathInElement(document.body, {
+    delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\(', right: '\\)', display: false},
+        {left: '\\[', right: '\\]', display: true}
+    ],
+    throwOnError : false
+  });
+</script>
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>Home</a>
+	
+	<a href="/posts">Archive</a>
+	<a href="/tags">Tags</a>
+	<a href="/about">About</a>
+
+	
+
+	
+	  <a class="button" href="https://dogsteven.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Group Theory: Basic Construction</h1>
+
+    <div class="tip">
+        <time datetime="2022-07-07 00:00:00 &#43;0000 UTC">Jul 7, 2022</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          4445 words
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          21 minute read
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+  <ul>
+    <li><a href="#groups">Groups</a></li>
+    <li><a href="#homomorphisms">Homomorphisms</a></li>
+    <li><a href="#cyclic-groups">Cyclic groups</a></li>
+  </ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      <h2 id="groups">Groups <a href="#groups" class="anchor">🔗</a></h2>
+  
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 1.</strong>
+A <em>group</em> is a set $G$ together with a binary operator $\star$ on $G$
+$$
+\begin{alignat*}{2}
+\star: G\times G &amp; \to G \\
+(a, b) &amp; \mapsto ab
+\end{alignat*}
+$$
+satisfying the following axioms</p>
+<ol>
+<li>$\star$ is associative, i.e., for every $a, b, c\in G$ we have $(ab)c = a(bc)$.</li>
+<li>There is an element $e\in G$, called an <em>identity</em>, such that for every $a\in G$ we have $ae = ea = a$.</li>
+<li>For each element $a\in G$, there is an element $a^{-1}\in G$, called an <em>inverse</em> of $a$, such that $aa^{-1} = a^{-1}a = e$.</li>
+</ol>
+<p>If $\star$ is commutative, i.e., for every $a, b\in G$ we have $ab = ba$, the group $G$ is said to be <em>abelian</em> or <em>commutative</em>.</p>
+<p>In most cases, we call the operator $\star$ the <em>multiplication</em> and call $G$ a <em>multiplicative group</em>. If $G$ is abelian, we usually write $a + b$ instead of $ab$ and call it the <em>addition</em> and call $G$ a <em>additive group</em>.</p>
+
+    </p>
+  </div>
+</p>
+
+
+<p>The condition 2 ensures that a group is non-empty. It&rsquo;s easy to observe that the identity of a group is unique, and the inverse of an element of a group is uniquely determined by this element.</p>
+<p>In a multiplicative group, the indenity is denoted by $1$ and the inverse of an element $a$ is denoted by $a^{-1}$. In an additive group, the identity is denoted by $0$ and the inverse of an element $a$ is denoted by $-a$.</p>
+<p>We write $a^n$ instead of $\underbrace{aa&hellip;a}_{n\text{ times}}$, write $na$ instead of $\underbrace{a + a + &hellip; + a}_{n \text{ times}}$, and define $a^0\overset{\text{def}}{=} 1$.</p>
+<p>We also write $a^{-n}$ and $(-n)a$ instead of $(a^n)^{-1}$ and $-(na)$, respectively. It&rsquo;s easy to see that
+$$a^{n + m} = a^na^m \text{ and } (n + m)a = na + ma$$
+for every $n, m\in \mathbb{Z}$. Also
+$$\left(a^{m}\right)^{n} = a^{nm}\text{ and } n(ma) = (nm)a$$
+for every $n, m\in \mathbb{Z}$. We call $a^n$ a <em>power</em> of $a$.</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 2.</strong>
+For a group $G$ and $a\in G$, the <em>order</em> of $a$, denoted $|a|$, is defined to be the cardinality of $\left\{a^n : n\in \mathbb{Z}\right\}$. If $|a|$ is finite number $n$, we say that $a$ is of order $n$. Otherwise, we say that $a$ is of infinite order.</p>
+<p>The <em>order</em> of $G$, denoted $|G|$, is defiend to be the cardinality of $G$.</p>
+<p>One observes that if $G$ is finite, every element of $G$ is of finite order.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 3.</strong>
+A <em>subgroup</em> of a group $G$ is a non-empty subset of $G$ that closed under the multiplication and inverse. Formally, a non-empty subset $H$ of a group $G$ is called a subgroup of $G$ if the following properties hold</p>
+<ol>
+<li>For every $a, b\in H$ we have $ab\in H$.</li>
+<li>For every $a\in H$ we have $a^{-1}\in H$.</li>
+</ol>
+<p>There are two trivial subgroups of a group $G$: the entire $G$ and the <em>identity subrgroup</em> $\{1\}$, denoted by $1$ ($0$ in additive groups).</p>
+<p>We write either $H\leqslant G$ or $G\geqslant H$ to express the fact that $H$ is a subgroup of $G$. One can make an observation that a subgroup of a group is also a group under the same operator. If $H$ is a subgroup of $G$ and $H\ne G$, we say that $H$ is a <em>proper subgroup</em> of $G$ and write either $H &lt; G$ or $G &gt; H$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+  
+
+
+
+
+<p><strong>Proposition 1.</strong>
+For a group $G$, the relation $\leqslant$ is a partial ordering on the set of all subgroups of $G$. The union of a chain of proper subgroups is also a proper subgroup. Therefore, every group has a maximal subgroup.</p>
+
+
+<p>The itersection of a chain of non-identity subgroups need not to be a non-identity subgroup of $G$: Consider the group $\mathbb{Z}$ under addition and the chain $\left\{2^n\mathbb{Z}\right\}_{n\in \mathbb{N}}$ where
+$$a\mathbb{Z} = \left\{ak : k\in \mathbb{Z}\right\}$$
+Then we have
+$$\bigcap\limits_{n = 0}^{\infty} 2^n\mathbb{Z} = \left\{k\in \mathbb{Z} : (\forall n\in \mathbb{N})(\exists a\in \mathbb{Z})(k = 2^n\cdot a)\right\} = 0$$</p>
+
+
+
+
+<p><strong>Proposition 2.</strong>
+The intersection of a collection of subgroups of a group $G$ is also a subgroup of $G$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 4.</strong>
+Let $A$ be a subset of a group $G$. The <em>subgroup generated by $A$ in $G$</em>, denoted $\left&lt;A\right&gt;$, is defined to be the smallest subgroup of $G$ containing $A$. Formally,
+$$\left&lt;A\right&gt; \overset{\text{def}}{=} \bigcap\limits_{\substack{A \subseteq H \\ H\leqslant G}} H$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 3.</strong>
+Let $G$ be a group, let $H$ be a subgroup of $G$ and let $A$ be a subset of $H$. Then the subgroup generated by $A$ in $H$ is as the same as the subgroup generated by $A$ in $G$.</p>
+
+
+
+  
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 1.</strong>
+Let $A$ be a subset of a group $G$. Then
+$$\left&lt;A\right&gt; = \left\{a_1^{\varepsilon_1}a_2^{\varepsilon_2}&hellip;a_n^{\varepsilon_n} : n\in \mathbb{Z}^{+}, a_i\in A, \varepsilon_i\in \{1, -1\}\right\}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 5.</strong>
+For a group $G$ and $a, g\in G$, the <em>conjugate</em> of $a$ by $g$ is defined to be $gag^{-1}$. For a subset $A$ of $G$, define
+$$gAg^{-1} := \{gag^{-1} : a\in A\}$$
+called the <em>conjugate</em> of $A$ in $G$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 6.</strong>
+For a group $G$ and a non-empty subset $A$ of $G$, define the <em>centralizer</em> of $A$ in $G$ by
+$$C_G(A) \overset{\text{def}}{=} \left\{g\in G : gag^{-1} = a \text{ for every }a\in A\right\}$$
+and the <em>normalizer</em> of $A$ in $G$ by
+$$N_G(A) \overset{\text{def}}{=} \left\{g\in G : gAg^{-1} = A\right\}$$</p>
+<p>For an element $g\in G$, we say that $g$ <em>centralizes</em> (resp, <em>normalizes</em>) $A$ if $g\in C_G(A)$ (resp, $g\in N_G(A)$). For a non-empty subset $B$ of $G$, we say that $B$ centralizes (resp, normalizes) $A$ if $B\subseteq C_G(A)$ (resp, $B\subseteq N_G(A)$).</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 4.</strong>
+For a group $G$ and a non-empty subset $A$ of $G$, the centralizer and normalizer of $A$ are subgroups of $G$. Furthermore, $C_G(A)\leqslant N_G(A)\leqslant G$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 7.</strong>
+A subgroup $H$ of $G$ is said to be <em>normal</em> in $G$ (or is a <em>normal subgroup</em> of $G$) if $gHg^{-1} = H$ for every element $g\in G$. In this case, we write $H\trianglelefteq G$ or $G\trianglerighteq H$.</p>
+<p>In another words, a subgroup $H$ of $G$ is normal in $G$ if and only if $N_G(H) = G$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 5.</strong>
+A subgroup $H$ of $G$ is normal in $G$ if and only if for every $h\in H$ and $g\in G$,
+$$ghg^{-1}\in H$$
+In another words, $H$ is normal in $G$ if and only if $gHg^{-1}\subseteq H$ for every $g\in G$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 6.</strong>
+Let $G$ be a group and let $H$ be a subgroup of $G$. Then the normalizer of $H$ in $G$ is the largest subgroup of $G$ in which $H$ is normal.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 8.</strong>
+For $A$ and $B$ subsets of a group $G$, define
+$$AB \overset{\text{def}}{=} \left\{ab : a\in A, b\in B\right\}$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 7.</strong>
+Let $H, K$ be finite subgroups of a group $G$, then
+$$\left|HK\right| = \dfrac{|H|\cdot |K|}{|H\cap K|}$$</p>
+
+
+<p><em>Proof.</em> Given $k_1, k_2\in K$, suppose that $k_1H = k_2H$, then $k_1^{-1}k_2\in H$ so $k_1^{-1}k_2\in H\cap K$. Therefore, the set
+$$A = \{kH : k\in K\}$$
+contains $\dfrac{|K|}{|H\cap K|}$ cosets of $H$. In another hand,
+$$HK = \bigcup\limits_{k\in H} kH = \bigsqcup\limits_{kH\in A} kH$$
+so
+$$|HK| = |H|\cdot|A| = \dfrac{|H|\cdot |K|}{|H\cap K|}$$</p>
+
+
+
+
+<p><strong>Proposition 8.</strong>
+Let $H, K$ be subgroups of a group $G$. Then $HK$ is a subgroup of $G$ if and only if $HK = KH$.</p>
+
+
+<p><em>Proof.</em> Suppose that $HK$ is a subgroup of $G$. Given $h\in H, k\in K$, we have
+$$kh = \left(h^{-1}k^{-1}\right)^{-1}\in HK$$
+so $KH \subseteq HK$. On the other hand,
+$$(hk)^{-1} = k^{-1}h^{-1}\in KH$$
+so $HK = (HK)^{-1} \subseteq KH$. Therefore, $HK = KH$.</p>
+<p>Conversely, suppose that $HK = KH$. Given $h_1,h_2\in H, k_1, k_2\in K$, we have
+$$(h_1k_1)^{-1}h_2k_2 = k_1^{-1}h_1^{-1}h_2k_2 = h_3k_3k_2 \in HK$$
+where $h_3\in H, k_3\in K$ such that $k_1^{-1}(h_1^{-1}h_2) = h_3k_3$. Hence $HK$ is a subgroup of $G$.</p>
+
+
+
+
+<p><strong>Proposition 9.</strong>
+Let $H, K$ be subgroups of a group $G$ such that $HK$ is a subgroup of $G$. Then
+$$HK = \left&lt;H, K\right&gt;$$</p>
+
+
+<p><em>Proof.</em> We have $H, K$ are subsets of $HK$, so $\left&lt;H, K\right&gt; \leqslant HK$. Obvously, $HK$ is a subset of $\left&lt;H, K\right&gt;$, so $HK = \left&lt;H, K\right&gt;$.</p>
+
+  
+
+
+
+
+<p><strong>Corollary 1.</strong>
+Let $H, K$ be subgroups of a group $G$. If $K$ normalizes $H$, then $HK$ is a subgroup $G$ and $H$ is normal in $HK$.</p>
+
+
+<p><em>Proof.</em> Since $K$ normalizes $H$, for every $k\in K$ and $h\in H$, we have
+$$hk = k\left(k^{-1}hg\right) \in KH\text{ and }kh = \left(khk^{-1}\right)k\in HK$$
+so $HK$ is a subgroup of $G$. Since $K$ normalizes $H$, we have
+$$HK = \left&lt;H, K\right&gt; \leqslant N_G(H)$$
+so $H$ is normal in $HK$.</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 9.</strong>
+For $G$ a group, $H$ a subgroup of $G$ and $a$ an element of $G$, define
+$$
+\begin{alignat*}{2}
+aH &amp; \overset{\text{def}}{=} \left\{ah : h\in H\right\} \\
+Ha &amp; \overset{\text{def}}{=} \left\{ha : h\in H\right\}
+\end{alignat*}
+$$
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 10.</strong>
+Let $G$ be a group and let $H$ be a subgroup of $G$. Define a relation $\sim_H$ on $G$ as follows
+$$a\sim_H b\iff a^{-1}b\in H$$
+This relation is an equivalence relation, whose equivalence classes are called <em>left cosets</em> of $H$ in $G$. The set of all left cosets of $H$ in $G$ is denoted by $G / H$.</p>
+<p>Similarly, define a relation $\sim^{H}$ on $g$ by
+$$a\sim^{H} b\iff ab^{-1} \in H$$
+This relation is an equivalence relation, whose equivalence class are called <em>right cosets</em> of $H$ in $G$. The set of all right cosets of $H$ in $G$ is (terribly) denoted by $H \setminus G$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 10.</strong>
+Let $G$ be a group and let $H$ be a subgroup of $G$. If $N$ is a left coset of $H$ in $G$, then for every $a\in N$ we have $N = aH$. As a consequence,
+$$G / H = \left\{aH : a\in G\right\}$$
+Similarly, if $N$ is a right coset of $H$ in $G$, then for every $a\in N$ we have $N = Ha$. Also
+$$H \setminus G = \left\{Ha : a\in G\right\}$$</p>
+
+
+
+
+
+
+<p><strong>Corollary 2.</strong>
+Let $G$ be a group and let $H$ be a subgroup of $G$. Then
+$$a\sim_H b \iff (\exists h\in H)a = bh \iff aH = bH$$</p>
+
+
+
+
+
+
+<p><strong>Corollary 3.</strong>
+If $G$ is a finite group and $H$ is a subgroup of $G$, then $|H|$ divides $|G|$ and $|G| / |H|$ is the number of left cosets (or right cosets) of $H$ in $G$.</p>
+
+
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 11.</strong>
+The <em>index</em> of a subgroup $H$ of a group $G$, denoted $[G : H]$, is defined to be the cardinality of $G / H$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 11.</strong>
+Suppose that $G$ is a group and $H, K$ is subgroups of $G$ such that $H \leqslant K$. Then
+$$[G : K]\cdot [K : H] = [G : H]$$
+In particular, $|G| = [G : H]\cdot |H|$.</p>
+
+
+<p><em>Proof.</em> Let $G / K = \{g_{\alpha}K\}_{\alpha}$ and $K / H = \{k_{\beta}H\}_{\beta}$, we have
+$$
+\begin{alignat*}{2}
+G = \bigsqcup\limits_{\alpha} g_{\alpha}K &amp; = \bigsqcup\limits_{\alpha}\left(g_{\alpha}\bigsqcup\limits_{\beta} k_{\beta}H\right) \\
+&amp; = \bigsqcup\limits_{\alpha, \beta} (g_{\alpha}k_{\beta})H
+\end{alignat*}
+$$
+Thus $[G : H] = [G : K]\cdot [K : H]$.</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 2.</strong>
+If $G$ is a finite group and $H$ is a subgroup of $G$, then $|H|$ divides $|G|$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 12.</strong>
+A subgroup $H$ of a group $G$ is normal in $G$ if and only if for every $a\in G$
+$$aH = Ha$$</p>
+
+
+
+
+
+
+<p><strong>Proposition 13.</strong>
+Let $G$ be a group and let $H$ be a subgroup of $G$. Then the binary operator
+$$
+\begin{alignat*}{2}
+\star: G / H\times G / H &amp; \to G / H \\
+(aH, bH) &amp; \mapsto (aH)(bH) \overset{\text{def}}{=} (ab)H
+\end{alignat*}
+$$
+is well-defined if and only if $H$ is normal in $G$.</p>
+
+
+<p><em>Proof.</em> Suppose that the map $\star$ is well-defined. Given $a\in H$, given $g\in G$, we have
+$$1 \sim_H a \text{ and } g^{-1}\sim_H g^{-1}$$
+so $g^{-1}\sim_H ag^{-1}$, thus $gag^{-1}\in H$. Since $a, g$ are arbitrary, we have $H \trianglelefteq G$.</p>
+<p>Conversely, suppose that $H$ is normal in $G$. Given $a, b, c, d\in G$ such that $a\sim_H c$ and $b\sim_H d$, we have
+$$(ab)^{-1}cd = b^{-1}\left(\left(a^{-1}c\right)\left(b\left(b^{-1}d\right)b^{-1}\right)\right)b \in H$$
+in another words, $ab\sim cd$. Hence the map $\star$ is well-defined.</p>
+
+
+
+
+<p><strong>Proposition 14.</strong>
+Let $G$ be a group and let $H$ be a normal subgroup of $G$. Then $G / H$ is a group under the binary operator $\star$ in the preceeding proposition, called the <em>quotient group</em> of $G$ by $N$. The identity of this group is $H$, the inverse of an element $aH$ is $a^{-1}H$.</p>
+
+
+<p>Suppose that $G$ is a group, $H, K$ are subgroup of $G$ such that $H$ is normal in $G$ and $H$ is a subgroup of $K$, then $H$ is normal in $K$ and
+$$K / H = \left\{kH : k\in K\right\} \subseteq \left\{gH : g\in G\right\} = G / H$$
+so $K / H$ is a subgroup of $G / H$.</p>
+<h2 id="homomorphisms">Homomorphisms <a href="#homomorphisms" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <p><strong>Definition 12.</strong>
+Let $G, H$ be groups. A <em>homomorphism</em> (of groups) is a map $\varphi: G\to H$ that preserves struture of group
+$$\varphi(ab) = \varphi(a)\varphi(b)\text{ for every }a, b\in G$$</p>
+<p>A <em>kernel</em> of a homomorphism $\varphi: G\to H$ is defined by
+$$\ker \varphi \overset{\text{def}}{=} \left\{a\in G : \varphi(a) = 1\right\}$$</p>
+
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><p><strong>Proposition 15.</strong>
+Images of subgroups under a homomorphism are also subgroups. Inverse images of (normal) subgroups are also (normal) subgroups.</p>
+<p>In particular, the image of a homomorphism is a subgroup, and its kernel is a normal subgroup.</p>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 16.</strong>
+The composite of two homomorphisms is a homomorphism. The restriction of a homomorphism into a subgroup is a homomorphism. Is a homomorphism is bijective, its inverse is also a homomorphism.</p>
+
+
+
+
+
+
+<p><strong>Proposition 17.</strong>
+A subgroup of a group is normal if and only if it is the kernel of some homomorphism.</p>
+
+
+<p><em>Proof.</em> Let $H$ be a normal subgroup of a group $G$. Define the <em>projection</em> of $G$ into $H$ by
+$$
+\begin{alignat*}{2}
+\pi_H : G &amp; \to H \\
+a &amp; \mapsto aH
+\end{alignat*}
+$$
+then $\pi_H$ is a homomorphism. It kernel is
+$$\ker \pi_H = \left\{a\in G : aH = H\right\} = H$$</p>
+
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 13.</strong>
+An <em>isomorphism</em> (of groups) is a bijection homomorphism. A group $G$ is said to be <em>isomorphic</em> to a group $H$ if there is an isomorphism from $G$ into $H$. In this case, we write $G\cong H$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 18.</strong>
+A homomorphism $\varphi: G\to H$ is injective if and only if $\ker\varphi = 1$.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 3.</strong>
+Let $G, H$ be groups and let $\varphi: G\to H$ be a homomorphism. Then there is a unique homomorphism $\overline{\varphi}: G / \ker \varphi \to H$ such that
+$$\varphi = \overline{\varphi}\circ \pi_{\ker \varphi}$$
+where $\pi_{\ker\varphi}: G \to G / \ker\varphi$ is the projection homomorphism. Furthermore, $\overline{\varphi}$ is injective, which deduces that
+$$G / \ker\varphi \cong \varphi(G)$$</p>
+<p>In particular, if $\varphi$ is surjective, then $G / \ker\varphi \cong H$.</p>
+
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Given $a, b\in G$ such that $a\sim_{\ker\varphi} b$, equivalently, $a^{-1}b\in \ker\varphi$, then
+$$\varphi(b) = \varphi(a)\varphi(a)^{-1}\varphi(b) = \varphi(a)\varphi\left(a^{-1}b\right) = \varphi(a)$$
+Therefore, the map
+$$
+\begin{alignat*}{2}
+\overline{\varphi}: G / \ker\varphi &amp; \to H \\
+a\ker \varphi &amp; \mapsto \varphi(a)
+\end{alignat*}
+$$
+is well-defined. This map is a homomorphism
+$$
+\begin{alignat*}{2}
+\overline{\varphi}\left((a\ker\varphi) (b\ker\varphi)\right) &amp; = \overline{\varphi}\left((ab)\ker\varphi\right)  \\
+&amp; = \varphi(ab) \\
+&amp; = \varphi(a)\varphi(b) \\
+&amp; = \overline{\varphi}(a\ker\varphi)\overline{\varphi}(b\ker\varphi)
+\end{alignat*}
+$$
+For every $a\in G$, we have
+$$\varphi(a) = \overline{\varphi}(a\ker\varphi) = \left(\overline{\varphi}\circ \pi_{\ker\varphi}\right)(a)$$
+Thus $\varphi = \overline{\varphi}\circ \pi_{\ker\varphi}$. Suppose that $\psi: G/\ker\varphi\to H$ is a homomorphism such that
+$$\varphi = \psi\circ \pi_{\ker\varphi}$$
+Given $a\in G$, we have
+$$\overline{\varphi}(a\ker\varphi) = \varphi(a) = (\psi\circ \pi_{\ker\varphi})(a) = \psi(a\ker\varphi)$$
+Thus $\psi = \overline{\varphi}$, which implies the uniqueness of $\overline{\varphi}$.</p>
+<p>The injectivity of $\varphi$ is followed by
+$$\ker\overline{\varphi} = \left\{a\ker\varphi\in G / \ker\varphi : \varphi(a) = 1\right\} = \{\ker\varphi\} = 1$$</p>
+
+
+
+
+<p><strong>Proposition 19.</strong>
+Let $\varphi: G\to H$ be a homomorphism, let $N$ be a normal subgroup of $G$. Then the map
+$$
+\begin{alignat*}{2}
+\overline{\varphi}: G / N &amp; \to H \\
+gN &amp; \mapsto \varphi(g)
+\end{alignat*}
+$$
+is well-defined if and only if $N \leqslant \ker\varphi$. If $\overline{\varphi}$ is well-defined, then $\overline{\varphi}$ is a homomorphism.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 4.</strong>
+Let $G$ be groups and $H, K$ be subgroups of $G$. if $K$ normalizes $H$, then
+$$K / (K\cap H) \cong KH / H$$
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Suppose that $K$ normalizes $H$, then $HK$ is a subgroup of $G$ and $H$ is normal in $HK$. Define
+$$
+\begin{alignat*}{2}
+\varphi: K  &amp; \to KH / H \\
+k &amp; \mapsto kH
+\end{alignat*}
+$$
+This map is clearly a homomorphism. Given $(kh)H\in KH/H$, we have $kH = (kh)H$, so
+$$\varphi(k) = kH = (kh)H$$
+hence $\varphi$ is surjective. We have
+$$\ker\varphi = \left\{k\in K : kH = H\right\} = \{k\in K : k = H\} = K \cap H$$
+By the first isomorphism theorem,
+$$K / (K\cap H) = K / \ker\varphi \cong KH / H$$</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <strong>Theorem 5.</strong>
+Let $G$ be a group and let $H, K$ be normal subgroups of $G$ such that $H$ is a subgroup of $K$. Then $K / H$ is a normal subgroup of $G / H$ and
+$$(G / H) / (K / H) \cong G / K$$
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Define
+$$
+\begin{alignat*}{2}
+\varphi: G / H &amp; \to G / K \\
+gH &amp; \mapsto gK
+\end{alignat*}
+$$
+Given $g_1, g_2\in G$ such that $g_1\sim_H g_2$, we have $g_1^{-1}g_2\in H$. Since $H\leqslant K$, we have $g_1^{-1}g_2\in K$, so $g_1\sim_K g_2$. Thus, $\varphi$ is well-defined. $\varphi$ is clearly a surjective homomorphism.</p>
+<p>We have
+$$
+\begin{alignat*}{2}
+\ker \varphi &amp; = \left\{gH \in G / H : gK = K\right\} \\
+&amp; = \left\{gH\in G / H : g\in K\right\} \\
+&amp; = K / H
+\end{alignat*}
+$$
+Therefore, $K / H$ is normal in $G / H$ and
+$$(G / H) / (K / H) \cong G / K$$</p>
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 6.</strong>
+Let $N$ be a normal subgroup of a group $G$. Then $A\mapsto A / N$ is a bijection between the set of all subgroups of $G$ that contains $N$ and the group $G / N$. Furthermore, for every subgroups $A, B$ of $G$ that contains $N$</p>
+<ol>
+<li>$A \leqslant B$ if and only if $A / N \leqslant B / N$.</li>
+<li>$A \trianglelefteq B$ if and only if $A / N \trianglelefteq B / N$.</li>
+<li>$\left&lt;A, B\right&gt; / N = \left&lt;A / N, B / N\right&gt;$.</li>
+<li>$A / N \cap B / N = (A \cap B) / N$.</li>
+<li>If $A \trianglelefteq B$ then $[B : A] = \left[B / N : A / N\right]$.</li>
+</ol>
+
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Let $\pi_N : G\to G/N$ be the projection from $G$ into $G / N$.</p>
+<p>Suppose that $H$ is a subgroup $G / N$, let $K = \pi_N^{-1}(H) = \bigcup H$. Clearly, $K$ is a subgroup of $G$. Since $N\in H$, we have $N\subseteq K$ and
+$$K / N = \left\{kN : k\in K\right\} = \pi_N(K) = \pi_N\left(\pi_N^{-1}(H)\right) = H$$</p>
+<p>Hence, the map $A\mapsto A / N$ is surjective. Suppose that $A, B$ are subgroups of $G$ containing $N$ such that $A / N = B / N$. We have
+$$A = \bigcup A / N = \bigcup B / N = B$$
+so the map $A\mapsto A / N$ is injective. Therefore, the map $A\to A / N$ is bijective.</p>
+<p>Given two subgroups $A, B$ of $G$ that contains $N$.</p>
+<p><em>Prove 1.</em> If $A \leqslant N$, then
+$$A / N = \pi_N(A) = \left(\pi_N\restriction_{B}\right)(A) \leqslant \left(\pi_N\restriction_{B}\right)(B) = \pi_N(B) = B / N$$
+and if $A / N \leqslant B / N$ then
+$$A = \bigcup A / N \subseteq \bigcup B / N = B \implies A \leqslant B$$</p>
+<p><em>Prove 2.</em> If $A \trianglelefteq B$, then by the third isomorphism theorem, $A / N$ is normal in $B / N$. Conversely, if $A / N \trianglelefteq B / N$, then $A/ N \leqslant B / N$, so $A \leqslant B$, thus
+$$A = \pi_N^{-1}(A / N) = \pi_N^{-1}(A / N)\cap B = \left(\pi_N\restriction_{B}\right)^{-1}(A / N) \trianglelefteq B / N$$</p>
+<p><em>Prove 3.</em> $A, B$ are subgroups of $\left&lt;A, B\right&gt;$ so $A/N, B/N$ are subgroups of $\left&lt;A, B\right&gt; / N$. Therefore $\left&lt;A / N, B / N\right&gt;$ is a subgroup of $\left&lt;A, B\right&gt; / N$.</p>
+<p>Since $\left&lt;A / N, B / N\right&gt;$ is a subgroup of $G / N$, there is a subgroup $C$ of $G$ containing $N$ such that $C / N = \left&lt;A / N, B / N\right&gt;$. We have $A / N$ and $B / N$ are subgroups of $C / N$, so $A, B$ are subgroups of $C$. Therefore $\left&lt;A, B\right&gt;$ is a subgroup of $C$, which implies that $\left&lt;A, B\right&gt; / N$ is a subgroup of $C / N$.</p>
+<p>Therefore $\left&lt;A / N, B / N\right&gt; = \left&lt;A, B\right&gt; / N$.</p>
+<p><em>Prove 4.</em> There is a subgroup $C$ of $G$ containing $N$ such that $C / N = A / N \cap B / N$. We have $C / N$ is a subgroup of both $A / N$ and $B / N$, so $C$ is a subgroup of $A$ and $B$, so $C$ is a subgroup of $A \cap B$.</p>
+<p>Conversely, $(A\cap B) / N$ is a subgroup of $A / N$ and $B / N$, so $(A \cap B) / N$ is a subgroup of $A / N \cap B / N = C / N$. Hence, $A \cap B$ is a subgroup of $C$.</p>
+<p>Therefore $C = A\cap B$, which means that $A / N \cap B / N = (A\cap B) / N$.</p>
+<p><em>Prove 5.</em> By the third isomorphism theorem,
+$$B / A \cong (B / N) / (A / N) \implies [B : A] = [B / N : A / N]$$</p>
+<h2 id="cyclic-groups">Cyclic groups <a href="#cyclic-groups" class="anchor">🔗</a></h2>
+
+
+
+<p>
+  <div class="definition-block">
+    <p>
+      <strong>Definition 14.</strong>
+A group $G$ is said to be <em>cyclic</em> if it can be generated by a single element, i.e., there is an element $a\in G$ such that $G = \left&lt;a\right&gt;$.
+    </p>
+  </div>
+</p>
+
+
+
+
+
+
+<p><strong>Proposition 20.</strong>
+Let $a$ be an element of a group $G$. Then elements of $\left&lt;a\right&gt;$ are powers of $a$.</p>
+
+
+
+
+
+
+<p><p><strong>Proposition 21.</strong>
+Let $G$ be a group and let $a$ be an element of $G$.</p>
+<ol>
+<li>If $a$ is of finite order $n$, then $a^m = 1$ if and only if $n$ divides $m$.</li>
+<li>If $a$ is infinite, then $a^n \ne a^m$ for every integers $n\ne m$.</li>
+</ol>
+</p>
+
+
+<p><em>Proof.</em></p>
+<p><em>Prove 1.</em> Given $b\in \left&lt;a\right&gt;$, there is an integer $m$ such that $b = a^m$. By Euclidean&rsquo;s Property, we can write $m = qn + r$ for some integers $q\in \mathbb{Z}$ and $r\in \{0, 1, &hellip;, n - 1\}$. Thus
+$$b = a^{nq + r} = (a^n)^qa^r = a^r$$
+It follows that any element of $\left&lt;a\right&gt;$ can be written in the form of $a^r$ for some non-negative integer $r \in \{0, 1, 2, &hellip;, n - 1\}$. Hence,
+$$\left&lt;a\right&gt; = \{1, a, a^2, &hellip;, a^{n - 1}\}$$
+By definition, the set $\left&lt;a\right&gt;$ has exactly $n$ element, so the powers $1, a, a^2, &hellip;, a^{n - 1}$ are distinct.</p>
+<p>Given $m\in \mathbb{Z}$, we can write $m = qn + r$ as above. If $a^m = 1$, then
+$$1 = a^{m} = a^{r}$$
+so $r = 0$, therefore $m = qn$ is divisible by $n$.</p>
+<p><em>Prove 2.</em> Assume that there are two integers $n, m$ such that $n\ne m$ and $a^n = a^m$.</p>
+<p>Given $b\in \left&lt;a\right&gt;$, there is an integer $k$ such that $b = a^k$. By Euclidean&rsquo;s Property, we can write
+$$k = q|n - m| + r$$
+for some integers $q\in \mathbb{Z}$ and $r\in \{0, 1, &hellip;, |n - m| - 1\}$. Thus
+$$b = a^{q|n - m| + r} = a^{r}$$
+Hence
+$$\left&lt;a\right&gt; \subseteq \left\{1, a, a^2, &hellip;, a^{|n - m| - 1}\right\}$$
+which contradicts to the infinity of $\left&lt;a\right&gt;$.</p>
+<p>Therefore the assumption is wrong, in another words, $a^n \ne a^m$ for every integers $n\ne m$.</p>
+
+
+
+
+<p><strong>Corollary 4.</strong>
+Let $x$ be an element of a group $G$. Then if $x^m = x^n = 1$, then $x^d = 1$ where $d$ is the greatest common divisor of $n$ and $m$.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 7.</strong>
+Let $G$ be a cyclic group. Then</p>
+<ol>
+<li>If $G$ is finite, $G\cong \mathbb{Z} / |G|\mathbb{Z}$.</li>
+<li>If $G$ is infinite, then $G\cong \mathbb{Z}$.</li>
+</ol>
+
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Suppose that $G = \left&lt;a\right&gt;$ for some $a\in G$. Define
+$$
+\begin{alignat*}{2}
+\varphi: \mathbb{Z} &amp; \to G \\
+n &amp; \mapsto a^n
+\end{alignat*}
+$$
+Then $\varphi$ is a surjective homomorphism.</p>
+<p>In the case that $G$ is finite, we have
+$$\ker\varphi = \{n\in \mathbb{Z} : a^{n} = 1\} = \{n\in \mathbb{Z} : |G| \text{ divides }n\} = |G|\mathbb{Z}$$
+By the first isomorphism theorem, $\mathbb{Z} / |G|\mathbb{Z} \cong G$.</p>
+<p>In the case that $|G|$ is infinite, we have
+$$\ker\varphi = \{n\in \mathbb{Z} : a^n = 1\} = \{0\}$$
+so $\varphi$ is injective. By the first isomorphism theore, $G\cong \mathbb{Z}$.</p>
+
+
+
+
+<p><p><strong>Proposition 22.</strong>
+Let $G = \left&lt;a\right&gt;$ be a cyclic group. Then</p>
+<ol>
+<li>If $|a|$ is infinite, then $\left|a^n\right|$ is infinite for every integer $n\ne 0$.</li>
+<li>If $|a| = m$ is finite, then $\left|a^n\right| = \dfrac{m}{\gcd(n, m)}$ for every integer $n$.</li>
+</ol>
+</p>
+
+
+<p><em>Proof.</em></p>
+<p>The map $\varphi: \mathbb{Z} \ni k\mapsto a^{nk}\in \left&lt;a^n\right&gt;$ is a surjective homomorphism from $\mathbb{Z}$ into $\left&lt;a^n\right&gt;$.</p>
+<p><em>Prove 1.</em> For every $k\in \mathbb{Z}$, we have $a^{nk} = 1$ if and only if $nk = 0$, so $k = 0$ as $n\ne 0$. Thus
+$$\ker\varphi = \{k\in \mathbb{Z} : a^{nk} = 1\} = \{0\}$$
+which means $\varphi$ is injective, and so a isomorphism.</p>
+<p><em>Prove 2.</em> For every $k\in \mathbb{Z}$, we have $a^{nk} = 1$ if and only if $nk$ is divisible by $m$, equivalently, $k$ is divisible by $\dfrac{m}{\gcd(n, m)}$. Hence
+$$\ker \varphi = \{k\in \mathbb{Z} : a^{nk} = 1\} = \left\{k\in \mathbb{Z} : \dfrac{m}{\gcd(n, m)} \mid k\right\} = \dfrac{m}{\gcd(n, m)}\mathbb{Z}$$
+By the first isomorphism theore, $\left&lt;a^n\right&gt; \cong \mathbb{Z} / \dfrac{m}{\gcd(n, m)}\mathbb{Z}$. Therefore, $\left|a^n\right| = \dfrac{m}{\gcd(n, m)}$.</p>
+
+
+
+
+<p><strong>Corollary 5.</strong>
+Let $G$ be a cyclic group of finite order $n$, let $k$ be an integer relatively prime to $n$. Then the map $a\mapsto a^k$ is an isomorphism from $G$ into itself.</p>
+
+
+
+
+
+
+<p>
+  <div class="theorem-block">
+    <p>
+      <p><strong>Theorem 8.</strong>
+Let $G = \left&lt;a\right&gt;$ be a cyclic group. Then</p>
+<ol>
+<li>Every subgroup of $G$ is a cyclic group generated by some power of $a$.</li>
+<li>If $G$ is infinite, then subgroups of $G$ are $\left\{1\right\}, \left&lt;a\right&gt;, \left&lt;a^2\right&gt;, &hellip;$ and these subgroups are distinct.</li>
+<li>If $G$ is of finite order $n$, then for every integer $m$, $\left&lt;a^m\right&gt; = \left&lt;a^{\gcd(n, m)}\right&gt;$. So that for every positive divisor $d$ of $n$, $\left&lt;a^{n / d}\right&gt;$ is the unique subgroup of order $d$ of $G$.</li>
+</ol>
+
+    </p>
+  </div>
+</p>
+
+
+<p><em>Proof.</em> Given a subgroup $H$ of $G$, suppose that $H \ne \{1\}$. By the well-ordering property, choose $m$ the smallest positive integer such that $a^m\in H$.</p>
+<p>Given $b\in H$, there is an integer $k$ such that $b = a^k$. By Euclidean&rsquo;s Property, we can write
+$$b = qm + r$$
+for some integers $q\in \mathbb{Z}$ and $r\in \{0, 1, 2, &hellip;, m - 1\}$. Then $a^r = a^{-qm}b\in H$.</p>
+<p>By the minimality of $m$, $a^r = 1$, so $b = a^{qm} = (a^m)^q \in \left&lt;a^m\right&gt;$.</p>
+<p>Therefore, $H = \left&lt;a^m\right&gt;$.</p>
+
+
+
+
+<p><strong>Proposition 23.</strong>
+If $G$ is a group such that $G/Z(G)$ is cyclic, then $G$ is abelian.</p>
+
+
+
+
+
+
+<p><strong>Proposition 24.</strong>
+Let $G$ be a group, let $x, y$ be elements of $G$. Suppose that $|x|$ and $|y|$ are finite and relatively prime, and suppose that $xy = yx$. Then $\left&lt;x\right&gt;\left&lt;y\right&gt; = \left&lt;xy\right&gt;$ and $|xy| = |x|\cdot|y|$.</p>
+
+
+
+
+
+
+<p><strong>Proposition 25.</strong>
+If $G$ is a group of order $p$ where $p$ is a prime, then $G\cong \mathbb{Z}/p\mathbb{Z}$.</p>
+
+
+
+    </div>
+
+    
+        <div class="tags">
+            
+                <a href="https://dogsteven.github.io/tags/abstract-algebra">abstract algebra</a>
+            
+                <a href="https://dogsteven.github.io/tags/group-theory">group theory</a>
+            
+        </div>
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/dogsteven" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>stackoverflow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-488.000000, -1163.000000)">
+            <g id="stackoverflow" transform="translate(488.000000, 1163.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M42.0860128,53.5922927 L22.9745951,53.6011499 L22.9729497,49.5538824 L42.0835447,49.5440929 L42.0860128,53.5922927 L42.0860128,53.5922927 Z M55,30.6708298 L51.7306912,12 L47.7087256,12.6920259 L50.9775643,31.3628557 L55,30.6708298 L55,30.6708298 Z M42.5455518,44.3547147 L23.5156994,42.616026 L23.1410164,46.6470941 L42.1712214,48.3841513 L42.5455518,44.3547147 L42.5455518,44.3547147 Z M43.8009984,39.0731519 L25.3459811,34.1539179 L24.285633,38.0621508 L42.7419431,42.9819676 L43.8009984,39.0731519 L43.8009984,39.0731519 Z M46.2103463,34.4436411 L29.7494464,24.8164635 L27.6748215,28.3015328 L44.1365441,37.9292931 L46.2103463,34.4436411 L46.2103463,34.4436411 Z M50.2466504,31.6088756 L46.8745036,33.8883189 L36.106599,18.2318456 L39.4792159,15.9517031 L50.2466504,31.6088756 Z M45.3315807,40.2784283 L48.5799693,40.2784283 L48.5799693,60 L17,60 L17,40.2784283 L20.2648427,40.2784283 L20.2648427,56.8243495 L45.3315807,56.8243495 L45.3315807,40.2784283 Z" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+    <a class="symbol" href="" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.536px" height="438.536px" viewBox="0 0 438.536 438.536" style="enable-background:new 0 0 438.536 438.536;"
+	 xml:space="preserve">
+<g>
+	<path d="M414.41,24.123C398.333,8.042,378.963,0,356.315,0H82.228C59.58,0,40.21,8.042,24.126,24.123
+		C8.045,40.207,0.003,59.576,0.003,82.225v274.084c0,22.647,8.042,42.018,24.123,58.102c16.084,16.084,35.454,24.126,58.102,24.126
+		h274.084c22.648,0,42.018-8.042,58.095-24.126c16.084-16.084,24.126-35.454,24.126-58.102V82.225
+		C438.532,59.576,430.49,40.204,414.41,24.123z M335.471,168.735c0.191,1.713,0.288,4.278,0.288,7.71
+		c0,15.989-2.334,32.025-6.995,48.104c-4.661,16.087-11.8,31.504-21.416,46.254c-9.606,14.749-21.074,27.791-34.396,39.115
+		c-13.325,11.32-29.311,20.365-47.968,27.117c-18.648,6.762-38.637,10.143-59.953,10.143c-33.116,0-63.76-8.952-91.931-26.836
+		c4.568,0.568,9.329,0.855,14.275,0.855c27.6,0,52.439-8.565,74.519-25.7c-12.941-0.185-24.506-4.179-34.688-11.991
+		c-10.185-7.803-17.273-17.699-21.271-29.691c4.947,0.76,8.658,1.137,11.132,1.137c4.187,0,9.042-0.76,14.56-2.279
+		c-13.894-2.669-25.598-9.562-35.115-20.697c-9.519-11.136-14.277-23.84-14.277-38.114v-0.571
+		c10.085,4.755,19.602,7.229,28.549,7.422c-17.321-11.613-25.981-28.265-25.981-49.963c0-10.66,2.758-20.747,8.278-30.264
+		c15.035,18.464,33.311,33.213,54.816,44.252c21.507,11.038,44.54,17.227,69.092,18.558c-0.95-3.616-1.427-8.186-1.427-13.704
+		c0-16.562,5.853-30.692,17.56-42.399c11.703-11.706,25.837-17.561,42.394-17.561c17.515,0,32.079,6.283,43.688,18.846
+		c13.134-2.474,25.892-7.33,38.26-14.56c-4.757,14.652-13.613,25.788-26.55,33.402c12.368-1.716,23.88-4.95,34.537-9.708
+		C357.458,149.793,347.462,160.166,335.471,168.735z"/>
+</g>
+</svg>
+
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2022 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       Huynh Bach Khoa
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>
