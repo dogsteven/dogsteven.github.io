@@ -1,0 +1,227 @@
+---
+title: "Lý thuyết tập hợp tiên đề 1: Các tiên đề cơ bản"
+pubDate: 2024-05-05
+intro: Lý thuyết tập hợp là một trong những lý thuyết nền tảng của Toán học. Khi sử dụng lý thuyết tập hợp làm ngôn ngữ cho Toán học, mọi đối tượng đều là một tập hợp. Bài viết này là bài viết mở đầu cho một series về lý thuyết tập hợp tiên đề.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+
+### 1. Giới thiệu
+
+**Tập hợp** (sets) được xem là một bộ các vật, mỗi vật trong tập hợp đó được gọi là một **phần tử** (members, elements) của tập hợp đó.
+Ta có thể gộp hai tập hợp lại để tạo ra một tập hợp mới, hay ta có thể trích xuất ra được một tập hợp bao gồm tất cả các tập hợp con của một tập hợp cho trước, ...
+
+Người ta có nhiều cách để miêu tả một tập hợp, ví dụ như liệt kê
+<p>
+$$
+\mathbb{N} = \left\{0, 1, 2, ...\right\}, \;\; \mathbb{Z} = \left\{..., -2, -1, 0, 1, 2, ...\right\} \;\; \mathbb{Q} = \left\{\dfrac{a}{b} : a\in \mathbb{Z}, b\in \mathbb{Z}^{\star}\right\}
+$$
+</p>
+hay thậm chí gom tất cả các đối tượng có một tính chất nào đó thành một tập hợp
+<p>
+$$
+\mathcal{P}(A) = \left\{B : B \text{ là tập hợp con của }A\right\}, \;\; E = \left\{n : n \text{ là số nguyên chẵn }\right\}
+$$
+</p>
+Tuy nhiên, nhiều thảm họa đã xảy ra với cách tiếp cận trên.
+
+Vào năm 1903, Bertrand Russell đã đưa ra một nghịch lý (nghịch lý Russell) sinh ra từ việc miêu tả tập hợp với các phần tử lấy từ một miền không giới hạn:
+<p>
+$$
+A = \left\{x : x\not\in x\right\}
+$$
+</p>
+Ta thấy rằng nếu $A\in A$ thì $A\not\in A$, và ngược lại nếu $A\not\in A$ thì $A\in A$.
+
+Một thảm họa tương tự xảy ra vào năm 1906, G.G. Berry đã đưa ra một nghịch lý sinh ra từ việc điều kiện đầu vào là mơ hồ, không xác định tốt:
+<p>
+$$
+X = \left\{x : x\text{ là số nguyên dương có thể được miêu tả trong một dòng}\right\}
+$$
+</p>
+Ta thấy rằng vì số lượng ký tự là hữu hạn nên chỉ có hữu hạn số nguyên dương có thể được miêu tả trong một dòng. Do đó, tập hợp các số nguyên dương không nằm trong $X$ là khác rỗng.
+Theo nguyên lý sắp xếp thứ tự tốt, tồn tại số nguyên dương nhỏ nhất không nằm trong $X$.
+Tuy nhiên, ta có thể miêu tả số đó bởi "số nguyên dương nhỏ nhất không thể được miêu tả trong một dòng", do đó số nguyên này có thể được miêu tả trong một dòng, và nó nằm trong $X$.
+
+Những thảm họa này cho thấy lý thuyết tập hợp, tưởng chừng như là một thứ trực giác và có thể được hiểu bởi bất kỳ ai, lại là một thứ cần được xem xét kỹ lưỡng.
+
+Đây là bài viết mở đầu cho series lý thuyết tập hợp tiên đề (Axiomatic Set Theory). Series này cung cấp những công cụ cơ bản nhất của lý thuyết tập hợp, do đó sẽ bao gồm những vấn đề sau:
+1. Các tiên đề và phép toán cơ bản trên tập hợp.
+2. Quan hệ và ánh xạ.
+3. Quan hệ tương đương và thứ tự.
+4. Tập hợp số tự nhiên.
+5. Xây dựng tập hợp số thực.
+6. Lực lượng của tập hợp và tiên đề chọn.
+
+Những vấn đề không nằm trong series này bao gồm:
+1. Tiên đề thay thế, nguyên lý quy nạp siêu hạn và số đếm.
+2. Tiên đề chính quy và phân cấp Von Neumann.
+
+### 2. Các tiên đề cơ bản của lý thuyết tập hợp
+
+Lý thuyết tập hợp được xây dựng xoay quanh hai khái niệm đó là **tập hợp** (sets) và **quan hệ phần tử** (membership). Ta viết $a\in b$ và phát biểu "$a$ là một phần tử của $b$".
+Từ hai khái niệm căn nguyên này ta sẽ xây dựng các khái niệm khác.
+
+Ta có một số quy ước sau:
+1. Ta viết $a\not\in b$ để rút gọn cho $\neg\left(a\in b\right)$
+2. Ta viết $\left(\forall a\in b\right)\varphi(a)$ để rút gọn cho $\forall a\left(a\in b \Rightarrow \varphi(a)\right)$.
+3. Ta viết $\left(\exists a\in b\right)\varphi(a)$ để rút gọn cho $\exists a\left(a\in b \wedge \varphi(a)\right)$.
+4. Ta viết $\exists!a\varphi(a)$ để rút gọn cho $\exists a\left(\varphi(a) \wedge \forall b\left(\varphi(b)\Rightarrow a = b\right)\right)$.
+
+<Axiom identifier="1" name="The Axiom of Extensionality">
+  Hai tập hơp bằng nhau khi chúng có cùng chính xác các phần tử:
+  <p>
+  $$
+  \forall x\forall y\left(\forall z\left(z\in x \Leftrightarrow z\in y\right) \Rightarrow x = y\right)
+  $$
+  </p>
+</Axiom>
+
+Ta định nghĩa **quan hệ tập hợp con** (inclusion) bởi:
+<p>
+$$
+x\subseteq y \iff \left(\forall z\in x\right)z\in y
+$$
+</p>
+Nếu $x\subseteq y$ ta nói "$x$ là một **tập hợp con** (subset) của $y$" hay "$x$ là một bộ phận của $y$". Từ [tiên đề trên](#axiom-1), hai tập hợp bằng nhau khi và chỉ khi mỗi tập hợp trong chúng là tập hợp con của tập hợp còn lại.
+
+<Axiom identifier="2" name="The Axiom of Empty Set">
+  Tồn tại một tập hợp không chứa bất kỳ phần tử nào:
+  <p>
+  $$
+  \exists e\forall z\left(z\not\in e\right)
+  $$
+  </p>
+</Axiom>
+
+Theo [tiên đề 1](#axiom-1), tập hợp $e$ trong [tiên đề trên](#axiom-2) là xác định duy nhất, ta gọi tập hợp này là **tập hợp rỗng** (empty set) và ký hiệu cho nó bởi $\varnothing$. Ta thấy rằng tập hợp rỗng là tập hợp con của mọi tập hợp.
+
+<Axiom identifier="3" name="The Axiom of Power Set">
+  Tồn tại một tập hợp chứa chính xác tất cả tập hợp con của một tập hợp cho trước:
+  <p>
+  $$
+  \forall x\exists p\forall y\left(y\in p \Leftrightarrow y\subseteq x\right)
+  $$
+  </p>
+</Axiom>
+
+Theo [tiên đề 1](#axiom-1), tập hợp $p$ trong [tiên đề trên](#axiom-3) là xác định duy nhất bởi $x$, ta gọi tập hợp này là **tập lũy thừa** (power set) của $x$ và lý hiệu cho nó bởi $\mathcal{P}(x)$.
+
+<Axiom identifier="4" name="The Axiom of Pairing">
+  Tồn tại một tập hợp chứa chính xác hai tập hợp cho trước:
+  <p>
+  $$
+  \forall x\forall y\exists p\forall z\left(z\in p \Leftrightarrow \left(z = x \vee z = y\right)\right)
+  $$
+  </p>
+</Axiom>
+
+Theo [tiên đề 1](#axiom-1), tập hợp $p$ trong [tiên đề trên](#axiom-4) là xác định duy nhất bởi $x$ và $y$, ta ký hiệu cho tập hợp này bởi $\left\{x, y\right\}$. Ta thấy rằng $\left\{x, y\right\} = \left\{y, x\right\}$, nghĩa là thứ tự viết không quan trọng. Ngoài ra tập hợp $\left\{x\right\} = \left\{x, x\right\}$ là tập hợp chỉ chứa một phần tử là $x$:
+<p>
+$$
+\forall z\left(x\in \left\{x\right\} \Leftrightarrow z = x\right)
+$$
+</p>
+
+<Axiom identifier="5" name="The Axiom of Union">
+  Tồn tại một tập hợp chứa chính xác tất cả các phần tử của tất cả các phần tử của một tập hợp cho trước:
+  <p>
+  $$
+  \forall x\exists u\forall z\left(z\in u\Leftrightarrow \left(\exists y\in x\right)z\in y\right)
+  $$
+  </p>
+</Axiom>
+
+Theo [tiên đề 1](#axiom-1), tập hợp $u$ trong [tiên đề trên](#axiom-5) là xác định duy nhất bởi $x$, ta ký hiệu cho tập hợp này bởi $\bigcup x$ và gọi nó là **hợp** (union) của $x$.
+
+<Axiom identifier="6" name="The Axiom Schema of Separation">
+  Với mọi biểu thức $\varphi\left(z, t_1, t_2, ..., t_n\right)$ (trong đó các biến tự do của $\varphi$ nằm trong $\left\{z, t_1, t_2, ..., t_n\right\}$), ta có tiên đề:
+  <p>
+  $$
+  \forall x \forall t_1\forall t_2 ... \forall t_n \exists y \forall z\left(z\in y\Leftrightarrow \left(z\in x \wedge \varphi(z, t_1, t_2, ..., t_n)\right)\right)
+  $$
+  </p>
+</Axiom>
+
+Theo [tiên đề 1](#axiom-1), với mỗi biểu thức $\varphi$, tập hợp $y$ trong [tiên đề trên](#axiom-6) là xác định duy nhất bởi $x, t_1, t_2, ..., t_n$, ta ký hiệu cho tập hợp này bằng **builder notation**:
+<p>
+$$
+\left\{z\in x : \varphi(z, t_1, t_2, ..., t_n)\right\}
+$$
+</p>
+Với $x$ là một tập hợp khác rỗng, hay ta chọn được phần tử $t$ của $x$, ta định nghĩa **giao** (intersection) $\bigcap x$ của $x$ bởi:
+<p>
+$$
+\bigcap x = \left\{z\in t : \left(\forall y\in x\right) z\in y\right\}
+$$
+</p>
+Ta dễ dàng chứng minh được giá trị của tập hợp trên không phụ thuộc vào cách chọn phần tử $t$ của $x$, do đó tập hợp trên xác định duy nhất bởi $x$.
+
+<Theorem identifier="1" name="The set of all sets">
+  Không tồn tại một tập hợp nào chứa tất cả các tập hợp.
+</Theorem>
+
+Ta có thể phát biểu lại định lý này như sau: Với mọi tập hợp $A$, tồn tại tập hợp $B$ sao cho $B\not\in A$.
+
+***Chứng minh.*** Xét $A$ là một tập hợp bất kỳ, xét tập hợp $B$ được định nghĩa như sau:
+<p>
+$$
+B = \left\{a\in A : a\not\in a\right\}
+$$
+</p>
+Nếu $B\in A$, ta có $B\in B$ khi và chỉ khi $B\not\in B$, vô lý. Do đó $B\not\in A$. ***Q.E.D.***
+
+### 3. Đại số tập hợp
+
+Với $x$ và $y$ là hai tập hợp, ta định nghĩa các phép toán hợp, giao và hiệu của chúng lần lược bởi:
+1. Hợp $x\cup y = \bigcup \left\{x, y\right\}$.
+2. Giao $x \cap y = \bigcap \left\{x, y\right\}$.
+3. Hiệu $x - y = \left\{z\in x : z\not\in y\right\}$.
+
+Đại số tập hợp là việc nghiên cứu về các tính chất của các phép toán trên tập hợp. Ở thời điểm hiện tại ta có các phép toán hợp, giao, hiệu cùng với quan hệ tập hợp con.
+Ta đến với các luật cơ bản.
+
+<Theorem identifier="2" name="Algebra of sets I">
+  Với mọi tập hợp $x, y$ và $z$, ta có:
+  1. $x\cup \varnothing = x$ và $x\cap \varnothing = \varnothing$.
+  2. $x\cup (y - x) = x\cup y$ và $x\cap (y - x) = \varnothing$.
+  3. *Commutative laws*:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    x \cup y & = y \cup x \\
+    x \cap y & = y \cap x
+  \end{alignat*}
+  $$
+  </p>
+  4. *Associative laws*:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    x\cup \left(y\cup z\right) & = \left(x\cup y\right)\cup z \\
+    x\cap \left(y\cap z\right) & = \left(x\cap y\right)\cap z
+  \end{alignat*}
+  $$
+  </p>
+  4. Distributive laws:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    x\cap \left(y\cup z\right) & = \left(x\cap y\right)\cup \left(x\cap z\right) \\
+    x\cup \left(y\cap z\right) & = \left(x\cup y\right)\cap \left(x\cup z\right)
+  \end{alignat*}
+  $$
+  </p>
+  5. De Morgan's laws:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    x - \left(y\cup z\right) & = \left(x - y\right)\cap \left(x - z\right) \\
+    x - \left(y\cap z\right) & = \left(x - y\right)\cup \left(x - z\right)
+  \end{alignat*}
+  $$
+  </p>
+</Theorem>

@@ -1,0 +1,7 @@
+---
+const { type, typeDisplayName, identifier, name } = Astro.props as { type: string, typeDisplayName: string, identifier: string, name?: string };
+---
+<div class="w-full px-10 pt-6 pb-1 rounded-2xl border-2 border-pacamara-accent">
+  <a id={`${type}-${identifier}`} href={`#${type}-${identifier}`}><b>{typeDisplayName} {identifier}. {name}</b></a>
+  <slot />
+</div>

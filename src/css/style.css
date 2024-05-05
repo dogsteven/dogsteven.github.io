@@ -104,3 +104,7 @@ body::-webkit-scrollbar-thumb {
     outline: 0px solid theme('colors.pacamara-accent');
     border-radius: 10px;
 }
+
+.katex-display {
+    overflow: auto hidden;
+}

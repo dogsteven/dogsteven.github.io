@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 const { authorData } = Astro.props;
 ---
 <section class="mx-auto max-w-screen-lg px-7 lg:px-0 py-10 mb-5 flex flex-col lg:flex-row flex-nowrap gap-10 items-center">
-    {authorData.data.photo && <Image src={authorData.data.photo} width="200" class="relative w-[150px] lg:w-[220px] rounded-full" alt="Author's photo" /> }
+    {authorData.data.photo && <Image src={authorData.data.photo} width="1000" class="object-cover aspect-square relative w-[150px] lg:w-[220px] rounded-full" alt="Author's photo" /> }
 
     <div class="
             prose lg:prose-xl max-w-none 

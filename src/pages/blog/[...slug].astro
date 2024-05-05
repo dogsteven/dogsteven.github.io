@@ -32,7 +32,9 @@ const author = await getEntry(entry.data.author);
       ">
         <h1 class="transition-all duration-300 dark:text-white">{entry.data.title}</h1>
         <p class="flex flex-row flex-wrap gap-5 items-center font-pacamara-space mx-auto max-w-screen-lg mb-7">
-            <Tag tag={entry.data.tag} />
+            {
+              entry.data.tags.map((tag: string) => (<Tag tag={tag} />))
+            }
             <PublishDate date={entry.data.pubDate} />
         </p>
     </div>
