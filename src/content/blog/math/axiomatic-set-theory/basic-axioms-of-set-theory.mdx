@@ -16,31 +16,31 @@ Ta có thể gộp hai tập hợp lại để tạo ra một tập hợp mới,
 
 Người ta có nhiều cách để miêu tả một tập hợp, ví dụ như liệt kê
 <p>
-```math
+$$
 \mathbb{N} = \left\{0, 1, 2, ...\right\}, \;\; \mathbb{Z} = \left\{..., -2, -1, 0, 1, 2, ...\right\} \;\; \mathbb{Q} = \left\{\dfrac{a}{b} : a\in \mathbb{Z}, b\in \mathbb{Z}^{\star} \right\}
-```
+$$
 </p>
 hay thậm chí gom tất cả các đối tượng có một tính chất nào đó thành một tập hợp
 <p>
-```math
+$$
 \mathcal{P}(A) = \left\{B : B \text{ is a subset of }A\right\}, \;\; E = \left\{n : n \text{ is an even integer}\right\}
-```
+$$
 </p>
 Tuy nhiên, nhiều thảm họa đã xảy ra với cách tiếp cận trên.
 
 Vào năm 1903, Bertrand Russell đã đưa ra một nghịch lý (nghịch lý Russell) sinh ra từ việc miêu tả tập hợp với các phần tử lấy từ một miền không giới hạn:
 <p>
-```math
+$$
 A = \left\{x : x\not\in x\right\}
-```
+$$
 </p>
 Ta thấy rằng nếu $A\in A$ thì $A\not\in A$, và ngược lại nếu $A\not\in A$ thì $A\in A$.
 
 Một thảm họa tương tự xảy ra vào năm 1906, G.G. Berry đã đưa ra một nghịch lý sinh ra từ việc điều kiện đầu vào là mơ hồ, không xác định tốt:
 <p>
-```math
+$$
 X = \left\{x : x\text{ is a positive integer that is describable in one line of typing}\right\}
-```
+$$
 </p>
 Ta thấy rằng vì số lượng ký tự là hữu hạn nên chỉ có hữu hạn số nguyên dương có thể được miêu tả trong một dòng. Do đó, tập hợp các số nguyên dương không nằm trong $X$ là khác rỗng.
 Theo nguyên lý sắp xếp thứ tự tốt, tồn tại số nguyên dương nhỏ nhất không nằm trong $X$.
@@ -74,26 +74,26 @@ Ta có một số quy ước sau:
 <Axiom identifier="1" name="The Axiom of Extensionality">
   Hai tập hơp bằng nhau khi chúng có cùng chính xác các phần tử:
   <p>
-  ```math
+  $$
   \forall x\forall y\left(\forall z\left(z\in x \Leftrightarrow z\in y\right) \Rightarrow x = y\right)
-  ```
+  $$
   </p>
 </Axiom>
 
 Ta định nghĩa **quan hệ tập hợp con** (inclusion) bởi:
 <p>
-```math
+$$
 x\subseteq y \iff \left(\forall z\in x\right)z\in y
-```
+$$
 </p>
 Nếu $x\subseteq y$ ta nói "$x$ là một **tập hợp con** (subset) của $y$" hay "$x$ là một bộ phận của $y$". Từ tiên đề trên, hai tập hợp bằng nhau khi và chỉ khi mỗi tập hợp trong chúng là tập hợp con của tập hợp còn lại.
 
 <Axiom identifier="2" name="The Axiom of Empty Set">
   Tồn tại một tập hợp không chứa bất kỳ phần tử nào:
   <p>
-  ```math
+  $$
   \exists e\forall z\left(z\not\in e\right)
-  ```
+  $$
   </p>
 </Axiom>
 
@@ -102,9 +102,9 @@ Theo [tiên đề 1](#axiom-1), tập hợp $e$ trong tiên đề trên là xác
 <Axiom identifier="3" name="The Axiom of Power Set">
   Tồn tại một tập hợp chứa chính xác tất cả tập hợp con của một tập hợp cho trước:
   <p>
-  ```math
+  $$
   \forall x\exists p\forall y\left(y\in p \Leftrightarrow y\subseteq x\right)
-  ```
+  $$
   </p>
 </Axiom>
 
@@ -113,25 +113,25 @@ Theo [tiên đề 1](#axiom-1), tập hợp $p$ trong tiên đề trên là xác
 <Axiom identifier="4" name="The Axiom of Pairing">
   Tồn tại một tập hợp chứa chính xác hai tập hợp cho trước:
   <p>
-  ```math
+  $$
   \forall x\forall y\exists p\forall z\left(z\in p \Leftrightarrow \left(z = x \vee z = y\right)\right)
-  ```
+  $$
   </p>
 </Axiom>
 
 Theo [tiên đề 1](#axiom-1), tập hợp $p$ trong tiên đề trên là xác định duy nhất bởi $x$ và $y$, ta ký hiệu cho tập hợp này bởi $\left\{x, y\right\}$. Ta thấy rằng $\left\{x, y\right\} = \left\{y, x\right\}$, nghĩa là thứ tự viết không quan trọng. Ngoài ra tập hợp $\left\{x\right\} = \left\{x, x\right\}$ là tập hợp chỉ chứa một phần tử là $x$:
 <p>
-```math
+$$
 \forall z\left(x\in \left\{x\right\} \Leftrightarrow z = x\right)
-```
+$$
 </p>
 
 <Axiom identifier="5" name="The Axiom of Union">
   Tồn tại một tập hợp chứa chính xác tất cả các phần tử của tất cả các phần tử của một tập hợp cho trước:
   <p>
-  ```math
+  $$
   \forall x\exists u\forall z\left(z\in u\Leftrightarrow \left(\exists y\in x\right)z\in y\right)
-  ```
+  $$
   </p>
 </Axiom>
 
@@ -140,31 +140,31 @@ Theo [tiên đề 1](#axiom-1), tập hợp $u$ trong tiên đề trên là xác
 <Axiom identifier="6" name="The Axiom Schema of Separation">
   Với mọi biểu thức $\varphi\left(z, t_1, t_2, ..., t_n\right)$ (trong đó các biến tự do của $\varphi$ nằm trong $\left\{z, t_1, t_2, ..., t_n\right\}$), ta có tiên đề:
   <p>
-  ```math
+  $$
   \forall x \forall t_1\forall t_2 ... \forall t_n \exists y \forall z\left(z\in y\Leftrightarrow \left(z\in x \wedge \varphi(z, t_1, t_2, ..., t_n)\right)\right)
-  ```
+  $$
   </p>
 </Axiom>
 
 Theo [tiên đề 1](#axiom-1), với mỗi biểu thức $\varphi$, tập hợp $y$ trong tiên đề trên là xác định duy nhất bởi $x, t_1, t_2, ..., t_n$, ta ký hiệu cho tập hợp này bằng **builder notation**:
 <p>
-```math
+$$
 \left\{z\in x : \varphi(z, t_1, t_2, ..., t_n)\right\}
-```
+$$
 </p>
 Với $x$ là một tập hợp khác rỗng, hay ta chọn được phần tử $t$ của $x$, ta định nghĩa **giao** (intersection) $\bigcap x$ của $x$ bởi:
 <p>
-```math
+$$
 \bigcap x = \left\{z\in t : \left(\forall y\in x\right) z\in y\right\}
-```
+$$
 </p>
 Ta dễ dàng chứng minh được giá trị của tập hợp trên không phụ thuộc vào cách chọn phần tử $t$ của $x$, do đó tập hợp trên xác định duy nhất bởi $x$.
 
 Từ đây ta chứng minh được với mọi tập hợp $x$ khác rỗng, ta có:
 <p>
-```math
+$$
 \forall z\left(z\in \bigcap x \Leftrightarrow \left(\forall y\in x\right)z\in y\right)
-```
+$$
 </p>
 
 <Theorem identifier="1" name="The set of all sets">
@@ -175,9 +175,9 @@ Ta có thể phát biểu lại định lý này như sau: Với mọi tập h�
 
 ***Chứng minh.*** Xét $A$ là một tập hợp bất kỳ, tập hợp $B$ được định nghĩa như sau:
 <p>
-```math
+$$
 B = \left\{a\in A : a\not\in a\right\}
-```
+$$
 </p>
 Nếu $B\in A$, ta có $B\in B$ khi và chỉ khi $B\not\in B$, vô lý. Do đó $B\not\in A$. ***Q.E.D.***
 
@@ -196,39 +196,39 @@ Với $x$ và $y$ là hai tập hợp, ta định nghĩa các phép toán hợp,
   2. $x\cap (y - x) = \varnothing$ và $x\cup (y - x) = x\cup y$.
   3. *Commutative laws*:
   <p>
-  ```math
+  $$
   \begin{alignat*}{2}
     x \cup y & = y \cup x \\
     x \cap y & = y \cap x
   \end{alignat*}
-  ```
+  $$
   </p>
   4. *Associative laws*:
   <p>
-  ```math
+  $$
   \begin{alignat*}{2}
     x\cup \left(y\cup z\right) & = \left(x\cup y\right)\cup z \\
     x\cap \left(y\cap z\right) & = \left(x\cap y\right)\cap z
   \end{alignat*}
-  ```
+  $$
   </p>
   5. Distributive laws:
   <p>
-  ```math
+  $$
   \begin{alignat*}{2}
     x\cap \left(y\cup z\right) & = \left(x\cap y\right)\cup \left(x\cap z\right) \\
     x\cup \left(y\cap z\right) & = \left(x\cup y\right)\cap \left(x\cup z\right)
   \end{alignat*}
-  ```
+  $$
   </p>
   6. De Morgan's laws:
   <p>
-  ```math
+  $$
   \begin{alignat*}{2}
     x - \left(y\cup z\right) & = \left(x - y\right)\cap \left(x - z\right) \\
     x - \left(y\cap z\right) & = \left(x - y\right)\cup \left(x - z\right)
   \end{alignat*}
-  ```
+  $$
   </p>
 </Theorem>
 
@@ -245,9 +245,9 @@ Bây giờ, ta đi đến dạng tổng quát là việc mở rộng các luật
 Giả sử $x$ là một tập hợp và $p$ là một quy tắc gán mỗi phần tử $z\in x$ với một tập hợp $p(z)$. Giả sử tồn tại tập hợp $\mathcal{D}$ sao cho với mỗi $z\in x$ ta có $p(z)\in \mathcal{D}$.
 Khi đó ta định nghĩa tập hợp bao gồm tất cả các $p(z)$ bởi:
 <p>
-```math
+$$
 \left\{p(z) : z\in x\right\} = \left\{t\in\mathcal{D} : \left(\exists z\in x\right)t = p(z)\right\}
-```
+$$
 </p>
 Bằng ký hiệu này, ta định nghĩa các tập hợp sau:
 1. $\left\{x\cup z : z\in y\right\}$ với $\mathcal{D} = \mathcal{P}\left(x\cup \bigcup y\right)$.
@@ -256,26 +256,26 @@ Bằng ký hiệu này, ta định nghĩa các tập hợp sau:
 
 Ngoài ra ta cũng định nghĩa phép hợp và phép giao với ký hiệu này như sau:
 <p>
-```math
+$$
 \begin{alignat*}{2}
   \bigcup\limits_{z\in x} p(z) & = \bigcup \left\{p(z) : z\in x\right\} \\
   \bigcap\limits_{z\in x} p(z) & = \bigcap \left\{p(z) : z\in x\right\}
 \end{alignat*}
-```
+$$
 </p>
 
 <Theorem identifier="4" name="Generalized distributive laws">
   Với mọi tập hợp $x$ và $y$, ta có:
   <p>
-  ```math
+  $$
   x\cap \bigcup y = \bigcup\limits_{z\in y} x \cap z
-  ```
+  $$
   </p>
   Hơn nữa, nếu $y$ khác rỗng, tập hợp $\left\{x\cup z : z\in y\right\}$ là khác rỗng và:
   <p>
-  ```math
+  $$
   x\cup \bigcap y = \bigcap\limits_{z\in y} x \cup z
-  ```
+  $$
   </p>
 </Theorem>
 
@@ -284,12 +284,12 @@ Ngoài ra ta cũng định nghĩa phép hợp và phép giao với ký hiệu n�
 <Theorem identifier="5" name="Generalized De Morgan's laws">
   Với mọi tập hợp $x$ và $y$, trong đó $y$ khác rỗng, ta có tập hợp $\left\{x - z : z\in y\right\}$ khác rỗng và:
   <p>
-  ```math
+  $$
   \begin{alignat*}{2}
     x - \bigcup y & = \bigcap\limits_{z\in y} x - z \\
     x - \bigcap y & = \bigcup\limits_{z\in y} x - z
   \end{alignat*}
-  ```
+  $$
   </p>
 </Theorem>
 
@@ -305,9 +305,9 @@ Tiếp theo, ta đến với các tính chất của quan hệ tập hợp con, 
 
 Có rất nhiều kết quả về quan hệ tập hợp con với phép hợp và phép giao. Ví dụ nếu $x$ là một tập hợp con của $y$ ta có:
 <p>
-```math
+$$
 \bigcup x \subseteq \bigcup y, \;\;\bigcap x \supseteq \bigcap y
-```
+$$
 </p>
 Kết quả vừa nêu nói rằng khi ta hợp nhiều tập hợp hơn ta được một tập hợp lớn hơn, và khi ta giao nhiều tập hợp hơn ta được tập hợp nhỏ hơn.
 Một cách nào đó nó tương đồng với một kết quả hiển nhiên là $x\cap y\subseteq x\subseteq x\cup y$, và cũng như có thể dễ dàng lý luận bằng định nghĩa của quan hệ tập hợp con.
@@ -333,9 +333,9 @@ Do đó những kết quả như thế này hiếm khi được sử dụng mộ
 <Theorem identifier="9" name="Minimality of union">
   Với mọi tập hợp $x$, tập hợp nhỏ nhất mà mọi phần tử của $x$ đều là tập hợp con của nó chính là hợp của $x$:
   <p>
-  ```math
+  $$
   \forall x\forall y\left( \left(\forall z\in x\right)z\subseteq y \Leftrightarrow \bigcup x\subseteq y \right)
-  ```
+  $$
   </p>
 </Theorem>
 
@@ -344,8 +344,8 @@ Do đó những kết quả như thế này hiếm khi được sử dụng mộ
 <Theorem identifier="10" name="Maximality of intersection">
   Với mọi tập hợp $x$ khác rỗng, tập hợp lớn nhất mà là tập hợp con của mọi phần tử của $x$ chính là giao của $x$:
   <p>
-  ```math
+  $$
   \forall x\forall y\left(x \ne \varnothing \Rightarrow \left( \left(\forall z\in x\right)y\subseteq z \Leftrightarrow y\subseteq \bigcap x \right) \right)
-  ```
+  $$
   </p>
 </Theorem>
