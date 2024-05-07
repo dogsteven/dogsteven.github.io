@@ -1,19 +1,28 @@
 ---
 import { getCollection } from "astro:content";
-import config from '../../config.mjs';
+import config from '../../../config.mjs';
 
 
-import Base from "../../layouts/Base.astro";
-import Post from "../../components/blog/Post.astro";
+import Base from "../../../layouts/Base.astro";
+import Post from "../../../components/blog/Post.astro";
 
 export async function getStaticPaths({ paginate }) {
     const blogEntries = (await getCollection('blog', ({ data }) => {
         return true;
-    })).sort(
-        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-    );
+    })).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-    return paginate(blogEntries, { pageSize: config.postsPerPage });
+    const tags = [...new Set(blogEntries.flatMap(({ data: { tags } }) => tags))];
+
+    return tags.flatMap((tag) => {
+        const filteredPosts = blogEntries.filter(({ data: { tags } }) => {
+            return tags.includes(tag);
+        });
+
+        return paginate(filteredPosts, {
+            params: { tag },
+            pageSize: config.postsPerPage
+        });
+    });
 }
 
 const { page } = Astro.props as { page: any };
