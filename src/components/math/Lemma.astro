@@ -1,0 +1,8 @@
+---
+import BlockDefinition from "./BlockDefinition.astro";
+
+const { identifier, name } = Astro.props as { identifier: string, name?: string };
+---
+<BlockDefinition type="lemma" typeDisplayName="Bổ đề" identifier={identifier} name={name}>
+  <slot />
+</BlockDefinition>

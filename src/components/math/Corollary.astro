@@ -1,0 +1,8 @@
+---
+import BlockDefinition from "./BlockDefinition.astro";
+
+const { identifier, name } = Astro.props as { identifier: string, name?: string };
+---
+<BlockDefinition type="corollary" typeDisplayName="Hệ quả" identifier={identifier} name={name}>
+  <slot />
+</BlockDefinition>
