@@ -1,0 +1,241 @@
+---
+title: "Lý thuyết tập hợp tiên đề 4.1: Quan hệ tương đương"
+pubDate: 2024-04-28
+intro: Quan hệ tương đương là một mô hình cho sự phân hoạch các đối tượng cho cùng một tính chất trong một tập hợp. Trong khi đó thứ tự là một mô hình cho sự so sánh hoặc vị trí của các phần tử trong một tập hợp.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+### 1. Quan hệ tương đương
+
+Một quan hệ $R$ được gọi là:
+1. **phản xạ** (reflexive) trên tập hợp $A$ nếu như với mọi $a\in A$ ta có $aRa$.
+2. **đối xứng** (symmetric) nếu như với mọi $a, b$ ta có $aRb$ suy ra $bRa$.
+3. **bắc cầu** (transitive) nếu như với mọi $a, b, c$ ta có $aRb$ và $bRc$ suy ra $aRc$.
+
+Một $R$ được gọi là một **quan hệ tương đương** (equivalence relation) nếu như nó có tính đối xứng và bắc cầu.
+
+<Theorem identifier="1">
+  Nếu $R$ là một quan hệ tương đương, ta có:
+  1. $\text{dom}(R) = \text{rng}(R)$.
+  2. $R$ phản xạ trên $\text{dom}(R)$.
+</Theorem>
+
+Ta nói $R$ là một quan hệ tương đương trên tập hợp $A$ nếu $R$ là một quan hệ tương đương và $A = \text{dom}(R)$.
+
+Giả sử $R$ là một quan hệ tương đương trên tập hợp $A$. Với mỗi $x\in A$, ta định nghĩa **lớp tương đương** (equivalence class) của $x$ theo modulo $R$, ký hiệu $\left[x\right]_R$, bởi:
+<p>
+$$
+\left[x\right]_R = R\left[\{x\}\right] = \left\{y : xRy\right\}
+$$
+</p>
+Tập hợp tất các lớp tương đương theo modulo $R$ được gọi là **tập thương** (quotient set) của quan hệ tương đương $R$, ký hiệu bởi $A / R$, xác định bởi:
+<p>
+$$
+A / R = \left\{[x]_R : x\in A\right\}
+$$
+</p>
+Ánh xạ $\pi: A\to A/R$ được xác định bởi $\pi(x) = \left[x\right]_R$ được gọi là **phép chiếu chính tắc** (canonical projection) hay **phép chiếu tự nhiên** (natural projection).
+
+Ta thấy rằng phép chiếu chính tắc luôn là một toàn ánh.
+
+<Theorem identifier="2">
+  Cho $R$ là một quan hệ tương đương trên tập hợp $A$. Với mọi $x, y\in A$, các điều sau là tương đương nhau:
+  1. $xRy$.
+  2. $\left[x\right]_R = \left[y\right]_R$.
+  3. $\left[x\right]_R \cap \left[y\right]_R \ne \varnothing$.
+</Theorem>
+
+Một **phân hoạch** (partition) trên tập hợp $A$ là một tập hợp $P$ các tập hợp con của $A$ thỏa mãn hai điều kiện sau:
+1. $\bigcup P = A$, hay với mọi $x\in A$, tồn tại $C\in P$ sao cho $x\in C$.
+2. Các tập hợp trong $P$ là **đôi một** (pairwise) **không giao nhau** (disjoint), nghĩa là với mọi $C, D\in P$ ta có $C = D$ hoặc $C\cap D = \varnothing$.
+
+[Tính phản xạ](#theorem-1) cùng với [định lý 2](#theorem-2) cho thấy tập thương $A / R$ của quan hệ tương đương $R$ trên $A$ là một phân hoạch của $A$.
+
+Ở chiều ngược lại, giả sử $P$ là một phân hoạch của $A$, khi đó tập hợp:
+<p>
+$$
+R = \left\{\left< x, y \right> \in A\times A : \left(\exists C\in P\right)x, y\in C\right\}
+$$
+</p>
+là một quan hệ tương đương trên $A$, hơn nữa $P$ chính là tập thương của quan hệ này.
+
+<Theorem identifier="3">
+  "Quan hệ tương đương" và "phân hoạch" là hai khái niệm tương đương nhau. Cụ thể với $A$ là một tập hợp, quy tắc $R \mapsto A/R$ xác định một song ánh từ tập hợp tất cả các quan hệ tương đương trên $A$ vào tập hợp tất cả các phân hoạch trên $A$.
+</Theorem>
+
+### 2. Tính tương thích
+
+Trong nhiều trường hợp, ta muốn định nghĩa các quy tắc trên các lớp tương đương.
+Lấy ví dụ, với $G, H$ là các nhóm và $\varphi: G\to H$ là một đồng cấu, ta định nghĩa một ánh xạ $\overline{\varphi}: G/\ker \varphi \to H$ bởi $\overline{\varphi}\left(\overline{x}\right) = \varphi(x)$ với mọi $x\in G$.
+Người ta nói rằng định nghĩa trên là xác định tốt, nghĩa là với quy tắc trên thực sự định nghĩa một ánh xạ. Ở phần này, ta sẽ tìm hiểu về tính xác định tốt khi định nghĩa ánh xạ trên tập thương.
+
+Cho $A, B$ là các tập hợp, $R$ là một quan hệ tương đương trên $A$. Ánh xạ $F: A\to B$ được gọi là:
+1. **tương thích** (compatible) với $R$ nếu như $f(x) = f(y)$ với mọi $x, y\in A$ mà $xRy$.
+2. **tương thích mạnh** (strongly compatible) với $R$ nếu như với mọi $x, y\in A$ ta có $xRy$ khi và chỉ khi $f(x) = f(y)$.
+
+<Theorem identifier="4">
+  Cho $A, B$ là các tập hợp, $R$ là một quan hệ tương đương trên $A$, và một ánh xạ $F: A\to B$. Khi đó hai điều sau tương đương nhau:
+  1. Ánh xạ $F$ tương thích với $R$.
+  2. Tồn tại một ánh xạ $G: A/R\to B$ thỏa mãn với mọi $x\in A$ ta có:
+  <p>
+  $$
+  G\left(\left[x\right]_R\right) = F(x)
+  $$
+  </p>
+
+  Nếu ánh xạ $G$ nêu trên là tồn tại, nó là tồn tại duy nhất.
+</Theorem>
+
+***Chứng minh.***
+
+*Chiều thuận.* Giả sử ánh xạ $F$ tương thích với $R$. Xét ánh xạ $G: A/R\to B$ được xác định bởi:
+<p>
+$$
+G = \left\{\left< \left[x\right]_R, F(x) \right> : x\in A\right\}
+$$
+</p>
+
+Giả sử $\left< \left[x\right]_R, F(x) \right>, \left< \left[y\right]_R, F(y) \right>\in G$ với $x,y\in A$ và $\left[x\right]_R = \left[y\right]_R$.
+Suy ra $xRy$, theo tính tương thích với $R$ của $F$ ta suy ra $F(x) = F(y)$.
+
+Do đó $G$ là một quy tắc gán.
+
+Với mọi $x\in A$, ta có $\left< \left[x\right]_R, F(x) \right> \in G$ nên $G\left(\left[x\right]_R\right) = F(x)$.
+
+*Chiều đảo.* Giả sử $G: A/R\to B$ là một ánh xạ mà với mọi $x\in A$ ta có:
+<p>
+$$
+G\left(\left[x\right]_R\right) = F(x)
+$$
+</p>
+Giả sử $x, y\in A$ mà $xRy$. Ta có $\left[x\right]_R = \left[y\right]_R$ nên:
+<p>
+$$
+F(x) = G\left(\left[x\right]_R\right) = G\left(\left[y\right]_R\right) = F(y)
+$$
+</p>
+Do đó ánh xạ $F$ tương thích với $R$.
+
+*Tính duy nhất.* Ta có thể viết lại điều kiện của ánh xạ $G$ như sau: $G\circ \pi = F$ trong đó $\pi: A\to A/R$ là phép chiếu chính tắc.
+
+Từ đây, theo tính toàn cấu của phép chiếu chính tắc, ánh xạ $G$ là duy nhất. ***Q.E.D.***
+
+Một cách tương tự, ta có được định lý với tính tương thích mạnh.
+
+<Theorem identifier="5">
+  Cho $A, B$ là các tập hợp, $R$ là một quan hệ tương đương trên $A$, và một ánh xạ $F: A\to B$. Khi đó hai điều sau tương đương nhau:
+  1. Ánh xạ $F$ tương thích mạnh với $R$.
+  2. Tồn tại một đơn ánh $G: A/R\to B$ thỏa mãn với mọi $x\in A$ ta có:
+  <p>
+  $$
+  G\left(\left[x\right]_R\right) = F(x)
+  $$
+  </p>
+
+  Nếu đơn ánh $G$ nêu trên là tồn tại, nó là tồn tại duy nhất.
+</Theorem>
+
+Trong một số trường hợp, ta cần định nghĩa tính xác định tốt trên một tích Cartesian.
+Ví dụ, với $N$ là một nhóm con chuẩn tắc của nhóm $G$, toán tử hai ngôi trên tập thương $G / N$ được xác định bởi $\overline{a}\cdot \overline{b} = \overline{ab}$ là xác định tốt.
+
+Thật may mắn là ta có thể sử dụng lại [định lý 4](#theorem-4) trong trường hợp này.
+
+<Theorem identifier="6">
+  Cho $A, B, C$ là các tập hợp. Khi đó ta có một song ánh từ tập hợp $C^{A\times B}$ vào tập hợp $\left(C^B\right)^A$ biến mỗi quy tắc gán $F: A\times B\to C$ thành quy tắc gán $G: A\to C^B$ thỏa mãn $G(a)(b) = F(a, b)$ với mọi $a\in A$ và $b\in B$.
+</Theorem>
+
+Với mỗi ánh xạ $F: A\times B\to C$, ta tương ứng có một ánh xạ $F^{\star}: A\to C^B$.
+Nếu $R$ là một quan hệ tương đương trên $A$ và ánh xạ $F^{\star}$ tương thích với $R$, ta nhận được ánh xạ $G^{\star}: A/R\to C^B$.
+Tương ứng với ánh xạ $G^{\star}$ là ánh xạ $G: A/R \times B\to C$.
+
+<Theorem identifier="7">
+  Cho $A, B, C$ là các tập hợp, $R$ và $S$ lần lược là các quan hệ tương đương trên $A$ và $B$, và cho ánh xạ $F: A\times B\to C$ bất kỳ. Khi đó các điều sau tương đương với nhau:
+  1. Với mọi $a_1, a_2\in A$ và với mọi $b_1, b_2\in B$, ta có $a_1Ra_2$ và $b_1Sb_2$ suy ra $F(a_1, b_1) = F(a_2, b_2)$.
+  2. Tồn tại ánh xạ $G: A/R \times B/S \to C$ sao cho với mọi $a\in A$ và $b\in B$ ta có:
+  <p>
+  $$
+  G\left([a]_R, [b]_S\right) = F(a, b)
+  $$
+
+  Nếu ánh xạ $G$ này tồn tại, thì nó là tồn tại duy nhất.
+  </p>
+</Theorem>
+
+Ta còn muốn định nghĩa tính xác định tốt không chỉ trên ánh xạ mà còn trên quan hệ.
+May mắn thay, ta có một công cụ để biến một quan hệ thành một ánh xạ.
+
+Đặt $\mathbf{T} = \left\{0, 1\right\}$ trong đó $0 = \varnothing$ và $1 = \{0\}$, ta có $0 \ne 1$.
+
+<Theorem identifier="8">
+  Cho $A$ là một tập hợp bất kỳ. Khi đó ánh xạ $c: \mathcal{P}(A) \to \mathbf{T}^A$ xác định bởi:
+  <p>
+  $$
+  P(B) = \left(B\times \{1\}\right)\cup \left(\left(A - B\right)\times \{0\}\right)
+  $$
+  </p>
+  là một song ánh. Nói cách khác, mọi tập hợp con $B$ của $A$ đều tương ứng một-một với một ánh xạ $c_B: A\to \mathbf{T}$ mà với mọi $a\in A$ ta có:
+  <p>
+  $$
+  c_B(a) = \begin{cases}
+  1 & \text{, if }a\in B \\
+  0 & \text{, otherwise}
+  \end{cases}
+  $$
+  </p>
+</Theorem>
+
+<br />
+
+<Theorem identifier="9">
+  Cho $A$ và $B$ là các tập hợp và $P\subseteq A\times B$ là một quan hệ. Cho $R$ và $S$ lần lược là các quan hệ tương đương trên $A$ và $B$. Giả sử với mọi $a_1, a_2\in A$ và $b_1, b_2\in B$ ta có:
+  <p>
+  $$
+  \left(a_1Ra_2 \wedge b_1Sb_2\right) \implies \left(a_1Pb_1 \Leftrightarrow a_2Pb_2\right)
+  $$
+  </p>
+  Khi đó tồn tại một quan hệ $Q \subseteq A/R\times B/S$ sao cho với mọi $a\in A$ và với mọi $b\in B$ ta có:
+  <p>
+  $$
+  aPb \iff [a]_R Q [b]_S
+  $$
+  </p>
+</Theorem>
+
+***Chứng minh.***
+
+Gọi $c_P: A\times B\to \mathbf{T}$ là ánh xạ tương ứng với $P$.
+
+Với mọi $a_1, a_2\in A$ và $b_1, b_2\in B$, giả sử $a_1Ra_2$ và $b_1Sb_2$, ta có:
+<p>
+$$
+c_P(a_1, b_1) = 1 \iff a_1Pb_1 \iff a_2Pb_2 \iff c_P(a_2, b_2) = 1
+$$
+</p>
+Tương tự ta có:
+<p>
+$$
+c_P(a_1, b_1) = 0 \iff \neg a_1Pb_1 \iff \neg a_2Pb_2 \iff c_P(a_2, b_2) = 0
+$$
+</p>
+Do đó ta có $c_P(a_1, b_1) = c_P(a_2, b_2)$.
+
+Theo [định lý 7](#theorem-7), tồn tại một ánh xạ $c_Q: A/R\times B/S\to \mathbf{T}$ thỏa mãn với mọi $a\in A$ và với mọi $b\in B$ ta có:
+<p>
+$$
+c_P(a, b) = c_Q\left([a]_R, [b]_S\right)
+$$
+</p>
+Gọi $Q\subseteq A/R\times B/S$ là quan hệ tương ứng với ánh xạ $c_Q$. Khi đó với mọi $a\in A$ và với mọi $b\in B$ ta có:
+<p>
+$$
+aPb \iff c_P(a, b) = 1 \iff c_Q\left([a]_R, [b]_S\right) = 1 \iff [a]_R Q [b]_S
+$$
+</p>
+Định lý đã được chứng minh. ***Q.E.D.***
