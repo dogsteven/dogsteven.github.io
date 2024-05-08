@@ -142,100 +142,62 @@ Một cách tương tự, ta có được định lý với tính tương thích
   Nếu đơn ánh $G$ nêu trên là tồn tại, nó là tồn tại duy nhất.
 </Theorem>
 
-Trong một số trường hợp, ta cần định nghĩa tính xác định tốt trên một tích Cartesian.
-Ví dụ, với $N$ là một nhóm con chuẩn tắc của nhóm $G$, toán tử hai ngôi trên tập thương $G / N$ được xác định bởi $\overline{a}\cdot \overline{b} = \overline{ab}$ là xác định tốt.
+Trong một số trường hợp, ta muốn định nghĩa tính tương thích cho một ánh xạ với nhiều tham số đầu vào.
+Ví dụ, với $\mathbb{Z}_n$ là tập hợp số nguyên modulo $n$, khi đó ta muốn định nghĩa phép cộng $\mathbb{Z}_n\times \mathbb{Z}_n\to \mathbb{Z}_n$ như sau:
+<p>
+$$
+[a] + [b] = [a + b]
+$$
+</p>
 
-Thật may mắn là ta có thể sử dụng lại [định lý 4](#theorem-4) trong trường hợp này.
+Giả sử $A$ và $B$ là hai tập hợp, và $R$ và $S$ lần lược là các quan hệ tương đương trên $A$ và $B$.
+Khi đó ta có thể định nghĩa một quan hệ tương đương $P$ trên $A\times B$ như sau:
+<p>
+$$
+\left< a, b \right>P\left< c, d \right> \iff aRc \wedge bSd
+$$
+</p>
+Ta thấy rằng lớp tương đương của $\left< a, b \right>$ là $[a]_R\times [b]_S$.
+
+Giả sử ánh xạ $F: A\times B\to C$ tương thích với quan hệ $P$ này.
+1. Sử dụng định lý, ta nhận được một ánh xạ $G^{\star}: (A\times B) / P \to C$.
+2. Quy tắc $\left< [a]_R, [b]_S \right> \mapsto [a]_R\times [b]_S$ xác định một ánh xạ từ $A/R\times B/S$ vào tập thương $(A \times B) / P$.
+3. Do đó ta có một ánh xạ $G: A/R\times B/S \to C$ có tính chất được mong đợi:
+<p>
+$$
+G\left([a]_R, [b]_S\right) = G^{\star}\left([a]_R\times [b]_S\right) = G^{\star}\left([\left< a, b \right>]_P\right) = F(a, b)
+$$
+</p>
+
+Trong một số trường hợp, ta mong muốn được sử dụng tính tương thích không chỉ trên ánh xạ mà còn trên quan hệ.
+Ví dụ, các cặp số tự nhiên có cùng "hiệu" tạo thành một lớp tương đương, mỗi lớp tương đương này là một số nguyên.
+Lúc này, ta muốn định nghĩa thứ tự trên tập hợp số nguyên bởi:
+<p>
+$$
+\left[\left< a, b \right>\right] < \left[\left< c, d \right>\right] \iff a + d < c + b
+$$
+</p>
+
+May mắn thay, ta có một công cụ để có thể biến đổi một quan hệ trở thành thành một ánh xạ và ngược lại.
+Đặt $\mathbf{T} = \left\{0, 1\right\}$ với $0 = \varnothing$ và $1 = \left\{0\right\}$, ta có $0\ne 1$.
 
 <Theorem identifier="6">
-  Cho $A, B, C$ là các tập hợp. Khi đó ta có một song ánh từ tập hợp $C^{A\times B}$ vào tập hợp $\left(C^B\right)^A$ biến mỗi quy tắc gán $F: A\times B\to C$ thành quy tắc gán $G: A\to C^B$ thỏa mãn $G(a)(b) = F(a, b)$ với mọi $a\in A$ và $b\in B$.
-</Theorem>
-
-Với mỗi ánh xạ $F: A\times B\to C$, ta tương ứng có một ánh xạ $F^{\star}: A\to C^B$.
-Nếu $R$ là một quan hệ tương đương trên $A$ và ánh xạ $F^{\star}$ tương thích với $R$, ta nhận được ánh xạ $G^{\star}: A/R\to C^B$.
-Tương ứng với ánh xạ $G^{\star}$ là ánh xạ $G: A/R \times B\to C$.
-
-<Theorem identifier="7">
-  Cho $A, B, C$ là các tập hợp, $R$ và $S$ lần lược là các quan hệ tương đương trên $A$ và $B$, và cho ánh xạ $F: A\times B\to C$ bất kỳ. Khi đó các điều sau tương đương với nhau:
-  1. Với mọi $a_1, a_2\in A$ và với mọi $b_1, b_2\in B$, ta có $a_1Ra_2$ và $b_1Sb_2$ suy ra $F(a_1, b_1) = F(a_2, b_2)$.
-  2. Tồn tại ánh xạ $G: A/R \times B/S \to C$ sao cho với mọi $a\in A$ và $b\in B$ ta có:
+  Với mọi tập hợp $A$, ánh xạ $c: \mathcal{P}(A)\to \mathbf{T}^A$ được xác định bởi
   <p>
   $$
-  G\left([a]_R, [b]_S\right) = F(a, b)
-  $$
-
-  Nếu ánh xạ $G$ này tồn tại, thì nó là tồn tại duy nhất.
-  </p>
-</Theorem>
-
-Ta còn muốn định nghĩa tính xác định tốt không chỉ trên ánh xạ mà còn trên quan hệ.
-May mắn thay, ta có một công cụ để biến một quan hệ thành một ánh xạ.
-
-Đặt $\mathbf{T} = \left\{0, 1\right\}$ trong đó $0 = \varnothing$ và $1 = \{0\}$, ta có $0 \ne 1$.
-
-<Theorem identifier="8">
-  Cho $A$ là một tập hợp bất kỳ. Khi đó ánh xạ $c: \mathcal{P}(A) \to \mathbf{T}^A$ xác định bởi:
-  <p>
-  $$
-  P(B) = \left(B\times \{1\}\right)\cup \left(\left(A - B\right)\times \{0\}\right)
+  c(B) = \left(B\times \{0\}\right) \cup \left(\left(A - B\right)\times \{1\}\right)
   $$
   </p>
   là một song ánh. Nói cách khác, mọi tập hợp con $B$ của $A$ đều tương ứng một-một với một ánh xạ $c_B: A\to \mathbf{T}$ mà với mọi $a\in A$ ta có:
   <p>
   $$
   c_B(a) = \begin{cases}
-  1 & \text{, if }a\in B \\
-  0 & \text{, otherwise}
+  0 & \text{, if }a\in B \\
+  1 & \text{, otherwise}
   \end{cases}
   $$
   </p>
 </Theorem>
 
-<br />
-
-<Theorem identifier="9">
-  Cho $A$ và $B$ là các tập hợp và $P\subseteq A\times B$ là một quan hệ. Cho $R$ và $S$ lần lược là các quan hệ tương đương trên $A$ và $B$. Giả sử với mọi $a_1, a_2\in A$ và $b_1, b_2\in B$ ta có:
-  <p>
-  $$
-  \left(a_1Ra_2 \wedge b_1Sb_2\right) \implies \left(a_1Pb_1 \Leftrightarrow a_2Pb_2\right)
-  $$
-  </p>
-  Khi đó tồn tại một quan hệ $Q \subseteq A/R\times B/S$ sao cho với mọi $a\in A$ và với mọi $b\in B$ ta có:
-  <p>
-  $$
-  aPb \iff [a]_R Q [b]_S
-  $$
-  </p>
-</Theorem>
-
-***Chứng minh.***
-
-Gọi $c_P: A\times B\to \mathbf{T}$ là ánh xạ tương ứng với $P$.
-
-Với mọi $a_1, a_2\in A$ và $b_1, b_2\in B$, giả sử $a_1Ra_2$ và $b_1Sb_2$, ta có:
-<p>
-$$
-c_P(a_1, b_1) = 1 \iff a_1Pb_1 \iff a_2Pb_2 \iff c_P(a_2, b_2) = 1
-$$
-</p>
-Tương tự ta có:
-<p>
-$$
-c_P(a_1, b_1) = 0 \iff \neg a_1Pb_1 \iff \neg a_2Pb_2 \iff c_P(a_2, b_2) = 0
-$$
-</p>
-Do đó ta có $c_P(a_1, b_1) = c_P(a_2, b_2)$.
-
-Theo [định lý 7](#theorem-7), tồn tại một ánh xạ $c_Q: A/R\times B/S\to \mathbf{T}$ thỏa mãn với mọi $a\in A$ và với mọi $b\in B$ ta có:
-<p>
-$$
-c_P(a, b) = c_Q\left([a]_R, [b]_S\right)
-$$
-</p>
-Gọi $Q\subseteq A/R\times B/S$ là quan hệ tương ứng với ánh xạ $c_Q$. Khi đó với mọi $a\in A$ và với mọi $b\in B$ ta có:
-<p>
-$$
-aPb \iff c_P(a, b) = 1 \iff c_Q\left([a]_R, [b]_S\right) = 1 \iff [a]_R Q [b]_S
-$$
-</p>
-Định lý đã được chứng minh. ***Q.E.D.***
+Một quan hệ $R$ là một tập hợp con của một tích Cartesian $A\times B$ nào đó.
+Khi đó ta biểu diễn $R$ bằng một ánh xạ $c_R: A\times B\to \mathbf{T}$ và ta có thể áp dụng [định lý 4](#theorem-4) để nhận được một quan hệ tương ứng trên tập thương.
