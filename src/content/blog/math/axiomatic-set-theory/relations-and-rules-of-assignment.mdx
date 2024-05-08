@@ -1,7 +1,7 @@
 ---
 title: "Lý thuyết tập hợp tiên đề 2: Quan hệ và quy tắc gán"
 pubDate: 2024-04-27
-intro: Quan hệ và ánh xạ là những khái niệm nền tảng và quan trọng bậc nhất của toán học, chúng xuất hiện xuyên suốt các ngành của toán học. Không có quan hệ và ánh xạ, ta không thể tiếp tục đi sâu vào toán.
+intro: Quan hệ và quy tắc gán là những khái niệm nền tảng và quan trọng bậc nhất của toán học, chúng xuất hiện xuyên suốt các ngành của toán học. Không có quan hệ và quy tắc gán, ta không thể tiếp tục đi sâu vào toán.
 tags: ["math", "set theory"]
 author: clown
 image: ../../../../assets/set-theory.jpeg
@@ -277,8 +277,8 @@ Nếu $F: A\to B$ và $G: C\to D$ với $B\subseteq C$, ta có $G\circ F: A\to D
 <Corollary identifier="2">
   Cho $F$ là một quy tắc gán một-một. Khi đó:
   1. $F^{-1}$ là một quy tắc gán một-một.
-  2. Với mọi $x\in \text{dom}(F)$ ta có $F^{-1}(F(x)) = x$.
-  3. Với mọi $y\in \text{rng}(F)$ ta có $F\left(F^{-1}(y)\right) = y$.
+  2. $F^{-1}\circ F = \text{id}_{\text{dom}(F)}$, với mọi $x\in \text{dom}(F)$ ta có $F^{-1}(F(x)) = x$.
+  3. $F\circ F^{-1} = \text{id}_{\text{rng}(F)}$, với mọi $y\in \text{rng}(F)$ ta có $F\left(F^{-1}(y)\right) = y$.
 </Corollary>
 
 Giả sử ta có những mũi tiên $x\to y\to z \to t$, ta thấy rằng $x\to (y\to z\to t)$ hay $(x\to y\to z)\to t$ cũng sẽ dẫn ta từ $x$ đến $t$.

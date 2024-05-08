@@ -1,0 +1,240 @@
+---
+title: "Lý thuyết tập hợp tiên đề 3: Ánh xạ"
+pubDate: 2024-04-28
+intro: Trong nhiều trường hợp, ta mong muốn kèm theo thông tin về cấu trúc của tập hợp nguồn và tập hợp đích vào quy tắc gán để có thể nhận thức được về cấu trúc của chúng. Trong lý thuyết tập hợp, khái niệm này là ánh xạ.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+### 1. Ánh xạ
+
+[Bài viết trước](/blog/math/axiomatic-set-theory/relations-and-rules-of-assignment) đã giới thiệu về hai khái niệm quan hệ và quy tắc gán.
+Quy tắc gán có thể được sử dụng trong hầu hết các trường hợp và có thể được sử dụng thay cho quan hệ.
+Trong nhiều trường hợp, ta mong muốn kèm theo thông tin về cấu trúc của tập hợp nguồn và tập hợp đích vào quy tắc gán để ta có thể nhận thức được về cấu trúc của chúng.
+
+**Ánh xạ** (map, mapping) là một bộ 3 $\left< F, A, B \right>$ trong đó $F: A\to B$, trong đó $A$ được gọi là **miền** (domain) và $B$ được gọi là **đối miền** (codomain) của ánh xạ này.
+Ta sử dụng lại ký hiệu $F: A\to B$ để ký hiệu cho ánh xạ $\left< F, A, B \right>$.
+Khi thông tin về miền và đối miền của một ánh xạ đã rõ ràng, ta sử dụng ký hiệu của quy tắc gán của nó để ký hiệu cho ánh xạ đó.
+
+Ta thấy rằng thông tin về miền là không cần thiết vì nó được chứa trong quy tắc gán.
+Không như quy tắc gán, để hai ánh xạ bằng nhau không chỉ yêu cầu hai quy tắc gán bằng nhau mà còn yêu cầu hai đối miền cũng phải bằng nhau.
+
+Đối với ánh xạ, ta chỉ hợp (composite) hai ánh xạ khi đối miền của ánh xạ đến trước là miền của ánh xạ đến sau.
+Nghĩa là nếu $F: A\to B$ và $G: B\to C$ thì ta mới hợp ánh xạ $G\circ F: A\to C$.
+
+Một ánh xạ $F: A\to B$ được gọi là:
+1. một **đơn ánh** (injection) nếu như $F$ là một-một.
+2. một **toàn ánh** (surjection) nếu như $\text{rng}(F) = F[A] = B$.
+3. một **song ánh** (bijection) nếu như nó vừa là một đơn ánh, vừa là một toàn ánh.
+4. một **đơn cấu** (monomorphism) nếu như với mọi tập hợp $C$, và với mọi ánh xạ $G_1, G_2: C\to A$ ta có $F\circ G_1 = F\circ G_2$ suy ra $G_1 = G_2$.
+5. một **toàn cấu** (epimorphism) nếu như với mọi tập hợp $C$, và với mọi ánh xạ $G_1, G_2: B\to C$ ta có $G_1\circ F = G_2\circ F$ suy ra $G_1 = G_2$.
+6. một **đẳng cấu** (isomorphism) nếu như tồn tại một ánh xạ $G: B\to A$ sao cho $G\circ F = \text{id}_A$ và $F\circ G = \text{id}_B$.
+
+Định nghĩa đơn ánh, toàn ánh và song ánh yêu cầu sử dụng đến các phần tử của miền và đối miền.
+Trong khi đó, định nghĩa của đơn cấu, toàn cấu và đẳng cấu chỉ yêu cầu về cấu trúc của phép hợp hai quan hệ.
+
+<Theorem identifier="1">
+  Hợp (composite) của hai quan hệ đơn gốc là một quan hệ đơn gốc. Do đó hợp (composite) của hai quy tắc gán một-một là một quy tắc gán một-một. Suy ra hợp của hai đơn ánh là một đơn ánh.
+</Theorem>
+
+<br />
+
+<Theorem identifier="2">
+  Hợp của hai toàn ánh là một toàn ánh.
+</Theorem>
+
+<br />
+
+<Corollary identifier="1">
+  Hợp của hai song ánh là một song ánh.
+</Corollary>
+
+<br />
+
+<Theorem identifier="3">
+  Khái niệm "đơn ánh" và "đơn cấu" là tương đương nhau.
+</Theorem>
+
+***Chứng minh.***
+
+*Chiều thuận.* Giả sử $F: A\to B$ là một đơn ánh. Giả sử $C$ là một tập hợp bất kỳ và $G_1, G_2: C\to A$ là hai ánh xạ sao cho $F\circ G_1 = F\circ G_2$.
+Với mọi $x\in C$ ta có $F\left(G_1(x)\right) = F(G_2(x))$, suy ra $G_1(x) = G_2(x)$. Suy ra $G_1 = G_2$.
+
+Do đó $F: A\to B$ là một đơn cấu.
+
+*Chiều đảo.* Giả sử $F: A\to B$ là một đơn cấu. Gọi $x_1, x_2\in A$ là hai phần tử nất kỳ sao cho $F(x_1) = F(x_2)$.
+Xét tập hợp $C = \left\{\varnothing\right\}$ và hai ánh xạ $G_1, G_2: C\to A$ xác định bởi:
+<p>
+$$
+G_1(\varnothing) = x_1, \;\; G_2(\varnothing) = x_2
+$$
+</p>
+Với mọi $x\in C$, ta có $x = \varnothing$, do đó
+<p>
+$$
+F\left(G_1(x)\right) = F\left(G_1(\varnothing)\right) = F(x_1) = F(x_2) = F\left(G_2(\varnothing)\right) = F\left(G_2(x)\right)
+$$
+</p>
+Suy ra $F\circ G_1 = F\circ G_2$ nên $G_1 = G_2$. Do đó $x_1 = G\_1(\varnothing) = G_2(\varnothing) = x_2$.
+
+Suy ra $F: A\to B$ là một đơn ánh. ***Q.E.D.***
+
+<Theorem identifier="4">
+  Khái niệm "toàn ánh" và "toàn cấu" là tương đương nhau.
+</Theorem>
+
+***Chứng minh.***
+
+*Chiều thuận.* Giả sử $F: A\to B$ là một toàn ánh. Giả sử $C$ là một tập hợp bất kỳ và $G_1, G_2: B\to C$ là hai ánh xạ sao cho $G_1\circ F = G_2 \circ F$.
+Gọi $y\in B$ là một phần tử bất kỳ. Tồn tại $x\in A$ sao cho $F(x) = y$. Khi đó ta có:
+<p>
+$$
+G_1(y) = G_1(F(x)) = G_2(F(x)) = G_2(y)
+$$
+</p>
+Suy ra $G_1 = G_2$. Do đó $F: A\to B$ là một toàn cấu.
+
+*Chiều đảo.* Giả sử $F: A\to B$ là một toàn cấu. Theo [nguyên lý không có tập hợp nào chứa mọi tập hợp](/blog/math/axiomatic-set-theory/basic-axioms-of-set-theory#theorem-1), tồn tại tập hợp $X\not\in B$.
+Khi đó xét $C = B\cup \left\{X\right\}$ và hai ánh xạ $G_1, G_2: B\to C$ xác định bởi:
+<p>
+$$
+G_1 = \text{id}_B, \;\; G_2 = \text{id}_{\text{rng}(F)} \cup \left(\left(B - \text{rng}(F)\right)\times \left\{X\right\}\right)
+$$
+</p>
+Gọi $x\in A$ là một phần tử bất kỳ, ta có $F(x)\in \text{rng}(F)$ nên:
+<p>
+$$
+G_1(F(x)) = G_1(F(x)) = F(x) = G_2(F(x))
+$$
+</p>
+Do đó $G_1\circ F = G_2\circ F$, suy ra $G_1 = G_2$. Nếu $B - \text{rng}(F) \ne \varnothing$, ta có:
+<p>
+$$
+\left\{X\right\} = \text{rng}\left(\left(B - \text{rng}(F)\right)\times \left\{X\right\}\right) \subseteq \text{rng}(G_2) = \text{rng}(G_1) = B
+$$
+</p>
+Vô lý do $X\not\in B$. Do đó $B - \text{rng}(F) = \varnothing$, suy ra $\text{rng}(F) = B$, hay $F: A\to B$ là một toàn ánh. ***Q.E.D.***
+
+<Theorem identifier="5">
+  Khái niệm "song ánh" và "đẳng cấu" là tương đương nhau.
+</Theorem>
+
+***Chứng minh.***
+
+*Chiều thuận.* Giả sử $F: A\to B$ là một song ánh. Ta có $F$ là một-một nên $F^{-1}$ là một quy tắc gán một-một. Mà $\text{dom}\left(F^{-1}\right) = \text{rng}(F) = B$ nên $F^{-1}: B\to A$. Ta có:
+<p>
+$$
+F^{-1}\circ F = \text{id}_{\text{dom}(F)} = \text{id}_A, \;\; F\circ F^{-1} = \text{id}_{\text{rng}(F)} = \text{id}_B
+$$
+</p>
+Do đó $F: A\to B$ là một đẳng cấu.
+
+*Chiều đảo.* Giả sử $F: A\to B$ là một đẳng cấu, khi đó có ánh xạ $G: B\to A$ thỏa mãn $G\circ F = \text{id}_A$ và $F\circ G = \text{id}_B$. Xét tập hợp $C$ bất kỳ.
+
+Giả sử $G_1, G_2: C\to A$ là hai ánh xạ mà $F\circ G_1 = F\circ G_2$. Khi đó ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  G_1 & = \text{id}_A\circ G_1 \\
+  & = \left(G\circ F\right)\circ G_1 \\
+  & = G\circ \left(F\circ G_1\right) \\
+  & = G\circ \left(F\circ G_2\right) \\
+  & = \left(G\circ F\right)\circ G_2 \\
+  & = \text{id}_A\circ G_2 \\
+  & = G_2
+\end{alignat*}
+$$
+</p>
+Do đó $F: A\to B$ là một đơn cấu, nên nó là một đơn ánh.
+
+Giả sử $G_1, G_2: B\to C$ là hai ánh xạ mà $G_1\circ F = G_2\circ F$. Khi đó ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  G_1 & = G_1\circ \text{id}_B \\
+  & = G_1 \circ \left(F\circ G\right) \\
+  & = \left(G_1\circ F\right)\circ G \\
+  & = \left(G_2\circ F\right)\circ G \\
+  & = G_2 \circ \left(F\circ G\right) \\
+  & = G_2\circ \text{id}_B \\
+  & = G_2
+\end{alignat*}
+$$
+</p>
+Do đó $F: A\to B$ là một toàn cấu, nên nó là một toàn ánh.
+
+Do đó $F: A\to B$ là một song ánh. ***Q.E.D.***
+
+Nếu $F: A\to B$ là một đẳng cấu, ánh xạ $F^{-1}: B\to A$ được gọi là **ánh xạ nghịch đảo** (inverse) của $F: A\to B$. 
+Dễ thấy rằng nếu $F: A\to B$ là một đẳng cấu thì $F^{-1}: B\to A$ cũng là một đẳng cấu, và ánh xạ nghịch đảo của $F^{-1}: B\to A$ chính là $F: A\to B$.
+
+Các định nghĩa về đơn cấu và toàn cấu rất hữu ích trong việc chứng minh sự tồn tại duy nhất của một đối tượng nào đó.
+
+### 2. Giới thiệu về tiên đề chọn
+
+Cho $F: A\to B$ là một ánh xạ. Một ánh xạ $G: B\to A$ được gọi là:
+1. **nghịch đảo trái** (left inverse) của $F: A\to B$ nếu như $G\circ F = \text{id}_A$.
+2. **nghịch đảo phải** (righ inverse) của $F: A\to B$ nếu như $F\circ G = \text{id}_B$.
+
+<Theorem identifier="6">
+  Ánh xạ $F: A\to B$ với $A$ khác rỗng là một đơn ánh khi và chỉ khi nó có nghịch đảo trái.
+</Theorem>
+
+Bạn đọc có thể dễ dàng chứng minh định lý này.
+
+<Theorem identifier="7">
+  Ánh xạ $F: A\to B$ là một toàn ánh khi và chỉ khi nó có nghịch đảo phải.
+</Theorem>
+
+***Chứng minh.***
+
+Chiều "nếu có nghịch đảo phải suy ra tính toàn ánh" đã được chứng minh trong chứng minh của [định lý 5](#theorem-5), ta chứng minh chiều còn lại.
+
+Ta xây dựng ánh xạ $G: B\to A$ như sau: Với mỗi $y\in B$, tồn tại phần tử $x\in A$ sao cho $F(x) = y$, khi đó chọn $G(y) = x$.
+Khi đó ta dễ dàng chứng minh $G: B\to A$ là nghịch đảo phải của $F: A\to B$. ***Q.E.D.***
+
+Liệu chứng minh trên có đúng? Ta phát biểu "chọn $G(y) = x$" nhưng ta không biết chính xác phải chọn như thế nào trong những $x$ khả thi.
+Do đó ta không thể nào thiết lập được một ánh xạ với lý luận như thế này.
+
+Ta thấy rằng quy tắc gán $G$ là một tập hợp con của quan hệ $F^{-1}$.
+Nếu ta có thể trích xuất được một quy tắc gán từ một quan hệ sao cho domain của quy tắc gán đó bằng với domain của quan hệ đó thì ta có thể thiết lập được nghịch đảo phải $G: B\to A$.
+Đây cũng chính là nội dung của tiên đề chọn.
+
+<Axiom identifier="1" name="The Axiom of Choice (1st form)">
+  Với mọi quan hệ $R$, tồn tại một quy tắc gán $F\subseteq R$ sao cho:
+  <p>
+  $$
+  \text{dom}(F) = \text{dom}(R)
+  $$
+  </p>
+</Axiom>
+
+### 3. Họ các tập hợp và tích Cartesian tổng quát
+
+Trong nhiều trường hợp, ta gọi một quy tắc gán $\mathbf{A}$ là một **họ các tập hợp** (family of sets). Nếu $I = \text{dom}\left(\mathbf{A}\right)$ ta có thể nói thêm $\mathbf{A}$ được đánh chỉ số bởi $I$.
+Lúc này ta viết $\mathbf{A}_i$ thay cho $\mathbf{A}(i)$ với $i\in I$, và viết $\left\{\mathbf{A}_i\right\}_{i\in I}$ hoặc $\left(\mathbf{A}_i\right)_{i\in I}$ thay cho $\mathbf{A}$.
+
+**Tích Cartesian** của họ $\left\{\mathbf{A}_i\right\}_{i\in I}$, ký hiệu bởi $\prod\limits_{i\in I} \mathbf{A}$, được định nghĩa bởi:
+<p>
+$$
+\prod\limits_{i\in A} \mathbf{A}_i = \left\{\left(a_i\right)_{i\in I} \in \left(\bigcup\limits_{i\in I} \mathbf{A}_i\right)^{I} : \left(\forall i\in I\right) a_i\in \mathbf{A}_i\right\}
+$$
+</p>
+Ta thường gọi một phần tử của tích Cartesian là một bộ, vì nó là mô hình của bộ có thứ tự với số lượng phần tử tùy ý.
+
+Giả sử $\mathbf{A}_i$ khác rỗng với mọi $i\in I$. Nếu ta có thể chọn từ mỗi $\mathbf{A}_i$ một phần tử $a_i$, khi đó ta có thể thiết lập một bộ $(a_i)_{i\in I}$ thuộc tích Cartesian của họ các tập hợp ban đầu.
+Nêu không sử dụng [tiên đề chọn](#axiom-1), ta không có cách nào chọn ra một bộ như thế này.
+Ta thấy rằng với $R$ là một quan hệ, ta có thể tạo ra được một họ các tập hợp được đánh chỉ số bởi $\text{dom}(R)$ là $\left\{R\left[\left\{x\right\}\right]\right\}_{x\in \text{dom}(R)}$, và một bộ trong tích Cartesian của họ này chính là quy tắc gán thỏa mãn tiên đề chọn.
+Do đó một dạng khác của tiên đề chọn đó là việc tích Cartesian khác rỗng.
+
+<Axiom identifier="2" name="The Axiom of Choice (2nd form)">
+  Tích Cartesian của một họ các tập hợp khác rỗng là khác rỗng.
+</Axiom>
+
+Ta sẽ để tiên đề chọn sang một bên cho đến khi ta đến với nội dung về lực lượng của tập hợp, những bài viết tiếp theo vẫn chưa cần đến tiên đề chọn.
