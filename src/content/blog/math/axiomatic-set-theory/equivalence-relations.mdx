@@ -1,6 +1,6 @@
 ---
 title: "Lý thuyết tập hợp tiên đề 4.1: Quan hệ tương đương"
-pubDate: 2024-04-28
+pubDate: 2024-04-27
 intro: Quan hệ tương đương là một mô hình cho sự phân hoạch các đối tượng cho cùng một tính chất trong một tập hợp. Trong khi đó thứ tự là một mô hình cho sự so sánh hoặc vị trí của các phần tử trong một tập hợp.
 tags: ["math", "set theory"]
 author: clown
@@ -142,6 +142,10 @@ Một cách tương tự, ta có được định lý với tính tương thích
   Nếu đơn ánh $G$ nêu trên là tồn tại, nó là tồn tại duy nhất.
 </Theorem>
 
+Hai định lý trên cũng nói lên chiều ngược lại của tính tương thích.
+Lấy ví dụ, nếu $H$ là một nhóm con của $G$ thì định nghĩa phép toán hai ngôi trên tập thương $G / H$ là xác định tốt khi và chỉ khi $H$ là một nhóm con chuẩn tắc của $G$.
+Điều này cho thấy rằng nhóm con chuẩn tắc là điều kiện cần và đủ để xây dựng nên nhóm thương.
+
 Trong một số trường hợp, ta muốn định nghĩa tính tương thích cho một ánh xạ với nhiều tham số đầu vào.
 Ví dụ, với $\mathbb{Z}_n$ là tập hợp số nguyên modulo $n$, khi đó ta muốn định nghĩa phép cộng $\mathbb{Z}_n\times \mathbb{Z}_n\to \mathbb{Z}_n$ như sau:
 <p>
@@ -199,5 +203,11 @@ May mắn thay, ta có một công cụ để có thể biến đổi một quan
   </p>
 </Theorem>
 
-Một quan hệ $R$ là một tập hợp con của một tích Cartesian $A\times B$ nào đó.
-Khi đó ta biểu diễn $R$ bằng một ánh xạ $c_R: A\times B\to \mathbf{T}$ và ta có thể áp dụng [định lý 4](#theorem-4) để nhận được một quan hệ tương ứng trên tập thương.
+Một quan hệ $P$ là một tập hợp con của một tích Cartesian $A\times B$ nào đó.
+Khi đó ta biểu diễn $P$ bằng một ánh xạ $c_P: A\times B\to \mathbf{T}$ và ta có thể áp dụng [định lý 4](#theorem-4) để nhận được một ánh xạ $c_Q: A/R\times B/S\to \mathbf{T}$.
+Ánh xạ trên tương ứng với quan hệ $Q\subseteq A/R\times B/S$ có tính chất được mong đợi:
+<p>
+$$
+aPb \iff c_P(a, b) = 0 \iff c_Q\left([a]_R, [b]_S\right) = 0 \iff [a]_R Q [b]_S
+$$
+</p>
