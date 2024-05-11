@@ -1,0 +1,368 @@
+---
+title: "Lý thuyết tập hợp 2: Quan hệ và quy tắc gán"
+pubDate: 2024-04-22
+intro: Quan hệ và quy tắc gán là những khái niệm nền tảng và quan trọng bậc nhất của toán học, chúng xuất hiện xuyên suốt các ngành của toán học. Không có quan hệ và quy tắc gán, ta không thể tiếp tục đi sâu vào toán.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+
+### 1. Cặp có thứ tự
+
+[Bài viết đầu tiên](/blog/math/set-theory/set-theory-1) đã giới thiệu về khái niệm cặp không có thứ tự $\left\{x, y\right\}$.
+Ta mong muốn một định nghĩa có thể bao hàm cả thông tin về vị trí của từng tập hợp. Cụ thể, ta mong muốn xây dựng được khái niệm **cặp có thứ tự** (ordered pair) $\left< \cdot, \cdot \right>$ sao cho với mọi $x, y, z, t$ ta có:
+<p>
+$$
+\left< x, y \right> = \left< z, t \right> \iff x = z \wedge y = t
+$$
+</p>
+Vào năm 1921, Kazimierz Kuratowski đã đưa ra một định nghĩa cho khái niệm này:
+<p>
+$$
+\left< x, y \right> = \left\{\{x\}, \{x, y\}\right\}
+$$
+</p>
+
+<Theorem identifier="1">
+  Với mọi tập hợp $x, y, z, t$ ta có:
+  <p>
+  $$
+  \left< x, y \right> = \left< z, t \right> \iff x = z \wedge y = t
+  $$
+  </p>
+</Theorem>
+
+<br />
+
+<Lemma identifier="1">
+  Với mọi tập hợp $x, y$ và $z$, ta có:
+  1. Nếu $x, y\in z$ thì $\left< x, y \right> \in \mathcal{P}\left(\mathcal{P}(z)\right)$.
+  2. Nếu $\left< x, y \right> \in z$ thì $x, y\in \bigcup \bigcup z$.
+</Lemma>
+
+**Tích Cartesian** của hai tập hợp $A$ và $B$, ký hiệu bởi $A\times B$, là tập hợp chứa tất cả các cặp $\left< a, b \right>$ với $a\in A$ và $b\in B$:
+<p>
+$$
+A\times B = \left\{ p \in \mathcal{P}\left(\mathcal{P}(A\cup B)\right) : \left(\exists a\in A\right)\left(\exists b\in B\right) p = \left< a, b \right> \right\}
+$$
+</p>
+Đơn giản hơn, ta sử dụng **builder notation**:
+<p>
+$$
+A\times B = \left\{\left< a, b \right> : a\in A, b\in B\right\}
+$$
+</p>
+
+### 2. Quan hệ
+
+Một **quan hệ** (relation) là một tập hợp gồm các cặp có thứ tự:
+<p>
+$$
+R \text{ is a relation}\iff \left(\forall p\in R\right)\exists x\exists y \left( p = \left< x, y \right> \right)
+$$
+</p>
+Đối với quan hệ, ta có thể viết $xRy$ thay cho $\left< x, y \right> \in R$.
+
+Với mỗi quan hệ $R$, ta định nghĩa:
+1. **domain** của $R$ bởi $\text{dom}(R) = \left\{ x \in \bigcup\bigcup R : \exists y\left(xRy\right) \right\}$.
+2. **range** của $R$ bởi $\text{rng}(R) = \left\{ y \in \bigcup\bigcup R : \exists x\left(xRy\right) \right\}$.
+
+Từ [bổ đề 1](#lemma-1) ta chứng minh được điều sau với mọi quan hệ $R$ và mọi tập hợp $x$:
+<p>
+$$
+\begin{alignat*}{2}
+  x \in \text{dom}(R) & \iff \exists y\left(xRy\right) \\
+  y \in \text{rng}(R) & \iff \exists x\left(xRy\right) \\
+\end{alignat*}
+$$
+</p>
+Do đó ta có thể viết domain và range ở dạng **builder notation** như sau:
+<p>
+$$
+\begin{alignat*}{2}
+  \text{dom}(R) & = \left\{x : \exists y\left(xRy\right)\right\} \\
+  \text{rng}(R) & = \left\{y : \exists x\left(xRy\right)\right\}
+\end{alignat*}
+$$
+</p>
+
+<Proposition identifier="1">
+  Với mọi quan hệ $R$ ta có $R\subseteq \text{dom}(R)\times \text{rng}(R)$.
+</Proposition>
+
+Mệnh đề trên suy ra rằng quan hệ là tập hợp con của tích Cartesian.
+
+<Proposition identifier="2">
+  Với mọi tập hợp $A$ và $B$, ta có $A\times B$ là một quan hệ và:
+  1. $\text{dom}\left(A\times B\right) \subseteq A$, đẳng thức xảy ra nếu $B$ khác rỗng.
+  2. $\text{rng}\left(A\times B\right) \subseteq B$, đẳng thức xảy ra nếu $A$ khác rỗng.
+</Proposition>
+
+<br />
+
+<Theorem identifier="2">
+  Giả sử $\mathcal{R}$ là một tập hợp các quan hệ. Khi đó $\bigcup \mathcal{R}$ là một quan hệ và:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    \text{dom}\left(\bigcup \mathcal{R}\right) & = \bigcup\limits_{R\in \mathcal{R}} \text{dom}(R) \\
+    \text{rng}\left(\bigcup \mathcal{R}\right) & = \bigcup\limits_{R\in \mathcal{R}} \text{rng}(R) \\
+  \end{alignat*}
+  $$
+  </p>
+</Theorem>
+
+Các phép toán giao hoán với phép hợp tập hợp thì luôn đồng biến.
+
+<Corollary identifier="1">
+  Với mọi quan hệ $R_1$ và $R_2$ với $R_1 \subseteq R_2$, ta có:
+  1. $\text{dom}(R_1) \subseteq \text{dom}(R_2)$.
+  2. $\text{rng}(R_1) \subseteq \text{rng}(R_2)$.
+</Corollary>
+
+### 3. Quy tắc gán
+
+Một **quy tắc gán** (rule of assignment), hoặc một **đồ thị** (graph), là một quan hệ $F$ có tính chất với mọi $x\in \text{dom}(F)$, tồn tại duy nhất $y$ sao cho $xFy$:
+<p>
+$$
+F \text{ is a rule of assignment} \iff \left(\forall x\in \text{dom}\right)\exists!y\left(xFy\right)
+$$
+</p>
+Đối với quy tắc gán, ta có thể viết $F(x) = y$ thay cho $xFy$.
+
+Ta nói một quy tắc gán $F$ là một quy tắc gán từ $A$ vào $B$ nếu như $\text{dom}(F) = A$ và $\text{rng}(F)\subseteq B$. Ta ký hiệu $B^A$ là tập hợp tất cả các quy tắc gán từ $A$ vào $B$.
+
+Với các quan hệ $F$ và $G$, và tập hợp $A$ bất kỳ, ta định nghĩa:
+1. **Nghịch đảo** (inverse) của $F$, ký hiệu $F^{-1}$, bởi:
+<p>
+$$
+F^{-1} = \left\{ \left< y, x \right> : xFy \right\}
+$$
+</p>
+2. **Hợp** (composite) của $G$ và $F$, ký hiệu $G\diamond F$, bởi:
+<p>
+$$
+G\diamond F = \left\{ \left< x, z \right> : \exists y\left(xFy \wedge yGz\right) \right\}
+$$
+</p>
+3. **Thu hẹp** (restriction) của $F$ lên $A$, ký hiệu $F\restriction_A$, bởi:
+<p>
+$$
+F\restriction_A = \left\{ \left< x, y \right> : x\in A \wedge xFy \right\} = F\cap \left(A \times \text{rng}(F)\right)
+$$
+</p>
+4. **Ảnh** (image) của $A$ qua $F$, ký hiệu $F[A]$, bởi:
+<p>
+$$
+F[A] = \text{rng}\left(F\restriction_A\right) = \left\{ y : \left(\exists x\in A\right)xFy \right\}
+$$
+</p>
+5. **Quy tắc gán đồng nhất** $I_A$ trên $A$ bởi:
+<p>
+$$
+I_A = \left\{ \left< a, a \right> : a\in A\right\}
+$$
+</p>
+
+Ta thấy rằng các khái niệm nghịch đảo, hợp hai quy tắc gán, thu hẹp và quy tắc gán đồng nhất đều là các quan hệ.
+
+Một quan hệ được gọi là **đơn gốc** (single-rooted) nếu như quan hệ nghịch đảo của nó là một quy tắc gán. Một quy tắc gán được gọi là **một-một** (one-to-one) nếu như nó là đơn gốc.
+
+Bây giờ, ta đi tìm hiểu các tính chất của các phép toán trên. Đầu tiên ta đến với tiêu chuẩn để so sánh hai quy tắc gán.
+
+<Theorem identifier="3">
+  Cho $F$ và $G$ là hai quy tắc gán, khi đó:
+  <p>
+  $$
+  F\subseteq G \iff \begin{cases}
+  \text{dom}(F) \subseteq \text{dom}(G) \\
+  \left(\forall x\in \text{dom}(F)\right) F(x) = G(x)
+  \end{cases}
+  $$
+  </p>
+</Theorem>
+
+Giả sử $F$ và $G$ là hai quy tắc gán có cùng domain. Theo định lý trên, để chứng minh $F = G$ ta chứng minh với mọi $x\in A$ thì $F(x) = G(x)$.
+
+<Theorem identifier="4">
+  Cho $F$ và $G$ là hai quy tắc gán, giả sử $\text{dom}(F)\cap \text{dom}(G) = \varnothing$. Khi đó $F\cup G$ là một quy tắc gán, và với mọi $x\in \text{dom}\left(F\cup G\right)$ ta có:
+  <p>
+  $$
+  \left(F\cup G\right)(x) = \begin{cases}
+    F(x) & \text{, if }x \in \text{dom}(F) \\
+    G(x) & \text{, otherwise}
+  \end{cases}
+  $$
+  </p>
+</Theorem>
+
+Định lý này hỗ trợ ta xây dựng các quy tắc gán mới từ những quy tắc gán cho trước, sẽ được sử dụng trong nhiều bài viết sau của series.
+
+Tiếp theo, để dễ hình dung, ta có một bộ các điểm trên một mặt phẳng, ở giữa hai điểm có hoặc không một mũi tên có hướng từ điểm này đến điểm kia.
+Quan hệ lúc này như là tập hợp các mũi tên.
+1. Phép nghịch đảo sẽ đảo chiều toàn bọ các mũi tên.
+2. Giả sử ta có hai bộ các mũi tên là $F$ và $G$, khi đó $G\diamond F$ sẽ bao gồm các mũi tên $x\to z$ mà ta có thể bắt đầu từ điểm $x$, đi đến một điểm $y$ theo $F$, và sau đó từ $y$ đi đến điểm $z$ theo $G$.
+3. Phép thu hẹp giới hạn các mũi tên xuất phát từ một tập hợp điểm nào đó.
+
+Nghịch đảo hai lần ta sẽ nhận được những mũi tên ban đầu.
+
+<Theorem identifier="5">
+  Cho $R$ là một quan hệ, khi đó:
+  1. $\text{dom}\left(R^{-1}\right) = \text{rng}(R)$.
+  2. $\text{rng}\left(R^{-1}\right) = \text{dom}(R)$.
+  3. $\left(R^{-1}\right)^{-1} = R$.
+</Theorem>
+
+Giả sử ta có $x\to y$, ta có thể trở lại $x$ bằng cách đi theo chiều ngược lại $y\to x$.
+
+<Theorem identifier="6">
+  Cho $R$ là một quan hệ. Khi đó $I_{\text{dom}(R)} \subseteq R^{-1}\diamond R$, đẳng thức xảy ra khi và chỉ khi $R$ là đơn gốc.
+</Theorem>
+
+<br />
+
+<Theorem identifier="7">
+  Cho $F$ và $G$ là các quy tắc gán, khi đó $G\diamond F$ cũng là một quy tắc gán với:
+  <p>
+  $$
+  \text{dom}\left(G\diamond F\right) = \left\{x\in \text{dom}(F) : F(x)\in \text{dom}(G)\right\}
+  $$
+  </p>
+  Với mọi $x\in \text{dom}\left(G\diamond F\right)$ ta có $\left(G\diamond F\right)(x) = G(F(x))$.
+</Theorem>
+
+Nếu $F$ là một quy tắc gán từ tập hợp $A$ vào tập hợp $B$, và $G$ là một quy tắc gán từ tập hợp $B$ vào tập hợp $C$, theo định lý trên ta có $G\diamond F$ là một quy tắc gán từ tập hợp $A$ vào tập hợp $C$.
+
+[Định lý 6](#theorem-6) có hai hệ quả được sử dụng phổ biến, một trong đó hỗ trợ việc tính toán giá trị của quy tắc gán nghịch đảo.
+
+<Corollary identifier="2">
+  Cho $F$ là một quy tắc gán một-một. Khi đó:
+  1. $F^{-1}$ là một quy tắc gán một-một.
+  2. $F^{-1}\diamond F = I_{\text{dom}(F)}$, với mọi $x\in \text{dom}(F)$ ta có $F^{-1}(F(x)) = x$.
+  3. $F\diamond F^{-1} = I_{\text{rng}(F)}$, với mọi $y\in \text{rng}(F)$ ta có $F\left(F^{-1}(y)\right) = y$.
+</Corollary>
+
+Giả sử ta có những mũi tiên $x\to y\to z \to t$, ta thấy rằng $x\to (y\to z\to t)$ hay $(x\to y\to z)\to t$ cũng sẽ dẫn ta từ $x$ đến $t$.
+
+<Theorem identifier="8">
+  Với mọi quan hệ $F, G$ và $H$ ta có $F\diamond (G\diamond H) = (F\diamond G)\diamond H$.
+</Theorem>
+
+Giả sử ta có những mũi tên $x\to y\to z$, khi đó để đi ngược lại từ $z$ về $x$ ta có thể đi theo $z\to y\to x$.
+
+<Theorem identifier="9">
+  Với mọi quan hệ $F$ và $G$ ta có $(G\diamond F)^{-1} = F^{-1}\diamond G^{-1}$.
+</Theorem>
+
+Để có thể bắt đầu ở một tập hợp $A$, ta có thể đi theo các mũi tên của $I_{A}$, và từ đó đi theo quy tắc cho trước.
+
+<Theorem identifier="10">
+  Với mọi quan hệ $F$ và tập hợp $A$, ta có $F\restriction_A = F\diamond I_{A}$.
+</Theorem>
+
+Từ định lý trên ta cũng có thể suy ra nếu $F$ là một quy tắc gán thì $F\restriction_A$ là một quy tắc gán với domain $\text{dom}(F)\cap A$.
+
+Định lý trên khá hữu ích trong một số trường hợp. Với trường hợp không gian tôpô, ánh xạ inclusion $I_A: A\to B$ luôn là một ánh xạ liên tục với $A$ là không gian con của $B$ và do đó ta có thể kết luận thu hẹp của một ánh xạ liên tục trên không gian con sinh ra một ánh xạ liên tục.
+
+<Corollary identifier="3">
+  Giả sử $F$ và $G$ là hai quan hệ và $A$ là một tập hợp, ta có:
+  <p>
+  $$
+  \left(G\diamond F\right)\restriction_A = \left(G\diamond F\right)\diamond I_A = G\diamond \left(F\diamond I_A\right) = G\diamond F\restriction_A
+  $$
+  </p>
+</Corollary>
+
+<br />
+
+<Lemma identifier="2">
+  Với mọi quan hệ $F$ và $G$ ta có $\text{rng}(G\diamond F) = G\left[\text{rng}(F)\right]$.
+</Lemma>
+
+<br />
+
+<Corollary identifier="4">
+  Với mọi quan hệ $F$ và $G$ và tập hợp $A$, ta có:
+  <p>
+  $$
+  \begin{alignat*}{2}
+    (G\diamond F)[A] & = \text{rng}\left(G\diamond F\restriction_A\right) \\
+    & = G\left[\text{rng}\left(F\restriction_A\right)\right] \\
+    & = G\left[F[A]\right]
+  \end{alignat*}
+  $$
+  </p>
+</Corollary>
+
+Lúc này, ta đến với hệ quả thứ hai của [định lý 6](#theorem-6).
+
+<Lemma identifier="3">
+  Với mọi tập hợp $A$ và $B$, ta có $I_{A}[B] = A\cap B$.
+</Lemma>
+
+<br />
+
+<Corollary identifier="5">
+  Với mọi quy tắc gán $F$ và tập hợp $A$, ta có:
+  1. $\text{dom}(F) \cap A \subseteq F^{-1}[F[A]]$, đẳng thức xảy ra khi $F$ là một-một.
+  2. $\text{rng}(F) \cap A = F\left[F^{-1}[A]\right]$.
+</Corollary>
+
+Dạng ta thường dùng của bổ đề này là, với mọi quy tắc gán $F$ từ tập hợp $A$ vào tập hợp $B$, và với mọi $C\subseteq A$ và $D\subseteq B$ ta có:
+1. $C\subseteq F^{-1}[F[C]]$, đẳng thức xảy ra nếu $F$ là một-một.
+2. $F\left[F^{-1}[D]\right] \subseteq D$, đẳng thức xảy ra nếu $F[A] = B$.
+
+<Theorem identifier="11">
+  Với mọi quan hệ $F$ và tập hợp $\mathcal{A}$, ta có:
+  <p>
+  $$
+  F\left[\bigcup \mathcal{A}\right] = \bigcup\limits_{A\in \mathcal{A}} F[A]
+  $$
+  </p>
+</Theorem>
+
+<br />
+
+<Theorem identifier="12">
+  Cho quan hệ $F$ và tập hợp $\mathcal{A}$ khác rỗng, ta có:
+  <p>
+  $$
+  F\left[\bigcap \mathcal{A}\right] \subseteq \bigcap\limits_{A\in \mathcal{A}} F[A]
+  $$
+  </p>
+  Đẳng thức xảy ra nếu $F$ là đơn gốc.
+</Theorem>
+
+Do đó nếu $F$ là một quy tắc gán thì $F^{-1}$ là đơn gốc nên:
+<p>
+$$
+F^{-1}\left[\bigcap \mathcal{A}\right] = \bigcap\limits_{A\in \mathcal{A}} F^{-1}[A]
+$$
+</p>
+
+<Theorem identifier="13">
+  Cho quan hệ $F$ và hai tập hợp $A$ và $B$, ta có:
+  <p>
+  $$
+  F[A] - F[B] \subseteq F[A - B]
+  $$
+  </p>
+  Đẳng thức xảy ra nếu $F$ là đơn gốc.
+</Theorem>
+
+Do đó nếu $F$ là một quy tắc gán thì $F^{-1}$ là đơn gốc nên:
+<p>
+$$
+F^{-1}[A] - F^{-1}[B] = F^{-1}[A - B]
+$$
+</p>
