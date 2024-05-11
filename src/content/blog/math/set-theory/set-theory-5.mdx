@@ -1,0 +1,138 @@
+---
+title: "Lý thuyết tập hợp 5: Quan hệ thứ tự"
+pubDate: 2024-04-25
+intro: Thứ tự là việc xác định một đối tượng đứng trước hoặc đứng sau đối tượng nào trong một cấu trúc. Quan hệ thứ tự, đúng như tên gọi, là một mô hình cho thứ tự.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
+5. [Quan hệ thứ tự](/blog/math/set-theory/set-theory-5)
+
+### 1. Thứ tự một phần
+
+Một quan hệ $R$ được gọi là:
+1. **không phản xạ** (irreflexive) trên tập hợp $A$ nếu như $I_A\cap R = \varnothing$, nói cách khác với mọi $a\in A$ ta không có $aRa$.
+2. **phản đối xứng** (anti-symmetric) nếu như với mọi $a, b$ ta có $aRb$ và $bRa$ suy ra $a = b$.
+
+Một **thứ tự một phần** (partial order) trên tập hợp $A$ là một quan hệ trên $A$ có tính phản xạ trên $A$, phản đối xứng và bắc cầu.
+
+Một **thứ tự một phần nghiêm ngặt** (strict partial order) trên tập hợp $A$ là một quan hệ trên $A$ có tính không phản xạ trên $A$ và bắc cầu.
+
+<Theorem identifier="1">
+  Cho $A$ là một tập hợp. Khi đó quy tắc $R\mapsto R \cup I_A$ là một song ánh từ tập hợp tất cả các thứ tự một phần nghiêm ngặt trên $A$ vào tập hợp tất cả các thứ tự một phần trên $A$.
+</Theorem>
+
+Định lý trên nói rằng, nếu $ < $ là một thứ tự một phần nghiêm ngặt trên tập hợp $A$ thì quan hệ $\leqslant$ xác định bởi
+<p>
+$$
+a \leqslant b \iff a < b \vee a = b
+$$
+</p>
+là một thứ tự một phần trên $A$. Ngược lại, nếu $\leqslant$ là một thứ tự một phần trên tập hợp $A$, quan hệ $ < $ xác định bởi
+<p>
+$$
+a < b \iff a \leqslant b \wedge a \ne b
+$$
+</p>
+là một thứ tự một phần nghiêm ngặt trên $A$, và với mọi $a, b\in A$ ta có
+<p>
+$$
+a \leqslant b \iff a < b \vee a = b
+$$
+</p>
+
+Do đó mỗi thứ tự một phần nghiêm ngặt tương ứng một-một với một thứ tự một phần và ngược lại, theo quy tắc như trên.
+
+Ta thường ký hiệu thứ tự một phần nghiêm ngặt bởi $ < , \subset, \prec, ...$, và thứ tự một phần tương ứng bởi $\leqslant, \subseteq, \preccurlyeq, ...$
+
+Ví dụ, cho $A$ là một tập hợp, khi đó quan hệ tập hợp con $\subseteq$ là một thứ tự một phần trên $A$, và quan hệ tập hợp con thật sự $\subset$ là một thứ tự một phần nghiêm ngặt trên $A$.
+
+<Theorem identifier="2">
+  Cho $R$ là một thứ tự trên tập hợp $A$. Khi đó $R$ là một thứ tự một phần nghiêm ngặt trên $A$ khi và chỉ khi $R^{-1}$ là một thứ tự một phần nghiêm ngặt trên $A$.
+</Theorem>
+
+Ta thường ký hiệu quan hệ nghịch đảo của thứ tự một phần nghiêm ngặt $ < , \subset, \prec, ...$ lần lược bởi $ >, \supset, \succ, ...$ và ngược lại.
+
+<Theorem identifier="3">
+  Cho $R$ là một thứ tự trên tập hợp $A$. Khi đó $R$ là một thứ tự một phần trên $A$ khi và chỉ khi $R^{-1}$ là một thứ tự một phần trên $A$.
+</Theorem>
+
+Ta thường ký hiệu quan hệ nghịch đảo của thứ tự một phần $\leqslant, \subseteq, \preccurlyeq, ...$ lần lược bởi $\geqslant, \supseteq, \succcurlyeq, ...$ và ngược lại.
+
+<Theorem identifier="4">
+  Cho $A$ là một tập hợp, và các ánh xạ sau:
+  1. $\kappa$ là song ánh từ tập hợp tất cả các thứ tự một phần nghiêm ngặt trên $A$ vào tập hợp tất cả các thứ tự một phần trên $A$.
+  2. $\lambda$ là song ánh nghịch đảo thứ tự một phần nghiêm ngặt trên $A$.
+  3. $\mu$ là song ánh nghịch đảo thứ tự một phần trên $A$.
+
+  Khi đó ta có $\kappa \circ \lambda = \mu \circ \kappa$.
+</Theorem>
+
+Giả sử $ < $ là một thứ tự một phần trên nghiêm ngặt trên tập hợp $A$, $ > $ là nghịch đảo của $ < $ và $\leqslant$ là thứ tự một phần tương ứng với $ < $.
+Định lý trên nói rằng, thứ tự một phần tương ứng với $ > $ và nghịch đảo của $\leqslant$ là như nhau.
+Nói cách khác tất cả các ký hiệu ta xây dựng không gây ra mâu thuẫn về mặt trực giác.
+
+<Theorem identifier="5">
+  Cho $ < $ là một thứ tự một phần nghiêm ngặt trên tập hợp $A$. Khi đó với mọi $a, b, c\in A$ ta có:
+  1. Nếu $a < b$ thì $\neg a \geqslant b$.
+  2. Nếu $a \leqslant b$ thì $\neg a > b$.
+  3. Nếu $a < b \leqslant c$ hoặc $a \leqslant b < c$ thì $a < c$.
+</Theorem>
+
+### 2. Thứ tự toàn phần
+
+Một thứ tự $R$ được gọi là **liên thông** (connected) trên tập hợp $A$ nếu như với mọi $a, b\in A$ ta có $a = b$ hoặc $aRb$ hoặc $bRa$.
+
+Một **thứ tự tuyến tính** (linear order) trên tập hợp $A$ là một thứ tự một phần nghiêm ngặt trên $A$ có tính chất liên thông trên $A$.
+
+<Theorem identifier="6" name="Trichotomy law">
+  Cho $ < $ là một thứ tự tuyến tính trên tập hợp $A$. Khi đó với mọi $a, b\in A$, chỉ một trong ba điều sau xảy ra: $(1)\; a = b,\;\; (2)\; a < b, \;\;(3)\; a > b$.
+</Theorem>
+
+<br />
+
+<Theorem identifier="5">
+  Cho $ < $ là một thứ tự tuyến tính trên tập hợp $A$. Khi đó với mọi $a, b\in A$ ta có:
+  1. $a < b$ khi và chỉ khi $\neg a \geqslant b$.
+  2. $a \leqslant b$ khi và chỉ khi $\neg a > b$.
+</Theorem>
+
+### 3. Các định nghĩa trên thứ tự
+
+Cho $A$ là một tập hợp, $ < $ là một thứ tự một phần nghiêm ngặt trên $A$, và $B$ là một tập hợp con của $A$.
+1. một phần tử $u\in A$ được gọi là một **chặn trên** (upper bound) của $B$ nếu với mọi $x\in B$ ta có $u\geqslant x$.
+2. một phần tử $l\in A$ được gọi là một **chặn dưới** (lower bound) của $B$ nếu với mọi $x\in B$ ta có $l\leqslant x$.
+3. một phần tử $M\in B$ được gọi là một **phần tử tối đại** (maximal element) của $B$ nếu với mọi $x\in B$ ta có $\neg x > M$.
+4. một phần tử $m\in B$ được gọi là một **phần tử tối tiểu** (minimal element) của $B$ nếu với mọi $x\in B$ ta có $\neg x < m$.
+5. một phần tử $g\in B$ được gọi là một **phần tử lớn nhất** (greatest element) của $B$ nếu nó là một chặn trên của $B$.
+6. một phần tử $l\in B$ được gọi là một **phần tử nhỏ nhất** (least element) của $B$ nếu nó là một chặn dưới của $B$.
+
+Ta thấy rằng, phần tử lớn nhất/nhỏ nhất nếu tồn tại thì nó là duy nhất. Có thể có không, một hoặc nhiều phần tử tối đại/tối tiểu.
+Khi $ < $ là một thứ tự tuyến tính trên tập hợp $A$, các khái niệm "phần tử lớn nhất/nhỏ nhất" và "phần tử tối đại/tối tiểu" là tương đương nhau.
+
+Phần tử nhỏ nhất của tập hợp các chặn trên của $B$ (nếu có) được gọi là **chặn trên nhỏ nhất** (least upper bound, supremum) của $B$ và được ký hiệu bởi $\sup B$.
+
+Phần tử lớn nhất của tập hợp các chặn dưới của $B$ (nếu có) được gọi là **chặn dưới lớn nhất** (greatest lower bound, infimum) của $B$ và được ký hiệu bởi $\inf B$.
+
+Tập hợp $A$ với thứ tự toàn phần trên nó được gọi là:
+1. có tính chất **LUB** (Least Upper Bound) nếu như mọi tập hợp con khác rỗng của nó, nếu tồn tại chặn trên thì tồn tại chặn trên nhỏ nhất.
+2. có tính chất **GLB** (Greatest Lowwer Bound) nếu như mọi tập hợp con khác rỗng của nó, nếu tồn tại chặn dưới thì tồn tại chặn dưới lớn nhất.
+
+<Theorem identifier="6">
+  Giả sử $A$ là một tập hợp với thứ tự toàn phần trên nó. Khi đó $A$ có tính chất LUB khi và chỉ khi $A$ có tính chất GLB.
+</Theorem>
+
+Với định lý này, sau khi chứng minh tính chất LUB của tập hợp số thực, ta có ngay tính chất GLB của nó.
+
+Một thứ tự toàn phần trên một tập hợp được gọi là một thứ tự tốt nếu như mọi tập hợp con khác rỗng của nó đều có phần tử nhỏ nhất.
