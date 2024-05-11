@@ -1,0 +1,241 @@
+---
+title: "Lý thuyết tập hợp 4: Quan hệ tương đương"
+pubDate: 2024-04-24
+intro: Trong nhiều trường hợp, ta thường làm việc trên các nhóm đối tượng có cùng tính chất, và thực hiện các phép toán chỉ dựa trên những đại diện của chúng. Quan hệ tương đương mà một mô hình của sự phân hoạch này.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
+
+### 1. Quan hệ tương đương
+
+Một quan hệ $R$ được gọi là:
+1. một quan hệ trên tập hợp $A$ nếu như $R\subseteq A\times A$.
+2. **phản xạ** (reflexive) trên $A$ nếu như $I_A\subseteq R$, hay với mọi $a\in A$ ta có $aRa$.
+3. **đối xứng** (symmetric) nếu như $aRb$ suy ra $bRa$ với mọi $a, b$.
+4. **bắc cầu** (transitive) nếu như $aRb$ và $bRc$ suy ra $aRc$ với mọi $a, b, c$.
+
+Một **quan hệ tương đương** (equivalence relation) trên tập hợp $A$ là một quan hệ trên $A$ có tính phản xạ trên $A$, đối xứng và bắc cầu.
+
+<Theorem identifier="1">
+  Cho $R$ là một quan hệ cho tính đối xứng và bắc cầu. Khi đó:
+  1. $\text{dom}(R) = \text{rng}(R)$, và
+  2. $R$ là một quan hệ tương đương trên $\text{dom}(R)$.
+</Theorem>
+
+Cho $R$ là một quan hệ tương đương trên tập hợp $A$, với mỗi $x\in A$, tập hợp
+<p>
+$$
+\left[x\right]_R = \left\{y : xRy\right\}
+$$
+</p>
+được gọi là **lớp tương đương** (equivalence class) của $x$ theo modulo $R$.
+Tập hợp tất cả các lớp tương đương được ký hiệu bởi $A / R$ và được gọi là **tập thương** (quotient set) của quan hệ tương đương $R$.
+Ánh xạ $\pi: A\to A/R$ được xác định bởi quy tắc
+<p>
+$$
+x\mapsto \left[x\right]_R
+$$
+</p>
+được gọi là **phép chiếu chính tắc** (canonical projection).
+
+Hiển nhiên phép chiếu chính tắc là một toàn ánh.
+
+<Theorem identifier="2">
+  Cho $R$ là một quan hệ tương đương trên tập hợp $A$. Với mọi $x, y\in A$, những điều sau tương đương nhau:
+  1. $xRy$.
+  2. $[x]_R = [y]_R$.
+  3. $[x]_R \cap [y]_R \ne \varnothing$.
+</Theorem>
+
+Cho $A$ là một tập hợp, một tập hợp $P$ gồm các tập hợp con khác rỗng của $A$ được gọi là một **phân hoạch** (partition) của $A$ nếu như các điều kiện sau thỏa mãn:
+1. Với mỗi $x\in A$, tồn tại $C\in P$ thỏa mãn $x \in C$, hay nói cách khác $\bigcup P = A$.
+2. Các phần tử của $P$ **đôi một** (pairwise) **không giao nhau** (disjoint), nghĩa là với mọi $C, D\in P$ ta có hoặc $C = D$, hoặc $C\cap D = \varnothing$.
+
+Với $R$ là một quan hệ tương đương trên tập hợp $A$, theo tính phản xạ trên $A$ của $R$ và [định lý 2](#theorem-2), ta thấy rằng $A / R$ là một phân hoạch của $A$.
+
+Ngược lại, giả sử $P$ là một phân hoạch của $A$. Xét quan hệ $R$ trên $A$ được xác định bởi:
+<p>
+$$
+aRb \iff \left(\exists C\in P\right)a, b\in C
+$$
+</p>
+Khi đó ta thấy răng $R$ là một quan hệ tương đương và $A / R = P$.
+
+Do đó hai khái niệm quan "hệ tương đương" và "phân hoạch" là tương đương nhau.
+
+### 2. Tính xác định tốt
+
+Một nhiều trường hợp, ta có các nhóm các đối tượng đôi một không giao nhau (một phân hoạch), và khi thực hiện phép toán trên các nhóm này, ta chỉ cần lựa chọn một đại diện trên từng nhóm để thực hiện phép toán tương ứng.
+
+Lấy ví dụ, với trường hợp các số nguyên modulo $n$. Mỗi số nguyên modulo $n$ là một lớp tương đương các số nguyên có cùng số dư khi chia cho $n$.
+Phép toán cộng các số nguyên modulo $n$ hoạt động theo chính xác những gì ta hiểu về phép cộng số nguyên:
+<p>
+$$
+\left[a\right]_n + \left[b\right]_n = \left[a + b\right]_n
+$$
+</p>
+Khi định nghĩa phép cộng số nguyên modulo $n$ theo quy tắc này, quy tắc này xác định một ánh xạ, vì với mọi $a, b, c, d$ sao cho $a\equiv c\pmod{n}$ và $b\equiv d\pmod{n}$ ta luôn có $\left[a + b\right]_n = \left[c + d\right]_n$, nghĩa là cùng một đầu vào, tuy khác nhau về biểu diễn nhưng chúng vẫn cho ra cùng một giá trị.
+Ta nói quy tắc trên là **xác định tốt** (well-defined).
+
+<Theorem identifier="3">
+  Cho $A$ và $B$ là các tập hợp, cho $R$ là một quan hệ tương đương trên $A$, và $f: A\to B$ là một ánh xạ. Khi đó hai điều sau là tương đương nhau:
+  1. Với mọi $a, b\in A$ ta có $aRb$ suy ra $f(a) = f(b)$.
+  2. Tồn tại một ánh xạ $g: A / R \to B$ thỏa mãn với mọi $a\in A$ ta có:
+  <p>
+  $$
+  g\left([a]_R\right) = f(a)
+  $$
+  </p>
+
+  Hơn nữa, nếu ánh xạ $g$ trên là tồn tại thì nó là duy nhất.
+</Theorem>
+
+***Chứng minh.***
+
+*Chiều thuận.* Giả sử với mọi $a, b\in A$ ta có $aRb$ suy ra $f(a) = f(b)$.
+
+Xét quan hệ $G$ xác định bởi $G = \left\{\left< [a]_R, f(a) \right> : a\in A\right\}$.
+
+Xét $\left< [a]_R, f(a) \right>, \left< [b]_R, f(b) \right>\in G$ với $a, b\in A$, ta có:
+<p>
+$$
+[a]_R = [b]_R \implies aRb \implies f(a) = f(b)
+$$
+</p>
+Do đó $G$ là một quy tắc gán. Dễ thấy rằng $\text{dom}(G) = A/R$, đặt $g = \left< G, B \right>$ thì ta có ánh xạ $g: A/R\to B$ là ánh xạ thỏa mãn điều kiện định lý.
+
+*Chiều đảo.* Giả sử $g: A/R\to B$ là ánh xạ thỏa mãn $g\left([a]_R\right) = f(a)$ với mọi $a\in A$.
+
+Với mọi $a, b\in A$, giả sử $aRb$, ta có $[a]_R = [b]_R$ nên:
+<p>
+$$
+f(a) = g\left([a]_R\right) = g\left([b]_R\right) = f(a)
+$$
+</p>
+
+*Tính duy nhất.* Ta có thể viết lại điều kiện của ánh xạ $g$ như sau: $g\circ \pi = f$ trong đó $\pi$ là phép chiếu chính tắc.
+Lúc này $g$ là tồn tại duy nhất theo tính toàn ánh của $\pi$. ***Q.E.D.***
+
+Định lý trên chỉ ra điều kiện cần và đủ để một ánh xạ có thể được sinh ra trên tập thương của một quan hệ tương đương.
+Do đó lý giải được tại sao điều kiện nhóm con chuẩn tắc là cần và đủ khi xây dựng nhóm thương.
+
+Trong trường hợp domain của ánh xạ đang xét là một tích Cartesian $A\times B$, ta mong muốn xây dựng một ánh xạ có domain là $A/R \times B/S$ thay vì $(A\times B) / \sim$.
+May thay, ta có một liên hệ hai chiều giữa $A/R\times B/S$ và $(A\times B)/P$ với $P$ là một quan hệ tương đương sinh ra bởi $R$ và $S$.
+
+<Theorem identifier="4">
+  Cho $A$ và $B$ là hai tập hợp, và $R$ và $S$ lần lược là quan hệ tương đương trên $A$ và $B$. Khi đó quan hệ $P$ trên $A\times B$ được xác định bởi
+  <p>
+  $$
+  \left< a, b \right>P \left< c, d \right> \iff aRc \wedge bSd
+  $$
+  </p>
+  là một quan hệ tương đương trên $A\times B$. Hơn nữa, với mọi $a\in A$ và $b\in B$, lớp tương đương của $\left< a, b \right>$ theo modulo $P$ chính là $[a]_R\times [b]_S$.
+
+  Nói cách khác, ta có song ánh $j: A/R\times B/S \to (A\times B) / P$ mà
+  <p>
+  $$
+  j\left([a]_R, [b]_S\right) = [a]_R\times [b]_S = \left[\left< a, b \right>\right]_P
+  $$
+  </p>
+</Theorem>
+
+Một số trường hợp, ở những bài viết sau của series, ta cần định nghĩa tính xác định tốt trên quan hệ tay vì trên ánh xạ.
+Lấy ví dụ, giả sử ta có tập hợp số tự nhiên, một số nguyên là một lớp tương đương các cặp số tự nhiên có cùng "hiệu":
+<p>
+$$
+\left< a, b \right> \sim \left< c, d \right> \iff a + d = c + b
+$$
+</p>
+Khi đó, ta định nghĩa thứ tự trên tập hợp số nguyên như sau:
+<p>
+$$
+\left[\left< a, b \right>\right] <_{\mathbb{Z}} \left[\left< c, d \right>\right] \iff a + d < c + b
+$$
+</p>
+Để làm rõ hơn, ta định nghĩa quan hệ $ < $ trên $\mathbb{N}\times \mathbb{N}$ bởi:
+<p>
+$$
+\left< a, b \right> < \left< c, d \right> \iff a + d < c + b
+$$
+</p>
+Khi đó định nghĩa thứ tự trên tập hợp số nguyên được viết lại như sau:
+<p>
+$$
+\left[\left< a, b \right>\right] <_{\mathbb{Z}} \left[\left< c, d \right>\right] \iff \left< a, b \right> < \left< c, d \right>
+$$
+</p>
+Nghĩa là, từ một quan hệ trên một tập hợp, ta mong muốn định nghĩa được một quan hệ tương ứng trên tập thương của tập hợp đó.
+
+May thay, ta có một công cụ để biến một quan hệ trở thành một ánh xạ, và từ đó áp dụng [định lý 3](#theorem-3) để xây dưng nên một quan hệ trên tập thương tương ứng.
+
+Đặt $2 = \left\{0, 1\right\}$ trong đó $0 = \varnothing$ và $1 = \left\{0\right\}$, ta có $0 \ne 1$.
+
+<Theorem identifier="5">
+  Cho $A$ là một tập hợp. Khi đó ánh xạ $c: \mathcal{P}(A)\to \text{Hom}_{\text{Set}}\left(A, 2\right)$, biến mỗi tập hợp con $B$ của $A$ thành ánh xạ $c_B: A\to 2$ xác định bởi
+  <p>
+  $$
+  c_B(a) = \begin{cases} 0 & \text{, if }a\in B \\ 1 & \text{, otherwise} \end{cases}
+  $$
+  </p>
+  là một song ánh.
+</Theorem>
+
+<br />
+
+<Theorem identifier="6">
+  Cho $A$ là một tập hợp, $R$ là một quan hệ tương đương trên $A$ và $S$ là một quan hệ trên $A$. Giả sử với mọi $a_1, a_2, b_1, b_2\in A$ ta có:
+  <p>
+  $$
+  \left(a_1Ra_2 \wedge b_1Rb_2\right) \implies \left(a_1Sb_1 \implies a_2Sb_2\right)
+  $$
+  </p>
+  Khi đó tồn tại một quan hệ $T$ trên $A/R$ thỏa mãn với mọi $a, b\in A$ ta có:
+  <p>
+  $$
+  aSb \iff [a]_R T [b]_R
+  $$
+  </p>
+</Theorem>
+
+***Chứng minh.***
+
+Theo tính đối xứng của quan hệ tương đương, điều kiện của $S$ có thể viết lại như sau:
+<p>
+$$
+\left(a_1Ra_2 \wedge b_1Rb_2\right) \implies \left(a_1Sb_1 \iff a_2Sb_2\right)
+$$
+</p>
+
+Gọi $c_S: A\times A\to 2$ là ánh xạ tương ứng với $S$. Khi đó với mọi $a_1, a_2, b_1, b_2\in A$, giả sử $a_1Ra_2$ và $b_1Rb_2$, ta có:
+<p>
+$$
+c_S(a_1, b_1) = 0 \iff a_1Sb_1 \iff a_2Sb_2 \iff c_S(a_2, b_2) = 0
+$$
+</p>
+Do $c_S(a, b)\ne 0$ khi và chỉ khi $c_S(a, b) = 1$ nên ta suy ra $c_S(a_1, b_1) = c_S(a_2, b_2)$.
+
+Do đó theo [định lý 3](#theorem-3) và [định lý 4](#theorem-4), tồn tại ánh xạ $c_T: A/R\times A/R\to 2$ thỏa mãn với mọi $a, b\in A$ ta có:
+<p>
+$$
+c_T\left([a]_R, [b]_R\right) = c_S\left(a, b\right)
+$$
+</p>
+Gọi $T$ là quan hệ tương ứng với ánh xạ $c_T$, với mọi $a, b\in A$, ta có:
+<p>
+$$
+aSb \iff c_S(a, b) = 1 \iff c_T\left([a]_R, [b]_R\right) \iff [a]_R T [b]_R
+$$
+</p>
+Định lý được chứng minh. ***Q.E.D.***
