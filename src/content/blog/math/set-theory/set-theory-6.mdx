@@ -1,0 +1,358 @@
+---
+title: "Lý thuyết tập hợp 6: Hệ thống Peano"
+pubDate: 2024-04-26
+intro: Tập hợp số tự nhiên là một mô hình của phép đếm, từ phần tử đầu tiên, đến phần tử thứ hai, đến phần tử thứ ba, và tiếp tục như vậy. Một hệ thống Peano là mô hình logic cho phép đếm đến vô hạn.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
+5. [Quan hệ thứ tự](/blog/math/set-theory/set-theory-5)
+6. [Hệ thống Peano](/blog/math/set-theory/set-theory-6)
+
+### 1. Hệ thống Peano
+
+Một **hệ thống Peano** (Peano system) là một bộ $\left< N, S, e \right>$ thỏa mãn những điều sau:
+1. $e\in N$.
+2. $S: N \to N - \{e\}$ là một đơn ánh.
+3. Mọi tập hợp con $A$ chứa $e$ của $N$ thỏa mãn $S(A)\subseteq A$ thì $A = N$.
+
+Hệ thống Peano là một mô hình cho phép đếm đến vô hạn. Ánh xạ $S$ được gọi là **successor**, xác định cấu trúc "phần tử kế tiếp".
+
+Điều kiện $e\not\in \text{rng}(N)$ là cần thiết để tránh các chu trình.
+Lấy ví dụ với $N = \mathbb{Z}_3$ và ánh xạ $S: \mathbb{Z}_3\to \mathbb{Z}_3$ xác định bởi $S\left([a]_3\right) = [a + 1]_3$ thì ta được một chu trình:
+<p>
+$$
+[0]_3 \to [1]_3 \to [2]_3 \to [0]_3 \to [1]_3 \to [2]_3 \to ...
+$$
+</p>
+
+Điều kiện thứ 3 được gọi là **nguyên lý quy nạp** (induction principle), là một điều kiện cần thiết để tránh những trường hợp bị thừa ra một thành phần đóng với $S$ không mong muốn, ví dụ với $N = \left\{0, 1, ...\right\} \cup \left\{0.5, 1.5, ...\right\}$, $e = 0$, và $S(x) = x + 1$.
+
+<Theorem identifier="1">
+  Cho $\left< N, S, e \right>$ là một hệ thống Peano. Khi đó $S$ là một song ánh.
+</Theorem>
+
+***Chứng minh.***
+
+Ta sử dụng nguyên lý quy nạp để chứng minh điều sau: Với mọi $n\in N$, hoặc $n = e$, hoặc tồn tại $m\in N$ sao cho $n = S(m)$.
+
+Từ đó cùng với tính đơn ánh của $S$ suy ra $S$ là một song ánh.
+
+Bước cơ sở $n = e$: Hiển nhiên mệnh đề trên đúng.
+
+Bước quy nạp: Giả sử mệnh đề trên đúng với $n\in N$. Chọn $m = n$ thì hiển nhiên $S(n) = S(m)$.
+
+Do đó theo nguyên lý quy nạp, mệnh đề trên đúng với mọi $n\in N$. ***Q.E.D.***
+
+<Theorem identifier="2" name="Principle of Recursive Definition">
+  Cho $\left< N, S, e \right>$ là một hệ thống Peano, $A$ là một tập hợp khác rỗng, $z$ là một phần tử của $A$ và $f: A\to A$ là một ánh xạ.
+  Khi đó tồn tại duy nhất một ánh xạ $h: N\to A$ thỏa mãn:
+  <p>
+  $$
+  h(e) = z, \;\; h(S(n)) = f(h(n)) \text{ for all }n\in N
+  $$
+  </p>
+</Theorem>
+
+***Chứng minh.***
+
+Một quy tắc gán $V$ được gọi là "chấp nhận được" nếu như $V\subseteq N\times A$ và:
+1. Nếu $e\in \text{dom}(V)$ thì $V(e) = z$.
+2. Với mọi $n\in N$, nếu $S(n)\in \text{dom}(V)$ thì $n\in \text{dom}(V)$ và $V(S(n)) = f(V(n))$.
+
+Gọi $\mathcal{H}$ là tập hợp tất cả các quy tắc gán chấp nhận được, và $H = \bigcup \mathcal{H}$. Ta sẽ chứng minh 4 điều sau:
+1. $H$ là một quy tắc gán.
+2. $H$ chấp nhận được.
+3. $\text{dom}(H) = N$.
+4. $H$ là duy nhất.
+
+*Chứng minh (1)*
+
+Ta sẽ sử dụng nguyên lý quy nạp để chứng minh điều sau: Với mọi $n\in N$ và $a_1, a_2\in A$ ta có nếu $\left< n, a_1\right> \in H$ và $\left< n, a_2\right> \in H$ thì $a_1 = a_2$.
+
+Bước cơ sở $n = e$:
+
+Giả sử $\left< e, a_1 \right>\in H$ và $\left< e, a_2 \right>\in H$ với $a_1, a_2\in A$ nào đó.
+Tồn tại hai quy tắc gán chấp nhận được $V_1, V_2$ sao cho $V_1(e) = a_1$ và $V_2(e) = a_2$.
+Khi đó theo tính chất chấp nhận được, ta có $a_1 = z = a_2$.
+
+Bước quy nạp: Giả sử mệnh đề trên đúng với $n\in N$.
+
+Giả sử $\left< S(n), a_1 \right>\in H$ và $\left< S(n), a_2 \right>\in H$ với $a_1, a_2\in A$ nào đó.
+Tồn tại hai quy tắc gán chấp nhận được $V_1, V_2$ sao cho $V_1(S(n)) = a_1$ và $V_2(S(n)) = a_2$.
+Khi đó theo tính chất chấp nhận được ta có:
+- $n\in \text{dom}(V_1)$ và $a_1 = V_1(S(n)) = f(V_1(n))$.
+- $n\in \text{dom}(V_2)$ và $a_2 = V_2(S(n)) = f(V_2(n))$.
+
+Theo giả thiết quy nạp, ta có $V_1(n) = V_2(n)$, suy ra $a_1 = a_2$.
+
+Như vậy mệnh đề trên đúng với $S(n)$.
+
+Theo nguyên lý quy nạp, mệnh đề trên đúng với mọi $n\in N$ nên mệnh đề trên đúng với mọi $n\in \text{dom}(H)$. Do đó $H$ là một quy tắc gán.
+
+*Chứng minh (2)*
+
+Hiển nhiên $H\subseteq N\times A$. Giả sử $e\in \text{dom}(H)$, tồn tại quy tắc gán chấp nhận được $V$ sao cho $e\in \text{dom}(V)$ và $H(e) = V(e)$, và hiển nhiên $H(e) = V(e) = z$.
+
+Giả sử ta có $n\in N$ sao cho $S(n)\in \text{dom}(H)$. Tồn tại quy tắc gán chấp nhận được $V$ sao cho $S(n)\in \text{dom}(V)$ và $H(S(n)) = V(S(n))$.
+Theo tính chất chấp nhận được của $V$, ta có $n\in \text{dom}(V)$ và $V(S(n)) = f(V(n))$.
+Do đó $n\in \text{dom}(H)$ và $H(n) = V(n)$ nên $H(S(n)) = V(S(n)) = f(V(n)) = f(H(n))$.
+
+Như vậy $H$ là một quy tắc gán chấp nhận được.
+
+*Chứng minh (3)*
+
+Ta sử dụng nguyên lý quy nạp để chứng minh điều sau: Với mọi $n\in N$, tồn tại một quy tắc gán chấp nhận được $V$ sao cho $n\in \text{dom}(V)$.
+
+Bước cơ sở $n = e$: Quy tắc gán $\left\{\left< e, z \right>\right\}$ thỏa mãn.
+
+Bước quy nạp: Giả sử tồn tại quy tắc gán chấp nhận được $V$ sao cho $n\in \text{dom}(V)$.
+
+Nếu $S(n)\in \text{dom}(V)$, thì hiển nhiên mệnh đề đúng.
+
+Giả sử $S(n)\not\in \text{dom}(V)$, xét quy tắc gán (do là hợp của hai quy tắc gán có domain rời nhau):
+<p>
+$$
+G = V \cup \left\{\left< S(n), f(V(n)) \right>\right\}
+$$
+</p>
+
+Hiển nhiên $G\subseteq N\times A$.
+
+Giả sử $e\in \text{dom}(G)$, ta có $e\in \text{dom}(V)$ do $S(n) \ne e$, do đó $G(e) = V(e) = z$ do $V$ là một quy tắc gán chấp nhận được.
+
+Giả sử có $m\in N$ sao cho $S(m)\in \text{dom}(G)$.
+
+Nếu $S(m) = S(n)$, ta có $m = n$ theo tính đơn ánh của $S$, khi đó $m \in \text{dom}(G)$ và $G(S(m)) = G(S(n)) = f(V(n)) = f(G(n)) = f(G(m))$.
+
+Trường hợp $S(m) \ne S(n)$, ta có $S(m)\in \text{dom}(V)$, theo tính chấp nhận được của $V$ ta có $m\in \text{dom}(V)$ và $V(S(m)) = f(V(m))$ nên $G(S(m)) = f(G(m))$.
+
+Do đó $G$ là một quy tắc gán chấp nhận được có $S(n)\in \text{dom}(G)$.
+
+Theo nguyên lý quy nạp, mệnh đề trên đúng với mọi $n\in N$.
+
+Với mỗi $n\in N$, tồn tại quy tắc gán chấp nhận được $V$ sao cho $n\in \text{dom}(V)$, do đó $n\in \text{dom}(H)$.
+Suy ra $\text{dom}(H) = N$.
+
+*Chứng minh (4)*
+
+Giả sử $G$ là một quy tắc gán từ $N$ vào $A$ sao cho $G(e) = z$ và với mọi $n\in N$ ta có $G(S(n)) = f(G(n))$. Khi đó ta sử dụng nguyên lý quy nạp để chứng minh $G = H$.
+
+Bước cơ sở $n = e$: Hiển nhiên $G(e) = z = H(e)$.
+
+Bước quy nạp: Giả sử $G(n) = H(n)$ với $n\in N$. Khi đó:
+<p>
+$$
+G(S(n)) = f(G(n)) = f(H(n)) = H(S(n))
+$$
+</p>
+
+Theo nguyên lý quy nạp, $G(n) = H(n)$ với mọi $n\in N$ nên $G = H$.
+
+Do đó ánh xạ $h = \left< H, A \right>$ thỏa mãn điều kiện định lý và tồn tại duy nhất. ***Q.E.D.***
+
+### 2. Phép toán trên hệ thống Peano
+
+Ở phần này, ta giả sử $\left< N, S, e \right>$ là một hệ thống Peano cố định.
+
+Với mỗi $m\in N$, ta định nghĩa phép toán "cộng $m$" $A_m: N\to N$ bởi:
+<p>
+$$
+A_m(e) = m, \;\; A_m\left(S(n)\right) = S\left(A_m(n)\right)
+$$
+</p>
+Ánh xạ trên tồn tại bởi [định lý 2](#theorem-2).
+
+Khi đó **phép cộng** (addition) $+: N\times N\to N$ được định nghĩa bởi:
+<p>
+$$
+m + n = A_m(n)
+$$
+</p>
+
+Tương tự, với mỗi $m\in N$, ta định nghĩa phép toán "nhân $m$" $M_m: N\to N$ bởi:
+<p>
+$$
+M_m(e) = e, \;\; M_m\left(S(n)\right) = M_m(n) + m
+$$
+</p>
+Ánh xạ trên tồn tại bởi [định lý 2](#theorem-2).
+
+Khi đó **phép nhân** (multiplication) $\cdot: N\times N\to N$ được định nghĩa bởi:
+<p>
+$$
+m \cdot n = M_m(n)
+$$
+</p>
+
+Để tóm gọn lại, phép cộng và phép nhân được định nghĩa như sau:
+<p>
+$$
+m + e = m, \;\; m + S(n) = S(m + n)
+$$
+</p>
+<p>
+$$
+m \cdot e = e, \;\; m \cdot S(n) = m\cdot n + m
+$$
+</p>
+
+Ta có thể dễ dàng sử dụng nguyên lý quy nạp để chứng minh được các tính chất đại số của phép cộng và phép nhân bao gồm: phần tử trung hòa với phép cộng là $e$, phần tử trung hòa với phép nhân là $S(e)$, luật kết hợp, luật giao hoán, luật phân phối, luật giản ước.
+Bạn đọc có thể tự chứng minh nhưng điều kể trên.
+
+### 3. Thứ tự trên hệ thống Peano
+
+Ở phần này, ta giả sử $\left< N, S, e \right>$ là một hệ thống Peano cố định.
+
+Ta định nghĩa thứ tự trên $N$ bởi:
+<p>
+$$
+m < n \iff \left(\exists k\in N\right)n = m + S(k)
+$$
+</p>
+
+Với mọi $n\in N$, ta thấy rằng nếu $n < n$ hay tồn tại $k\in N$ sao cho $n = n + S(k)$ thì theo luật giản ước ta có $S(k) = e$, vô lý.
+Suy ra $ < $ có tính không phản xạ.
+
+Với mọi $m, n, p\in N$, giả sử $m < n$ và $n < p$, khi đó tồn tại hai phần tử $k, l\in N$ sao cho $n = m + S(k)$ và $p = n + S(l)$.
+Lúc này ta có
+<p>
+$$
+p = n + S(l) = m + S(k) + S(l) = m + S(S(k) + l)
+$$
+</p>
+nên $m < p$. Suy ra $ < $ có tính bắc cầu.
+
+Do đó $ < $ là một thứ tự một phần nghiêm ngặt trên $N$. Theo [định lý 1](#theorem-1), với thứ tự này thì $e$ là phần tử nhỏ nhất của $N$.
+
+<Lemma identifier="1">
+  Với mọi $m, n\in N$ ta có $m < n$ khi và chỉ khi $S(m) < S(n)$.
+</Lemma>
+
+***Chứng minh.***
+
+Giả sử $m < n$, tồn tại $k\in N$ sao cho $n = m + S(k)$. Khi đó:
+<p>
+$$
+S(n) = S(m + k) = m + S(k)
+$$
+</p>
+nên suy ra $S(m) < S(n)$.
+
+Giả sử $S(m) < S(n)$. Tồn tại $k\in N$ sao cho $S(m) = S(n) + S(k)$.
+Ta có
+<p>
+$$
+S(m) = S(n + S(k)) \implies m = n + S(k)
+$$
+</p>
+nên suy ra $m < n$.
+
+Định lý được chứng minh. ***Q.E.D.***
+
+<Theorem identifier="3">
+  Với mọi $m, n\in N$ ta có hoặc $m = n$, hoặc $m < n$ hoặc $m > n$.
+</Theorem>
+
+***Chứng minh.***
+
+Ta sử dụng quy nạp theo $n$ để chứng minh định lý trên.
+
+Bước cơ sở $n = e$: Với mọi $m\in N$, ta có hoặc $m = e$, hoặc tồn tại $k\in N$ sao cho $m = S(k) = e + S(k)$ hay $m > e$.
+
+Bước quy nạp: Giả sử với $n\in N$, với mọi $m\in N$ ta có hoặc $m = n$ hoặc $m < n$ hoặc $m > n$. Xét $m\in N$ là một phần tử bất kỳ.
+- Trường hợp $m = e$ ta có $S(n) > e = m$.
+- Trường hợp $m \ne e$, tồn tại $k\in N$ sao cho $m = S(k)$. Khi đó ta có $k = n$, hoặc $k < n$ hoặc $k > n$. Do đó $m = S(k) = S(n)$, hoặc $m = S(k) < S(n)$, hoặc $m = S(k) > S(n)$.
+
+Theo nguyên lý quy nạp, định lý được chứng minh. ***Q.E.D.***
+
+Nói cách khác $ < $ liên thông trên $N$, nên $ < $ là một thứ tự tuyến tính trên $N$.
+
+Phép cộng bảo toàn thứ tự từ định nghĩa, sử dụng nguyên lý quy nạp, ta dễ dàng chứng minh phép nhân cũng bảo toàn thứ tự.
+
+<Theorem identifier="4">
+  Với mọi $m, n, p\in N$, ta có:
+  1. $m < n$ khi và chỉ khi $m + p < n + p$.
+  2. Nếu $p \ne e$ thì $m < n$ khi và chỉ khi $m\cdot p < n\cdot p$.
+</Theorem>
+
+Cuối cùng, ta chứng minh $ < $ là một thứ tự tốt trên $N$.
+Hãy tưởng tượng, đầu tiên ta lấy $e$ là phần tử nhỏ nhất của $n$, phần tử tiếp theo $S(e)$ chính là phần tử nhỏ nhất của $N - \{e\}$, phần tử tiếp theo $S^2(e)$ chính là phần tử nhỏ nhất của $N - \{e, S(e)\}$, và cứ như vậy.
+Do đó cấu trúc thứ tự tốt của $N$ nằm ở việc không có phần tử $m$ nào nằm giữa $n$ và $S(n)$ để $S(n)$ trở thành phần tử nhỏ nhất của phần còn lại.
+
+<Theorem identifier="5">
+  Với mọi $m, n\in N$, nếu $m < n$ thì $S(m) \leqslant n$.
+</Theorem>
+
+***Chứng minh.***
+
+Giả $m, n\in N$ là hai phần tử với $m < n$ mà $n < S(m)$. Khi đó tồn tại $k, l\in N$ sao cho $S(m) = n + S(k)$ và $n = m + S(l)$. Lúc này:
+<p>
+$$
+m + S(e) = S(m) = n + S(k) = m + S(k) + S(l) = m + S(k + S(l))
+$$
+</p>
+Do đó theo luật giản ước và tính đơn ánh của $S$ ta có $e = k + S(l)$ hay $e > k$, vô lý do $e$ là phần tử nhỏ nhất của $N$. ***Q.E.D.***
+
+Định lý trên nói rằng, không có một phần tử nào nằm giữa $n$ và $S(n)$, hay cấu trúc thứ tự của $N$ có thể được biểu diễn như sau:
+<p>
+$$
+e < S(e) < S^2(e) < S^3(e) < ...
+$$
+</p>
+
+Với mỗi $n\in N$, đặt
+<p>
+$$
+\text{seg}(n) = \left\{m\in N : m < n\right\}
+$$
+</p>
+Theo [định lý 5](#theorem-5), ta thấy rằng $\text{seg}(S(n)) = \text{seg}(n)\cup \{n\}$ với mọi $n\in N$.
+
+<Lemma identifier="2">
+  Với mọi $n\in N$ thì mọi tập hợp con khác rỗng của $\text{seg}(n)$ luôn có phần tử nhỏ nhất.
+</Lemma>
+
+***Chứng minh.***
+
+Bước cơ sở $n = e$: Hiển nhiên đúng do $\text{seg}(e) = \varnothing$.
+
+Bước quy nạp: Giả sử kết luận của bổ đề đúng với $n$.
+
+Gọi $A$ là một tập hợp con khác rỗng của $\text{seg}(S(n))$. Đặt $B = A\cap \text{seg}(n)$.
+
+Nếu $B = \varnothing$, ta suy ra $A = \{n\}$, phần tử nhỏ nhất của $A$ lúc này chính là $n$.
+
+Trường hợp $B\ne \varnothing$, theo giả thiết quy nạp, ta có $B$ có phần tử nhỏ nhất là $k$. Với mọi $m\in A$ ta có hai trường hợp:
+- Nếu $m\in \text{seg}(n)$ thì $m\in B$ nên $m\geqslant k$.
+- Nếu $m\not\in \text{seg}(n)$, ta có $m = n$, do đó $m > k$.
+
+Như vậy $k$ là phần tử nhỏ nhất của $A$.
+
+Theo nguyên lý quy nạp, bổ đề đúng với mọi $n\in N$. ***Q.E.D.***
+
+<Theorem identifier="6">
+  Thứ tự tuyến tính $ < $ là một thứ tự tốt.
+</Theorem>
+
+***Chứng minh.***
+
+Giả sử $A$ là một tập hợp con khác rỗng của $N$. Khi đó tồn tại phần tử $n\in A$, xét tập hợp $B = \text{seg}(S(n))\cap A$.
+Theo bổ đề trên, $B$ có phần tử nhỏ nhất là $k$.
+
+Với mọi $m\in A$ ta có hai trường hợp:
+- Nếu $m \leqslant n$ ta có $m\in B$ nên $m\geqslant k$.
+- Nếu $m > n$ ta có $m > n \geqslant k$ nên $m > k$.
+
+Do đó $k$ là phần tử nhỏ nhất của $A$. ***Q.E.D.***
