@@ -55,6 +55,8 @@ Bước quy nạp: Giả sử mệnh đề trên đúng với $n\in N$. Chọn $
 
 Do đó theo nguyên lý quy nạp, mệnh đề trên đúng với mọi $n\in N$. ***Q.E.D.***
 
+Một trong những tính chất của hệ thống Peano là cho phép ta định nghĩa ánh xạ một cách đệ quy: Giá trị của ánh xạ tại $S(n)$ được tính dựa vào giá trị của ánh xạ đó tại $n$.
+
 <Theorem identifier="2" name="Principle of Recursive Definition">
   Cho $\left< N, S, e \right>$ là một hệ thống Peano, $A$ là một tập hợp khác rỗng, $z$ là một phần tử của $A$ và $f: A\to A$ là một ánh xạ.
   Khi đó tồn tại duy nhất một ánh xạ $h: N\to A$ thỏa mãn:
@@ -237,7 +239,7 @@ nên $m < p$. Suy ra $ < $ có tính bắc cầu.
 Do đó $ < $ là một thứ tự một phần nghiêm ngặt trên $N$. Theo [định lý 1](#theorem-1), với thứ tự này thì $e$ là phần tử nhỏ nhất của $N$.
 
 <Lemma identifier="1">
-  Với mọi $m, n\in N$ ta có $m < n$ khi và chỉ khi $S(m) < S(n)$.
+  Với mọi $m, n\in N$ ta có $m < n$ thì $S(m) < S(n)$.
 </Lemma>
 
 ***Chứng minh.***
@@ -245,21 +247,10 @@ Do đó $ < $ là một thứ tự một phần nghiêm ngặt trên $N$. Theo [
 Giả sử $m < n$, tồn tại $k\in N$ sao cho $n = m + S(k)$. Khi đó:
 <p>
 $$
-S(n) = S(m + k) = m + S(k)
+S(n) = S(m + S(k)) = S(m) + S(k)
 $$
 </p>
-nên suy ra $S(m) < S(n)$.
-
-Giả sử $S(m) < S(n)$. Tồn tại $k\in N$ sao cho $S(m) = S(n) + S(k)$.
-Ta có
-<p>
-$$
-S(m) = S(n + S(k)) \implies m = n + S(k)
-$$
-</p>
-nên suy ra $m < n$.
-
-Định lý được chứng minh. ***Q.E.D.***
+nên suy ra $S(m) < S(n)$. ***Q.E.D.***
 
 <Theorem identifier="3">
   Với mọi $m, n\in N$ ta có hoặc $m = n$, hoặc $m < n$ hoặc $m > n$.
