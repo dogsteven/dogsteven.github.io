@@ -1,0 +1,385 @@
+---
+title: "Lý thuyết tập hợp 7.2: Các tập hợp số"
+pubDate: 2024-04-28
+intro: Số là những đối tượng toán học mô hình cho sự đo đạc. Ta sẽ xây dựng một hệ thống Peano, gọi là tập hợp số tự nhiên, và từ đó xây dựng lên tập hợp số nguyên, số hữu tỉ và cuối cùng là tập hợp số thực.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
+5. [Quan hệ thứ tự](/blog/math/set-theory/set-theory-5)
+6. [Hệ thống Peano](/blog/math/set-theory/set-theory-6)
+7. [Các tập hợp số phần 1](/blog/math/set-theory/set-theory-7-part-1)
+8. [Các tập hợp số phần 2](/blog/math/set-theory/set-theory-7-part-2)
+
+### 4. Tập hợp số thực
+
+Một **dãy** (sequence) là một bộ được đánh số bởi $\mathbb{N}$.
+
+Một **dãy Cauchy các số hữu tỉ** (rational Cauchy sequence) là một dãy các số hữu tỉ $(a_n)_{n \in \mathbb{N}}$ thỏa mãn với mọi số hữu tỉ dương $\varepsilon$, tồn tại số tự nhiên $N$ sao cho với mọi số tự nhiên $m, n \geqslant N$ ta có $\left|a_m - a_n\right| < \varepsilon$.
+
+Dãy Cauchy là những dãy "hội tụ", tuy nhiên điểm hội tụ lại không nằm trong không gian của dãy đó.
+**Tập hợp số thực** (the real numbers) $\mathbb{R}$ là tập hợp tất cả các lớp tương đương những dãy Cauchy có cùng "giới hạn".
+Cụ thể tập hợp số thực là tập thương của quan hệ sau trên tập hợp tất cả các dãy Cauchy các số hữu tỉ: Dãy $(a_n)_{n\in \mathbb{N}}$ tương đương với dãy $(b_n)_{n\in \mathbb{N}}$ khi và chỉ khi với mọi số hữu tỉ dương $\varepsilon$, tồn tại số tự nhiên $N$ sao cho với mọi số tự nhiên $n\geqslant N$ ta có $\left|a_n - b_n\right| < \varepsilon$.
+
+<Proposition identifier="1">
+  Quan hệ nói trên là một quan hệ tương đương.
+</Proposition>
+
+***Chứng minh.***
+
+Gọi $(a_n)_{n\in \mathbb{N}}, (b_n)_{n\in \mathbb{N}}, (c_n)_{n\in \mathbb{N}}$ là các dãy Cauchy các số hữu tỉ.
+
+*Tính phản xạ:* Hiển nhiên theo định nghĩa.
+
+*Tính đối xứng:* Hiển nhiên theo định nghĩa.
+
+*Tính bắc cấu:* Giả sử $(a_n)_{n\in \mathbb{N}}\sim (b_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}}\sim (c_n)_{n\in \mathbb{N}}$.
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $n\geqslant N_1$ ta có $|a_n - b_n| < \dfrac{\varepsilon}{2}$.
+2. Với mọi số tự nhiên $n\geqslant N_2$ ta có $|b_n - c_n| < \dfrac{\varepsilon}{2}$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+|a_n - c_n| \leqslant |a_n - b_n| + |b_n - c_n| < \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2} = \varepsilon
+$$
+</p>
+Do đó $(a_n)_{n\in \mathbb{N}}\sim (c_n)_{n\in \mathbb{N}}$.
+
+Như vậy quan hệ kể trên là một quan hệ tương đương. ***Q.E.D.***
+
+Muốn định nghĩa được các phép toán trên tập hợp số thực, trước tiên ta cần kiếm tra tổng và tích của hai dãy Cauchy các số hữu tỉ là một dãy Cauchy các số hữu tỉ.
+
+<Proposition identifier="2">
+  Giả sử $(a_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}}$ là hai dãy Cauchy các số hữu tỉ. Khi đó ta có dãy $(a_n + b_n)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ.
+</Proposition>
+
+**Chứng minh.**
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Khi đó tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $m, n\geqslant N_1$ ta có $\left|a_m - a_n\right| < \dfrac{\varepsilon}{2}$.
+2. Với mọi số tự nhiên $m, n\geqslant N_2$ ta có $\left|b_m - b_n\right| < \dfrac{\varepsilon}{2}$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $m, n\geqslant N$ ta có:
+<p>
+$$
+\left|(a_m + b_m) - (a_n + b_n)\right| \leqslant |a_m - a_n| + |b_m - b_n| < \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2} = \varepsilon
+$$
+</p>
+Do đó $(a_n + b_n)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ. ***Q.E.D.***
+
+Sử dụng nguyên lý quy nạp, ta chứng minh được một tập hợp hữu hạn các số hữu tỉ thì luôn có chặn trên. Tuy nhiên ta chưa định nghĩa khái niệm về sự hữu hạn nên ta sẽ phát biểu điều trên ở một cách khác.
+
+<Lemma identifier="1">
+  Cho $\left(a_n\right)_{n\in \text{seg}(m)}$ là một bộ các số hữu tỉ trong đó $m$ là một số nguyên dương.
+  Khi đó tồn tại số hữu tỉ $q$ sao cho $a_n < q$ với mọi $n\in \text{seg}(m)$.
+</Lemma>
+
+<br />
+
+<Lemma identifier="2">
+  Cho $\left(a_n\right)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ. Tồn tại một số hữu tỉ $M$ sao cho với mọi $n\in \mathbb{N}$ ta có $|a_n| < M$.
+</Lemma>
+
+***Chứng minh.***
+
+Tồn tại số tự nhiên $N$ sao cho với mọi số tự nhiên $m, n \geqslant N$ ta có $|a_m - a_n| < 1$.
+Chọn số hữu tỉ $M$ là chặn trên thật sự của $\left\{|a_0|, |a_1|, ..., |a_N|, |a_N| + 1\right\}$.
+Khi đó với mọi số tự nhiên $n$, ta có:
+1. Nếu $n\leqslant N$ ta có $|a_n| < M$, hiển nhiên.
+2. Nếu $n > N$, ta có $|a_n - a_N| < 1$ nên $|a_n| < |a_N| + 1 < M$.
+
+Do đó $|a_n| < M$ với mọi số tự nhiên $n$. ***Q.E.D.***
+
+<Proposition identifier="3">
+  Giả sử $(a_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}}$ là hai dãy Cauchy các số hữu tỉ. Khi đó ta có dãy $(a_nb_n)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ.
+</Proposition>
+
+***Chứng minh.***
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Tồn tại hai số hữu tỉ $M_a, M_b$ sao cho với mọi số tự nhiên $n$ ta có $|a_n| < M_a$ và $|b_n| < M_b$.
+
+Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $m, n\geqslant N_1$ ta có $|a_m - a_n| < \dfrac{\varepsilon}{2M_b}$.
+2. Với mọi số tự nhiên $m, n\geqslant N_2$ ta có $|b_m - b_n| < \dfrac{\varepsilon}{2M_a}$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $m, n\geqslant N$ ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  \left|a_mb_m - a_nb_n\right| & = \left|a_m(b_m - b_n) + b_n(a_m - a_n)\right| \\
+  & \leqslant |a_m|\cdot |b_m - b_n| + |b_n|\cdot |a_m - a_n| \\
+  & < M_a\cdot \dfrac{\varepsilon}{2M_a} + M_b\cdot \dfrac{\varepsilon}{2M_b} = \varepsilon
+\end{alignat*}
+$$
+</p>
+
+Do đó $(a_nb_n)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ. ***Q.E.D.***
+
+Ta định nghĩa phép cộng và phép nhân trên tập hợp số thực bởi:
+<p>
+$$
+\left[\left(a_n\right)_{n\in \mathbb{N}}\right] + \left[\left(b_n\right)_{n\in \mathbb{N}}\right] = \left[\left(a_n + b_n\right)_{n\in \mathbb{N}}\right]
+$$
+</p>
+<p>
+$$
+\left[\left(a_n\right)_{n\in \mathbb{N}}\right] \cdot \left[\left(b_n\right)_{n\in \mathbb{N}}\right] = \left[\left(a_nb_n\right)_{n\in \mathbb{N}}\right]
+$$
+</p>
+
+<Proposition identifier="4">
+  Hai định nghĩa trên về phép cộng và phép nhân là xác định tốt.
+</Proposition>
+
+***Chứng minh.***
+
+Giả sử $(a_n)_{n\in \mathbb{N}}, (b_n)_{n\in \mathbb{N}}, (c_n)_{n\in \mathbb{N}}, (d_n)_{n\in \mathbb{N}}$ là các dãy Cauchy các số hữu tỉ sao cho $(a_n)_{n\in \mathbb{N}}\sim (c_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}} \sim (d_n)_{n\in \mathbb{N}}$.
+
+Đầu tiên ta chứng minh $(a_n + b_n)_{n\in \mathbb{N}} \sim (c_n + d_n)_{n\in \mathbb{N}}$.
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $n\geqslant N_1$ ta có $|a_n - c_n| < \dfrac{\varepsilon}{2}$.
+2. Với mọi số tự nhiên $n\geqslant N_2$ ta có $|b_n - d_n| < \dfrac{\varepsilon}{2}$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+\left|(a_n + b_n) - (c_n + d_n)\right| \leqslant |a_n - c_n| + |b_n - d_n| < \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2} = \varepsilon
+$$
+</p>
+Do đó $(a_n + b_n)_{n\in \mathbb{N}} \sim (c_n + d_n)_{n\in \mathbb{N}}$, hay định nghĩa phép cộng là xác định tốt.
+
+Ta chứng minh $(a_nb_n)_{n\in \mathbb{N}} \sim (c_nd_n)_{n\in \mathbb{N}}$.
+
+Tồn tại hai số hữu tỉ $M_a$ và $M_d$ sao cho với mọi số tự nhiên $n$ ta có $|a_n| < M_a$ và $|d_n| < M_d$.
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $n\geqslant N_1$ ta có $|a_n - c_n| < \dfrac{\varepsilon}{2M_d}$.
+2. Với mọi số tự nhiên $n\geqslant N_2$ ta có $|b_n - d_n| < \dfrac{\varepsilon}{2M_a}$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  |a_nb_n - c_nd_n| & = \left|a_n(b_n - d_n) + d_n(a_n - c_n)\right| \\
+  & \leqslant |a_n|\cdot |b_n - d_n| + |d_n|\cdot |a_n - c_n| \\
+  & < M_a\cdot \dfrac{\varepsilon}{2M_a} + M_d\cdot \dfrac{\varepsilon}{2M_d} = \varepsilon
+\end{alignat*}
+$$
+</p>
+
+Do đó $(a_nb_n)_{n\in \mathbb{N}} \sim (c_nd_n)_{n\in \mathbb{N}}$, hay định nghĩa phép nhân là xác định tốt. ***Q.E.D.***
+
+Đặt $\mathbf{0} = \left[(0)_{n\in \mathbb{N}}\right]$ và $\mathbf{1} = \left[(1)_{n\in \mathbb{N}}\right]$.
+Ta dễ dàng chứng minh $\left< \mathbb{R}, +, \cdot \right>$ là một vành giao hoán, trong đó $\mathbf{0}$ là phần tử trung lập với phép cộng, và $\mathbf{1}$ là phần tử trung lập với phép nhân, với phần tử đối của $(a_n)_{n\in \mathbb{N}}$ là $(-a_n)_{n\in \mathbb{N}}$.
+Như vậy, nếu ta chứng minh được mọi số thực khác $\mathbf{0}$ đều có nghịch đảo thì ngay lập tức $\mathbb{R}$ là một trường.
+
+Để dễ dàng chứng minh điều này, ta nên mô hình hóa thứ tự trên $\mathbb{R}$.
+Ta thấy rằng một dãy Cauchy sẽ hội tụ về một số thực với biên độ nhỏ tùy ý.
+Lấy ví dụ, ta có hai dãy Cauchy $(a_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}}$ lần lược hội tụ về hai số thực $a$ và $b$, giả sử $a > b$.
+Khi đó đến một lúc nào đó các $a_n$ sẽ dao động quanh $a$ với biên độ nhỏ hơn $\dfrac{a - b}{3}$ và các $b_n$ sẽ dao động quanh $b$ với biên độ nhỏ hơn $\dfrac{a - b}{3}$.
+Do đó đến một lúc nào đó $a_n$ sẽ lớn hơn $b_n$ ít nhất là một khoảng $\dfrac{a - b}{3}$.
+
+Như vậy, ta định nghĩa thứ tự trên tập hợp số thực như sau: $\left[(a_n)_{n\in \mathbb{N}}\right] < \left[(b_n)_{n\in \mathbb{N}}\right]$ khi và chỉ khi tồn tại số hữu tỉ dương $\delta$ và số tự nhiên $N$ sao cho với mọi số tự nhiên $n\geqslant N$ ta có $b_n - a_n \geqslant \delta$.
+
+<Proposition identifier="5">
+  Định nghĩa thứ tự $ < $ là xác định tốt.
+</Proposition>
+
+***Chứng minh.***
+
+Giả sử $(a_n)_{n\in \mathbb{N}}, (b_n)_{n\in \mathbb{N}}, (c_n)_{n\in \mathbb{N}}, (d_n)_{n\in \mathbb{N}}$ là các dãy Cauchy các số hữu tỉ sao cho:
+1. $(a_n)_{n\in \mathbb{N}} \sim (c_n)_{n\in \mathbb{N}}$ và $(b_n)_{n\in \mathbb{N}} \sim (d_n)_{n\in \mathbb{N}}$.
+2. Tồn tại số hữu tỉ dương $\delta$ và số tự nhiên $N$ sao cho $a_n - b_n \geqslant \delta$ với mọi số tự nhiên $n\geqslant N$.
+
+Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi $n \geqslant N_1$ ta có $|a_n - c_n| < \dfrac{\delta}{3}$.
+2. Với mọi $n \geqslant N_2$ ta có $|b_n - d_n| < \dfrac{\delta}{3}$.
+
+Chọn $N' = \max\left\{N, N_1, N_2\right\}$, với mọi $n \geqslant N'$ ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  c_n - d_n & = (a_n - b_n) + (c_n - a_n) + (b_n - d_n) \\
+  & \geqslant \delta - |c_n - a_n| - |b_n - d_n| \\
+  & \geqslant \delta - \dfrac{\delta}{3} - \dfrac{\delta}{3} = \dfrac{\delta}{3}
+\end{alignat*}
+$$
+</p>
+
+Do đó định nghĩa thứ tự $ < $ là xác định tốt. ***Q.E.D.***
+
+<Theorem identifier="8">
+  Quan hệ $ < $ là một thứ tự tuyến tính trên tập hợp số thực.
+</Theorem>
+
+***Chứng minh.***
+
+Hiển nhiên $ < $ có tính không phản xạ.
+Giả sử $\left[(a_n)_{n\in \mathbb{N}}\right], \left[(b_n)_{n\in \mathbb{N}}\right], \left[(c_n)_{n\in \mathbb{N}}\right]$ là các số thực sao cho $\left[(a_n)_{n\in \mathbb{N}}\right] < \left[(b_n)_{n\in \mathbb{N}}\right]$ và $\left[(b_n)_{n\in \mathbb{N}}\right] < \left[(c_n)_{n\in \mathbb{N}}\right]$.
+
+Khi đó tồn tại hai số hữu tỉ dương $\delta_1, \delta_2$ và hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $n\geqslant N_1$ ta có $b_n - a_n \geqslant \delta_1$.
+2. Với mọi số tự nhiên $n\geqslant N_2$ ta có $c_n - b_n \geqslant \delta_2$.
+
+Chọn $N = \max\left\{N_1, N_2\right\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+c_n - a_n = (c_n - b_n) + (b_n - a_n) \geqslant d_1 + d_2
+$$
+</p>
+Do đó $\left[(a_n)_{n\in \mathbb{N}}\right] < \left[(c_n)_{n\in \mathbb{N}}\right]$. Quan hệ $ < $ có tính bắc cầu.
+
+Do đó quan hệ $ < $ là một thứ tự một phần nghiêm ngặt trên $\mathbb{R}$. Ta chứng minh tính liên thông của quan hệ này trên $\mathbb{R}$.
+
+Gọi $\left[(a_n)_{n\in \mathbb{N}}\right], \left[(b_n)_{n\in \mathbb{N}}\right]$ là hai số thực khác nhau.
+Khi đó tồn tại số hữu tỉ dương $\varepsilon$ sao cho với mọi số tự nhiên $N$, tồn tại số tự nhiên $n \geqslant N$ sao cho $|a_n - b_n| \geqslant \varepsilon$.
+
+Tồn tại hai số tự nhiên $N_1, N_2$ sao cho:
+1. Với mọi số tự nhiên $m, n\geqslant N_1$ ta có $|a_m - a_n| < \dfrac{\varepsilon}{3}$.
+2. Với mọi số tự nhiên $m, n\geqslant N_2$ ta có $|b_m - b_n| < \dfrac{\varepsilon}{3}$.
+
+Tồn tại số tự nhiên $N \geqslant \max\left\{N_1, N_2\right\}$ sao cho $|a_N - b_N| \geqslant \varepsilon$.
+
+Giả sử $a_N - b_N > 0$, khi đó $a_N - b_N \geqslant \varepsilon$. Với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+\begin{alignat*}{2}
+  a_n - b_n & = (a_N - b_N) + (a_n - a_N) + (b_N - b_n) \\
+  & \geqslant \varepsilon - |a_n - a_N| - |b_n - b_N| \\
+  & \geqslant \varepsilon - \dfrac{\varepsilon}{3} - \dfrac{\varepsilon}{3} = \dfrac{\varepsilon}{3}
+\end{alignat*}
+$$
+</p>
+Do đó $\left[(a_n)_{n\in \mathbb{N}}\right] > \left[(b_n)_{n\in \mathbb{N}}\right]$. Tương tự nếu $a_N - b_N < 0$ thì $\left[(a_n)_{n\in \mathbb{N}}\right] < \left[(b_n)_{n\in \mathbb{N}}\right]$.
+
+Do đó $ < $ là một thứ tự tuyến tính trên $\mathbb{R}$. ***Q.E.D.***
+
+<Proposition identifier="6">
+  Với mọi số thực $a\ne \mathbf{0}$, tồn tại số thực $a^{-1}$ sao cho $aa^{-1} = a^{-1}a = \mathbf{1}$.
+</Proposition>
+
+***Chứng minh.***
+
+Gọi $\left[(a_n)_{n\in \mathbb{N}}\right]$ là một số thực khác $\mathbf{0}$. Giả sử $\left[(a_n)_{n\in \mathbb{N}}\right] > \mathbf{0}$, trường hợp còn lại cho ra kết quả tương tự.
+
+Khi đó tồn tại số hữu tỉ dương $\delta$ và số tự nhiên $N$ sao cho với mọi số tự nhiên $n\geqslant N$ ta có $a_n \geqslant d > 0$.
+Xét số thực $\left[(b_n)_{n\in \mathbb{N}}\right]$ trong đó $b_n = 0$ với $n < N$ và $b_n = \dfrac{1}{a_n}$ trong trường hợp còn lại.
+Khi đó $\left[(b_n)_{n\in \mathbb{N}}\right]$ là số thực cần tìm. ***Q.E.D.***
+
+<Theorem identifier="9">
+  Cấu trúc $\left< \mathbb{R}, +, \cdot \right>$ là một trường.
+</Theorem>
+
+Từ tính chất bảo toàn thứ tự của các phép toán trên $\mathbb{Q}$, ta dễ dàng suy ra tính chất bảo toàn thứ tự của các phép toán trên $\mathbb{R}$.
+
+<Proposition identifier="7">
+  Với mọi số thực $a, b, c$ ta có:
+  1. $a < b$ khi và chỉ khi $a + c < b + c$.
+  2. Nếu $c > 0$ thì $a < b$ khi và chỉ khi $ac < bc$.
+</Proposition>
+
+Tóm lại, cấu trúc $\left< \mathbb{R}, +, \cdot, < \right>$ là một trường có thứ tự.
+
+Tương tự với trường hợp số nguyên và số tự tiên, tập hợp số hữu tỉ có thể được xem là một trường con của tập hợp số thực.
+
+<Theorem identifier="10">
+  Ánh xạ $E: \mathbb{Q}\to \mathbb{R}$ xác định bởi $E(q) = \left[(q)_{n\in \mathbb{N}}\right]$ là một đơn cấu trường bảo toàn thứ tự:
+  1. $E(1) = \mathbf{1}$.
+  2. $E(a + b) = E(a) + E(b)$ với mọi $a, b\in \mathbb{Q}$.
+  3. $E(ab) = E(a)\cdot E(b)$ với mọi $a, b\in \mathbb{Q}$.
+  4. $E(a) < E(b) \iff a < b$ với mọi $a, b\in \mathbb{Q}$.
+</Theorem>
+
+### 5. Tính đầy đủ của tập hợp số thực
+
+Cả $\mathbb{Q}$ và $\mathbb{R}$ đều là các trường có thứ tự. Tuy nhiên $\mathbb{R}$ có tính đầy đủ, nghĩa là mọi dãy Cauchy trong $\mathbb{R}$ đều hội tụ.
+Tính đầy đủ của $\mathbb{R}$ đến từ việc nó có tính chất LUB (tính chất chặn trên nhỏ nhất).
+
+Đầu tiên, từ [bổ đề 2](#lemma-2) ta suy ra được hệ quả sau.
+
+<Corollary identifier="1">
+  Với mọi số thực $r$, tồn tại số hữu tỉ $M$ sao cho $-M < r < M$.
+</Corollary>
+
+<br />
+
+<Lemma identifier="3">
+  Với mọi số hữu tỉ $q$, tồn tại số tự nhiên $n$ sao cho $n > q$.
+</Lemma>
+
+***Chứng minh.***
+
+Giả sử $q = \dfrac{a}{b}$ với $b$ là số nguyên dương, ta có $q < |a| + 1$. ***Q.E.D.***
+
+<Theorem identifier="11">
+  Tập hợp số thực có tính chất LUB.
+</Theorem>
+
+***Chứng minh.***
+
+Gọi $A$ là một tập hợp con khác rỗng và bị chặn trên của $\mathbb{R}$.
+
+Theo [hệ quả 1](#corollary-1), ta chọn được một số hữu tỉ $M_1$ là chặn trên của $A$, cũng như chọn được một số hữu tỉ $M_2$ không là chặn trên của $A$.
+
+Ta thiết lập hai dãy các số hữu tỉ $(u_n)_{n\in \mathbb{N}}$ và $(l_n)_{n\in \mathbb{N}}$ một cách đệ quy như sau:
+1. $u_0 = M_1$ và $l_0 = M_2$.
+2. Giả sử ta có $u_n$ và $l_n$, đặt $m = \dfrac{u_n + l_n}{2}$.
+- Nếu $m$ là một chặn trên của $A$, chọn $u_{n + 1} = m$ và $l_{n + 1} = l_n$.
+- Ngược lại chọn $u_{n + 1} = u_n$ và $l_{n + 1} = m$.
+
+Sử dụng nguyên lý quy nạp, ta chứng minh được những điều sau:
+1. $u_n$ là chặn trên của $A$ với mọi số tự nhiên $n$.
+2. $l_n$ không là chặn trên của $A$ với mọi số tự nhiên $n$.
+3. $u_m \leqslant u_n$ và $l_m \geqslant l_n$ với mọi số tự nhiên $m, n$ sao cho $m > n$.
+4. Với mọi số tự nhiên $n$ ta có $u_n - l_n = \dfrac{u_0 - l_0}{2^n}$.
+5. $2^n > n$ với mọi số tự nhiên $n$.
+
+Ta chứng minh hai dãy $(u_n)_{n\in \mathbb{N}}$ và $(l_n)_{n\in \mathbb{N}}$ đều là các dãy Cauchy các số hữu tỉ.
+
+Với mọi số tự nhiên $m, n$, tồn tại $a\in A$ sao cho $a > l_m$, do đó $u_n > l_m$.
+
+Gọi $\varepsilon$ là một số hữu tỉ dương bất kỳ. Tồn tại số tự nhiên $N$ lớn hơn $\dfrac{u_0 - l_0}{\varepsilon}$.
+Với mọi số tự nhiên $m, n\geqslant N$, giả sử $m\geqslant n$ ta có:
+<p>
+$$
+|u_m - u_n| = u_n - u_m \leqslant u_n - l_n = \dfrac{u_0 - l_0}{2^n} < \dfrac{u_0 - l_0}{n} \leqslant \dfrac{u_0 - l_0}{N} < \varepsilon
+$$
+</p>
+Do đó $(u_n)_{n\in \mathbb{N}}$ là một dãy Cauchy các số hữu tỉ. Tương tự $(l_n)_{n\in \mathbb{N}}$ cũng là một dãy Cauchy các số hữu tỉ.
+Theo điều 4, hai dãy này biểu diễn cùng một số thực $r$.
+
+Ta chứng minh $r$ là chặn trên nhỏ nhất của $A$.
+
+Giả sử $r$ không là một chặn trên của $A$, khi đó tồn tại số thực $a = \left[(a_n)_{n\in \mathbb{N}}\right]\in A$ sao cho $\left[(a_n)_{n\in \mathbb{N}}\right] > r$.
+Tồn tại số hữu tỉ dương $\delta$ và số tự nhiên $N_1$ sao cho với mọi số tự nhiên $n\geqslant N_1$ ta có $a_n - u_n \geqslant \delta$.
+Tồn tại số tự nhiên $N_2$ sao cho với mọi số tự nhiên $m, n \geqslant N_2$ ta có $|u_m - u_n| < \dfrac{\delta}{2}$. Chọn $N = \max\{N_1, N_2\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+a_n - u_N = (a_n - u_n) + (u_n - u_N) \geqslant \delta - |u_n - u_N| > \delta - \dfrac{\delta}{2} = \dfrac{\delta}{2}
+$$
+</p>
+Do đó $a > u_N$, là một điều vô lý vì $u_N$ là chặn trên của $A$. Do đó giả thiết ban đầu là sai, hay ta phải có $r$ là một chặn trên của $A$.
+
+Giả sử $r$ không là chặn trên nhỏ nhất của $A$, nghĩa là tồn tại chặn trên $s = \left[(s_n)_{n\in \mathbb{N}}\right]$ của $A$ sao cho $s < r$.
+Khi đó tồn tại số hữu tỉ dương $\delta$ và số tự nhiên $N_1$ sao cho với mọi số tự nhiên $n\geqslant N_1$ ta có $l_n - s_n \geqslant \delta$.
+Tồn tại số tự nhiên $N_2$ sao cho với mọi số tự nhiên $m, n\geqslant N_2$ ta có $|l_m - l_n| < \dfrac{\delta}{2}$. Chọn $N = \max\{N_1, N_2\}$, với mọi số tự nhiên $n\geqslant N$ ta có:
+<p>
+$$
+l_N - s_n = (l_n - s_n) + (l_N - l_n) \geqslant \delta - |l_N - l_n| > \delta - \dfrac{\delta}{2} = \dfrac{\delta}{2}
+$$
+</p>
+Do đó $l_N > s$, tuy nhiên tồn tại $a\in A$ sao cho $a > l_N$ nên $a > s$, vô lý. Do đó giả sử ban đầu là sai hay ta phải có $r$ là chặn trên nhỏ nhất của $A$. ***Q.E.D.***

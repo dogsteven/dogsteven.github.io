@@ -1,7 +1,7 @@
 ---
 title: "Lý thuyết tập hợp 6: Hệ thống Peano"
 pubDate: 2024-04-26
-intro: Tập hợp số tự nhiên là một mô hình của phép đếm, từ phần tử đầu tiên, đến phần tử thứ hai, đến phần tử thứ ba, và tiếp tục như vậy. Một hệ thống Peano là mô hình logic cho phép đếm đến vô hạn.
+intro: Hệ thống Peano là một mô hình cho phép đếm, từ phần tử đầu tiên, đến phần tử thứ hai, phần thử thứ ba, và cứ như vậy cho đến vô hạn. Với phép đếm, ta có thể thực sự định nghĩa được những quy tắc một cách đệ quy.
 tags: ["math", "set theory"]
 author: clown
 image: ../../../../assets/set-theory.jpeg
@@ -19,6 +19,8 @@ Các bài viết con series lý thuyết tập hợp:
 4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
 5. [Quan hệ thứ tự](/blog/math/set-theory/set-theory-5)
 6. [Hệ thống Peano](/blog/math/set-theory/set-theory-6)
+7. [Các tập hợp số phần 1](/blog/math/set-theory/set-theory-7-part-1)
+8. [Các tập hợp số phần 2](/blog/math/set-theory/set-theory-7-part-2)
 
 ### 1. Hệ thống Peano
 
@@ -29,7 +31,7 @@ Một **hệ thống Peano** (Peano system) là một bộ $\left< N, S, e \righ
 
 Hệ thống Peano là một mô hình cho phép đếm đến vô hạn. Ánh xạ $S$ được gọi là **successor**, xác định cấu trúc "phần tử kế tiếp".
 
-Điều kiện $e\not\in \text{rng}(N)$ là cần thiết để tránh các chu trình.
+Điều kiện $e\not\in \text{rng}(S)$ và $S$ là đơn ánh là cần thiết để tránh các chu trình.
 Lấy ví dụ với $N = \mathbb{Z}_3$ và ánh xạ $S: \mathbb{Z}_3\to \mathbb{Z}_3$ xác định bởi $S\left([a]_3\right) = [a + 1]_3$ thì ta được một chu trình:
 <p>
 $$
@@ -279,8 +281,7 @@ Phép cộng bảo toàn thứ tự từ định nghĩa, sử dụng nguyên lý
 </Theorem>
 
 Cuối cùng, ta chứng minh $ < $ là một thứ tự tốt trên $N$.
-Hãy tưởng tượng, đầu tiên ta lấy $e$ là phần tử nhỏ nhất của $n$, phần tử tiếp theo $S(e)$ chính là phần tử nhỏ nhất của $N - \{e\}$, phần tử tiếp theo $S^2(e)$ chính là phần tử nhỏ nhất của $N - \{e, S(e)\}$, và cứ như vậy.
-Do đó cấu trúc thứ tự tốt của $N$ nằm ở việc không có phần tử $m$ nào nằm giữa $n$ và $S(n)$ để $S(n)$ trở thành phần tử nhỏ nhất của phần còn lại.
+Cấu trúc thứ tự tốt của $N$ nằm ở việc $S(n)$ là phần tử tiếp theo của $n$.
 
 <Theorem identifier="5">
   Với mọi $m, n\in N$, nếu $m < n$ thì $S(m) \leqslant n$.

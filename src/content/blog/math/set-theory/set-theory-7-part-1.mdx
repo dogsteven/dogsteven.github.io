@@ -1,0 +1,185 @@
+---
+title: "Lý thuyết tập hợp 7.1: Các tập hợp số"
+pubDate: 2024-04-27
+intro: Số là những đối tượng toán học mô hình cho sự đo đạc. Ta sẽ xây dựng một hệ thống Peano, gọi là tập hợp số tự nhiên, và từ đó xây dựng lên tập hợp số nguyên, số hữu tỉ và cuối cùng là tập hợp số thực.
+tags: ["math", "set theory"]
+author: clown
+image: ../../../../assets/set-theory.jpeg
+---
+import Axiom from "../../../../components/math/Axiom.astro";
+import Theorem from "../../../../components/math/Theorem.astro";
+import Lemma from "../../../../components/math/Lemma.astro";
+import Proposition from "../../../../components/math/Proposition.astro";
+import Corollary from "../../../../components/math/Corollary.astro";
+
+Các bài viết con series lý thuyết tập hợp:
+1. [Các tiên đề cơ bản](/blog/math/set-theory/set-theory-1)
+2. [Quan hệ và quy tắc gán](/blog/math/set-theory/set-theory-2)
+3. [Ánh xạ](/blog/math/set-theory/set-theory-3)
+4. [Quan hệ tương đương](/blog/math/set-theory/set-theory-4)
+5. [Quan hệ thứ tự](/blog/math/set-theory/set-theory-5)
+6. [Hệ thống Peano](/blog/math/set-theory/set-theory-6)
+7. [Các tập hợp số phần 1](/blog/math/set-theory/set-theory-7-part-1)
+8. [Các tập hợp số phần 2](/blog/math/set-theory/set-theory-7-part-2)
+
+### 1. Tập hợp số tự nhiên
+
+Trong [bài viết trước](/blog/math/set-theory/set-theory-6), ta đã tìm hiểu về hệ thống Peano và các tính chất của nó.
+Ta biết rằng hệ thống Peano là một mô hình cho phép đếm, và do đó là một mô hình cho tập hợp số tự nhiên.
+Ngay lúc này có hai câu hỏi:
+1. Liệu những hệ thống Peano có khác nhau hay không?
+2. Liệu có tồn tại một hệ thống Peano hay không?
+
+Câu hỏi đầu tiên là một câu hỏi đơn giản, sử dụng [định nghĩa đệ quy](/blog/math/set-theory/set-theory-6#theorem-2), ta có thể dễ dàng xây dựng một đẳng cấu bảo toàn cấu trúc đếm giữa hai hệ thống Peano.
+
+Về câu hỏi thứ hai, đến thời điểm hiện tại, ta không thể nào thiết lập được một hệ thống Peano. Do đó ta xem nó là một tiên đề.
+
+<Axiom identifier="1" name="Peano's axiom">
+  Tồn tại một hệ thống Peano $\left< \mathbb{N}, \text{succ}, 0 \right>$.
+</Axiom>
+
+Tập hợp $\mathbb{N}$ được gọi là **tập hợp số tự nhiên** (the natural numbers).
+
+### 2. Tập hợp số nguyên
+
+**Tập hợp số nguyên** (the integers) $\mathbb{Z}$ là tập hợp các lớp tương đương các cặp số tự nhiên có cùng "hiệu".
+Cụ thể, tập hợp số nguyên là tập thương của quan hệ tương đương sau trên $\mathbb{N}\times \mathbb{N}$:
+<p>
+$$
+\left< a, b \right> \sim \left< c, d \right> \iff a + d = c + b
+$$
+</p>
+Lớp tương đương của $\left< a, b \right>$ được ký hiệu bởi $a - b$.
+
+Ta định nghĩa phép cộng, phép nhân và thứ tự trên $\mathbb{Z}$ như sau:
+<p>
+$$
+(a - b) + (c - d) = (a + c) - (b + d)
+$$
+</p>
+<p>
+$$
+(a - b)\cdot(c - d) = (ac + bd) - (ad + cb)
+$$
+</p>
+<p>
+$$
+a - b < c - d \iff a + d < c + b
+$$
+</p>
+Ta dễ dàng chứng minh được các định nghĩa trên là xác định tốt.
+
+<Theorem identifier="1">
+  Đặt $\mathbf{0} = 0 - 0$ và $\mathbf{1} = 1 - 0$, khi đó:
+  1. $\mathbf{0} \ne \mathbf{1}$.
+  2. $\left< \mathbb{Z}, +, \cdot \right>$ là một miền nguyên, trong đó $\mathbf{0}$ là phần tử trung lập với phép cộng, và $\mathbf{1}$ là phần tử trung lập với phép nhân, phần tử đối của $a - b$ là $b - a$.
+  3. $ < $ là một thứ tự tuyến tính trên $\mathbb{Z}$. Đễ thấy hai số nguyên $a$ và $a + \mathbf{1}$ là hai số nguyên liên tiếp, nghĩa là không tồn tại số nguyên nào nằm giữa chúng.
+</Theorem>
+
+Một số nguyên được gọi là **dương** (positive) nếu như số đó lớn hơn $\mathbf{0}$, gọi là **âm** (negative) nếu như số đó nhỏ hơn $\mathbf{0}$.
+Dễ thấy rằng một số nguyên là số dương khi và chỉ khi đối của số đó là số âm và ngược lại.
+
+Ta thấy rằng phép cộng số nguyên và phép nhân số nguyên dương bảo toàn thứ tự.
+
+<Theorem identifier="2">
+  Cho $a, b, c$ là các số nguyên. Khi đó:
+  1. $a < b$ khi và chỉ khi $a + c < b + c$.
+  2. Nếu $c$ dương, ta có $a < b$ khi và chỉ khi $ac < bc$.
+</Theorem>
+
+Tập hợp số tự nhiên có thể được nhúng vào tập hợp số nguyên mà vẫn bảo được phép toán và thứ tự.
+
+<Theorem identifier="3">
+  Ánh xạ $E: \mathbb{N}\to \mathbb{Z}$ xác định bởi $E(n) = n - 0$ là một đơn ánh bảo toàn các phép toán và thứ tự:
+  1. $E(0) = \mathbf{0}$ và $\mathbf{E}(1) = \mathbf{1}$
+  2. $E(m + n) = E(m) + E(n)$ với mọi $m, n\in \mathbb{N}$.
+  3. $E(m \cdot n) = E(m) \cdot E(n)$ với mọi $m, n\in \mathbb{N}$.
+  4. $E(m) < E(n) \iff m < n$ với mọi $m, n\in \mathbb{N}$.
+</Theorem>
+
+Dễ thấy rằng $E(\mathbb{N})$ là tập hợp tất cả các số nguyên không âm. Do đó ta có thể xem tập hợp số tự nhiên chính là tập hợp số nguyên không âm, với các phép toán và thứ tự nhận được từ phép toán và thứ tự của tập hợp số nguyên.
+
+Sử dụng tính chất sắp xếp thứ tự tốt của tập hợp số tự nhiên, ta chứng minh được tập hợp số nguyên là một miền Euclidean.
+
+<Theorem identifier="4">
+  Cho $a$ là một số nguyên, $b$ là một số nguyên dương. Khi đó tồn tại duy nhất hai số nguyên $q, r$ thỏa mãn $0 \leqslant r < b$ mà:
+  <p>
+  $$
+  a = bq + r
+  $$
+  </p>
+</Theorem>
+
+***Chứng minh.***
+
+Gọi $R$ là tập hợp các số nguyên không âm $r$ sao cho tồn tại số nguyên $q$ thỏa mãn $a = bq + r$.
+Ta chứng minh $R$ khác rỗng, và sau đó chứng minh phần tử nhỏ nhất của $R$ thỏa mãn điều kiện định lý.
+
+Xét $r = |a|b + a$, ta có:
+<p>
+$$
+r \geqslant |a|b - |a| = |a|(b - 1)\geqslant 0
+$$
+</p>
+Ngoài ra $a = -|a|b + r$ nên $r\in R$. Do đó $R$ khác rỗng.
+
+Theo nguyên lý sắp xếp thứ tự tốt, gọi $r$ là phần tử nhỏ nhất của $R$. Khi đó tồn tại số nguyên $q$ sao cho $a = bq + r$.
+Giả sử $r \geqslant b$, khi đó ta có $a = b(q + 1) + r - b$ nên $r - b\in R$, mà $r - b < r$, vô lý. Do đó $r < b$, đương nhiên $q$ là tồn tại duy nhất theo luật giản ước với phép nhân số dương. ***Q.E.D.***
+
+### 3. Tập hợp số hữu tỉ
+
+**Tập hợp số hữu tỉ** (the rational numbers) $\mathbb{Q}$ là tập hợp các lớp tương đương các cặp số nguyên có cùng "tỉ số".
+Cụ thể, tập hợp số hữu tỉ là tập thương của quan hệ tương đương sau trên $\mathbb{Z}\times \left(\mathbb{Z} - \{0\}\right)$:
+<p>
+$$
+\left< a, b \right> \sim \left< c, d \right> \iff ad = cb
+$$
+</p>
+Lớp tương đương của $\left< a, b \right>$ được ký hiệu bởi $\dfrac{a}{b}$.
+
+Ta định nghĩa phép cộng và phép nhân trên $\mathbb{Q}$ như sau:
+<p>
+$$
+\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad + bc}{bd},\;\; \dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}
+$$
+</p>
+Ta thấy rằng $\dfrac{a}{b} = \dfrac{-a}{-b}$ với mọi số hữu tỉ $\dfrac{a}{b}$. Do đó mỗi số hữu tỉ đều có thể được viết ở dạng $\dfrac{a}{b}$ trong đó $b > 0$.
+Khi đó thứ tự trên $\mathbb{Q}$ được định nghĩa như sau:
+<p>
+$$
+\dfrac{a}{b} > \dfrac{c}{d} \iff ad > cb \;\;\; \left(b, d > 0\right)
+$$
+</p>
+Ta dễ dàng chứng minh được định nghĩa trên là xác định tốt.
+
+<Theorem identifier="5">
+  Đặt $\mathbf{0} = \dfrac{0}{1}$ và $\mathbf{1} = \dfrac{1}{1}$, khi đó:
+  1. $\mathbf{0}\ne \mathbf{1}$.
+  2. $\left< \mathbb{Q}, +, \cdot \right>$ là một trường, trong đó $\mathbf{0}$ là phần tử trung lập với phép cộng, và $\mathbf{1}$ là phần tử trung lập với phép nhân, phần tử đối của $\dfrac{a}{b}$ là $\dfrac{-a}{b}$ và phần tử nghịch đảo của $\dfrac{a}{b}$ là $\dfrac{b}{a}$ với $a\ne 0$.
+  3. $ < $ là một thứ tự tuyến tính trên $\mathbb{Q}$.
+</Theorem>
+
+Một số hữu tỉ được gọi là **dương** nếu như số đó lớn hơn $\mathbf{0}$, gọi là **âm** nếu như số đó nhỏ hơn $\mathbf{0}$.
+Dễ thấy rằng một số hữu tỉ là số dương khi và chỉ khi đối của số đó là số âm và ngược lại.
+
+Ta thấy rằng phép cộng số hữu tỉ và phép nhân số hữu tỉ dương bảo toàn thứ tự.
+
+<Theorem identifier="6">
+  Cho $a, b, c$ là các số hữu tỉ. Khi đó:
+  1. $a < b$ khi và chỉ khi $a + c < b + c$.
+  2. Nếu $c$ dương, ta có $a < b$ khi và chỉ khi $ac < bc$.
+</Theorem>
+
+Nói cách khác, cấu trúc $\left< \mathbb{Q}, +, \cdot, < \right>$ là một trường có thứ tự.
+
+Tương tự như tập hợp số tự nhiên, tập hợp số nguyên có thể được nhúng vào tập hợp số hữu tỉ mà vẫn bảo được phép toán và thứ tự.
+
+<Theorem identifier="7">
+  Ánh xạ $E: \mathbb{Z}\to \mathbb{Q}$ xác định bởi $E(a) = \dfrac{a}{1}$ là một đơn cấu vành bảo toàn thứ tự:
+  1. $E(1) = \mathbf{1}$.
+  2. $E(a) + E(b) = E(a + b)$ với mọi $a, b\in \mathbb{Z}$.
+  3. $E(a) \cdot E(b) = E(a \cdot b)$ với mọi $a, b\in \mathbb{Z}$.
+  4. $E(a) < E(b) \iff a < b$ với mọi $a, b\in \mathbb{Z}$.
+</Theorem>
+
+Do đó, ta có thể xem tập hợp số nguyên là một tập hợp con của tập hợp số hữu tỉ, với các phép toán và thứ tự nhận được từ phép toàn và thứ tự của tập hợp số hữu tỉ.
