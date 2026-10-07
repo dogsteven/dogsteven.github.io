@@ -1,0 +1,61 @@
+---
+import { EMAIL, GITHUB_URL, LINKEDIN_URL, SITE_NAME } from '../../lib/site';
+import EmailIcon from './EmailIcon.astro';
+import GitHubIcon from './GitHubIcon.astro';
+import LinkedInIcon from './LinkedInIcon.astro';
+import RssIcon from './RssIcon.astro';
+import SearchIcon from './SearchIcon.astro';
+
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Home', current: currentPath === '/' },
+  { href: '/blog/', label: 'Blog', current: currentPath.startsWith('/blog') },
+  { href: '/about/', label: 'About', current: currentPath === '/about/' },
+];
+---
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="/" aria-label={`${SITE_NAME} Home`}>
+      <span>{SITE_NAME}</span>
+    </a>
+
+    <details class="nav-menu">
+      <summary class="nav-menu-button" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <div class="nav-menu-panel">
+        {navLinks.map(({ href, label, current }) => (
+          <a href={href} aria-current={current ? 'page' : undefined}>{label}</a>
+        ))}
+      </div>
+    </details>
+
+    <div class="nav-links">
+      {navLinks.map(({ href, label, current }) => (
+        <a href={href} aria-current={current ? 'page' : undefined}>{label}</a>
+      ))}
+    </div>
+
+    <div class="nav-tools">
+      <button class="nav-icon-link" type="button" id="search-open" aria-label="Search (Ctrl+K)">
+        <SearchIcon />
+      </button>
+      <a class="nav-icon-link" href={GITHUB_URL} aria-label="GitHub" target="_blank" rel="noopener">
+        <GitHubIcon />
+      </a>
+      <a class="nav-icon-link" href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noopener">
+        <LinkedInIcon />
+      </a>
+      <a class="nav-icon-link" href={`mailto:${EMAIL}`} aria-label="Email">
+        <EmailIcon />
+      </a>
+      <a class="nav-icon-link" href="/rss.xml" aria-label="RSS feed">
+        <RssIcon />
+      </a>
+    </div>
+  </nav>
+</header>
