@@ -1,6 +1,7 @@
 ---
+import { SITE_URL } from '../lib/site';
 ---
 
 <footer class="footer">
-  <span>&copy; {new Date().getFullYear()} example.com</span>
+  <span>&copy; {new Date().getFullYear()} {new URL(SITE_URL).hostname}</span>
 </footer>
