@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import { DEFAULT_PALETTE } from '../lib/palette';
-import { SITE_NAME } from '../lib/site';
+import { SITE_NAME, SITE_URL } from '../lib/site';
 import Footer from './Footer.astro';
 import Header from './header/index.astro';
 
@@ -19,7 +19,7 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const site = 'https://example.com';
+const site = SITE_URL;
 const canonicalUrl = new URL(canonicalPath, site).toString();
 // Replace public/assets/og.png with your own 1200x630 social preview image.
 const ogImageUrl = new URL('/assets/og.png', site).toString();

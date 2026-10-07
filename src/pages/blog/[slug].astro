@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../components/Layout.astro';
 import { formatPostDate, postSlug } from '../../lib/posts';
+import { SITE_URL } from '../../lib/site';
 import { slugifyTag } from '../../lib/tags';
 
 export async function getStaticPaths() {
@@ -33,7 +34,7 @@ const postSchema = JSON.stringify({
   author: {
     '@type': 'Person',
     name: 'Your Name',
-    url: 'https://example.com/about/',
+    url: new URL('/about/', SITE_URL).toString(),
   },
   // Escape < so a post title/description can never close the <script> tag.
 }).replace(/</g, '\\u003c');
