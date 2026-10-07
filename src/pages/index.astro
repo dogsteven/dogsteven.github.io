@@ -4,6 +4,7 @@ import Layout from '../components/Layout.astro';
 import TypedLede from '../components/TypedLede.astro';
 import SkillsMarquee from '../components/SkillsMarquee.astro';
 import { formatPostDate, postSlug } from '../lib/posts';
+import { GITHUB_URL, LINKEDIN_URL } from '../lib/site';
 
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
@@ -16,10 +17,7 @@ const personSchema = JSON.stringify({
   name: 'Your Name',
   jobTitle: 'Your Job Title',
   url: 'https://example.com',
-  sameAs: [
-    'https://github.com/your-username',
-    'https://linkedin.com/in/your-profile',
-  ],
+  sameAs: [GITHUB_URL, LINKEDIN_URL],
   // Escape < so no value can ever close the inline <script> tag.
 }).replace(/</g, '\\u003c');
 ---
