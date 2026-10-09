@@ -3,14 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 // Replace with your own skills, tools, or interests. Each one seeds a page
 // in the /tags/ archive, so marquee items link somewhere even before any
 // post uses them as a tag.
-export const skills = [
-  'HTML', 'CSS', 'JavaScript', 'TypeScript',
-  'Python', 'Go', 'Rust', 'Bash',
-  'Git', 'GitHub Actions', 'Docker', 'Kubernetes',
-  'AWS', 'Azure', 'GCP',
-  'PostgreSQL', 'Redis', 'GraphQL', 'REST APIs',
-  'Linux', 'Terraform', 'Ansible', 'CI/CD',
-];
+export const skills = [];
 
 // URL slug for a tag. Letters and digits in any script are kept (lowercased),
 // every other run of characters collapses to a hyphen: "GitHub Actions" ->

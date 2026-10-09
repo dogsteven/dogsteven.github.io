@@ -1,5 +1,5 @@
-export const SITE_NAME = 'Palette';
-export const SITE_URL = 'https://example.com';
-export const EMAIL = 'you@example.com';
-export const GITHUB_URL = 'https://github.com/your-username';
-export const LINKEDIN_URL = 'https://linkedin.com/in/your-profile';
+export const SITE_NAME = 'Serene';
+export const SITE_URL = 'https://dogsteven.github.io';
+export const EMAIL = 'khoa.huynh.bach.1802@gmail.com';
+export const GITHUB_URL = 'https://github.com/dogsteven';
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/khoa-hu%E1%BB%B3nh-b%C3%A1ch-466b62367/';

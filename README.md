@@ -74,6 +74,8 @@ Comments stay disabled unless you run a Remark42 instance. The configuration is 
 
 Posts are markdown files in `src/content/blog/` with `title`, `description`, `date`, optional `tags`, and optional `draft` frontmatter. Each tag links to its archive page under `/tags/`. `example-post.md` shows the frontmatter and the supported markdown.
 
+Posts can be organized in subdirectories. For example, `src/content/blog/software-engineering/example-post.md` is published at `/blog/software-engineering/example-post/`. The directory path is preserved in post links, the RSS feed, and tag archives. Posts directly in `src/content/blog/` continue to work.
+
 ## Project structure
 
 ```
