@@ -4,6 +4,7 @@ import Layout from '../../components/Layout.astro';
 import { formatPostDate, postSlug } from '../../lib/posts';
 import { SITE_URL } from '../../lib/site';
 import { slugifyTag } from '../../lib/tags';
+import 'katex/dist/katex.min.css';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -33,7 +34,7 @@ const postSchema = JSON.stringify({
   url: new URL(`/blog/${slug}/`, Astro.site).toString(),
   author: {
     '@type': 'Person',
-    name: 'Your Name',
+    name: 'Khoa Huynh Bach',
     url: new URL('/about/', SITE_URL).toString(),
   },
   // Escape < so a post title/description can never close the <script> tag.
@@ -41,7 +42,7 @@ const postSchema = JSON.stringify({
 ---
 
 <Layout
-  title={`${post.data.title} — Your Name`}
+  title={`${post.data.title} — Khoa Huynh Bach`}
   description={post.data.description}
   canonicalPath={`/blog/${slug}/`}
   ogType="article"
@@ -84,6 +85,8 @@ const postSchema = JSON.stringify({
   </main>
 
   <script>
+    import '../../scripts/charts';
+
     // Optional Remark42 comments. Point these at your own instance, or
     // remove the #remark42 section above to disable comments entirely.
     const REMARK_HOST = 'https://comments.example.com';
