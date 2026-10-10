@@ -1229,6 +1229,21 @@ button.nav-icon-link {
     border-bottom: 1px solid var(--line);
 }
 
+.article-header,
+.article-prose {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.article-prose code,
+.article-prose pre,
+.article-prose .katex {
+    -webkit-hyphens: none;
+    hyphens: none;
+}
+
 .article-header h1 {
     max-width: 22ch;
     margin: 0;
@@ -1255,6 +1270,37 @@ button.nav-icon-link {
 }
 
 .article-prose > *:first-child { margin-top: 0; }
+
+.article-prose .katex {
+    color: inherit;
+    font-size: 1.1em;
+}
+
+.article-prose .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: 0.4rem;
+}
+
+.article-prose figure {
+    margin: 1.5rem 0;
+}
+
+.article-prose figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.article-prose figcaption {
+    margin-top: 0.65rem;
+    color: var(--muted);
+    font-size: 0.9em;
+    line-height: 1.65;
+}
 
 .article-prose h1,
 .article-prose h2,

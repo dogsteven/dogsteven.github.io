@@ -76,6 +76,14 @@ Posts are markdown files in `src/content/blog/` with `title`, `description`, `da
 
 Posts can be organized in subdirectories. For example, `src/content/blog/software-engineering/example-post.md` is published at `/blog/software-engineering/example-post/`. The directory path is preserved in post links, the RSS feed, and tag archives. Posts directly in `src/content/blog/` continue to work.
 
+Math is rendered at build time with KaTeX. Use `$P(\lambda)$` for inline math and
+`$$` on separate lines around display equations. KaTeX styles and fonts are
+bundled locally on blog pages; no browser-side math renderer or CDN is needed.
+
+The color-theory article's spectrum figures are generated from checked-in CIE
+reference data. See [the data and regeneration notes](scripts/data/color-theory/README.md)
+for attribution, figure licensing, and instructions.
+
 ## Project structure
 
 ```

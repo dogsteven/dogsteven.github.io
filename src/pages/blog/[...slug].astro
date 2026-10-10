@@ -4,6 +4,7 @@ import Layout from '../../components/Layout.astro';
 import { formatPostDate, postSlug } from '../../lib/posts';
 import { SITE_URL } from '../../lib/site';
 import { slugifyTag } from '../../lib/tags';
+import 'katex/dist/katex.min.css';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
